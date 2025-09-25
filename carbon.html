@@ -1,60 +1,279 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🌱 碳匯：固碳原理與公式</title>
+  <style>
+    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#fdfdfd; color:#222;}
+    nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center;}
+    nav a{color:#333; text-decoration:none; margin-left:12px}
+    nav .brand{font-weight:700; color:#1e90ff}
+    main{max-width:1080px; margin:24px auto; padding:0 16px;}
+    h1{margin:8px 0 16px; color:#2c3e50}
+    h2{margin:28px 0 10px; color:#2c3e50}
+    p{line-height:1.75}
+    ul{line-height:1.7}
+
+    /* ====== Carousel ====== */
+    .carousel{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.07);}
+    .carousel:focus{outline:2px solid #1e90ff55; outline-offset:2px;}
+    .carousel .stage{position:relative; width:100%; aspect-ratio:16/9; background:#111;}
+    .carousel .slide{position:absolute; inset:0; display:none;}
+    .carousel .slide.active{display:block;}
+    .carousel img{
+      width:100%; height:100%; object-fit:cover; object-position:center;
+      transition: transform .35s ease;
+    }
+    /* 滑鼠移入輕微放大 */
+    .carousel:hover .slide.active img{ transform: scale(1.02); }
+
+    .carousel .arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(0,0,0,.45); color:#fff; border:none; width:42px; height:42px;
+      border-radius:50%; cursor:pointer; display:grid; place-items:center; font-size:18px;
+      transition: background .2s ease;
+    }
+    .carousel .arrow:hover{background:rgba(0,0,0,.6)}
+    .carousel .prev{left:10px}
+    .carousel .next{right:10px}
+
+    .dots{
+      position:absolute; left:0; right:0; bottom:10px;
+      display:flex; gap:8px; justify-content:center; align-items:center;
+      pointer-events:auto;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      border:2px solid rgba(255,255,255,.9);
+      background:rgba(255,255,255,.25); cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .dot:hover{ transform:scale(1.15); background:#fff; }
+    .dot.active{background:#fff}
+
+    /* 進度條 */
+    .progress{
+      position:absolute; left:0; right:0; bottom:0;
+      height:4px; background:rgba(255,255,255,.18);
+    }
+    .progress .bar{
+      height:100%; width:0%;
+      background:linear-gradient(90deg,#5fb3ff,#1e90ff);
+      transition: width .1s linear;
+    }
+
+    /* 標題浮層 */
+    .caption{
+      position:absolute; left:12px; bottom:12px;
+      background:rgba(0,0,0,.42); color:#fff; font-size:14px;
+      padding:6px 10px; border-radius:8px; max-width:min(80%, 800px);
+      line-height:1.5; backdrop-filter:saturate(140%) blur(2px);
+      opacity:.98;
+    }
+
+    /* 播放/暫停 */
+    .controls{
+      position:absolute; right:10px; bottom:10px; display:flex; gap:8px; z-index:2;
+    }
+    .btn{
+      background:rgba(0,0,0,.45); color:#fff; border:none; border-radius:10px;
+      padding:6px 10px; font-size:13px; cursor:pointer;
+    }
+    .btn:hover{ background:rgba(0,0,0,.6); }
+  </style>
 </head>
-<body style="font-family:'Microsoft JhengHei', sans-serif; padding:20px; background:#fdfdfd;">
-  
-<nav style="background-color:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center; font-family:'Microsoft JhengHei', sans-serif;">
-  <div style="font-size:1.2em; font-weight:bold; color:#1e90ff;">
-    📘 UDM ESG 永續教科書
-  </div>
-  <div style="display:flex; gap:15px;">
-    <a href="index.html" style="text-decoration:none; color:#333;">🏠 首頁</a>
-    <a href="sunshine.html" style="text-decoration:none; color:#333;">🌞 陽光</a>
-    <a href="air.html" style="text-decoration:none; color:#333;">💨 空氣</a>
-    <a href="water.html" style="text-decoration:none; color:#333;">💧 水</a>
-    <a href="carbon.html" style="text-decoration:none; color:#333;">🌱 碳匯</a>
-  </div>
-</nav>
+<body>
+  <nav>
+    <div class="brand">📘 UDM ESG 永續教科書</div>
+    <div>
+      <a href="index.html">🏠 首頁</a>
+      <a href="sunshine.html">🌞 陽光</a>
+      <a href="air.html">💨 空氣</a>
+      <a href="water.html">💧 水</a>
+      <a href="carbon.html">🌱 碳匯</a>
+    </div>
+  </nav>
 
-  <h1>🌱 碳匯：固碳原理與公式</h1>
+  <main>
+    <h1>🌱 碳匯：固碳原理與公式</h1>
 
-  <p>碳匯是能夠吸收並儲存二氧化碳（CO₂）的自然或人工系統，是對抗氣候變遷的重要力量。</p>
+    <!-- 圖片輪播（帶互動） -->
+    <section class="carousel" id="carbonCarousel" aria-label="碳匯示範影像" tabindex="0">
+      <div class="stage">
+        <!-- data-caption 可自訂每張圖的標題說明 -->
+        <div class="slide active"><img src="C1.png" alt="碳匯示意 1" loading="eager"  decoding="async" data-caption="森林是重要碳匯：透過光合作用把 CO₂ 變成生物量。"></div>
+        <div class="slide"><img src="C2.png" alt="碳匯示意 2" loading="lazy"   decoding="async" data-caption="草地與濕地把碳長期儲存在植物體與土壤中。"></div>
+        <div class="slide"><img src="C3.png" alt="碳匯示意 3" loading="lazy"   decoding="async" data-caption="海洋浮游植物每年吸收全球約四分之一 CO₂。"></div>
+        <div class="slide"><img src="C4.png" alt="碳匯示意 4" loading="lazy"   decoding="async" data-caption="校園樹木調查可用 DBH 與樹高估算碳匯。"></div>
+        <div class="slide"><img src="C5.png" alt="碳匯示意 5" loading="lazy"   decoding="async" data-caption="樹齡不同，年固碳量也不同，成長最快時吸收最多。"></div>
+        <div class="slide"><img src="C6.png" alt="碳匯示意 6" loading="lazy"   decoding="async" data-caption="永續經營：保育、生產、教育三合一。"></div>
+        <div class="slide"><img src="C7.png" alt="碳匯示意 7" loading="lazy"   decoding="async" data-caption="以資料驅動的碳匯盤點與教學活動。"></div>
 
-  <h2>📘 什麼是碳匯？</h2>
-  <img src="2f71a005-2881-4ad4-8dcf-9dd245a36a38.png" alt="森林碳匯" style="max-width:100%; margin-bottom:20px;">
-  <ul>
-    <li>🌳 森林：透過光合作用吸收 CO₂</li>
-    <li>🌿 草地與濕地：儲存碳於植物體與土壤</li>
-    <li>🌊 海洋：海藻與浮游植物也是重要碳匯</li>
-  </ul>
+        <button class="arrow prev" aria-label="上一張" title="上一張">‹</button>
+        <button class="arrow next" aria-label="下一張" title="下一張">›</button>
+        <div class="dots" aria-hidden="true"></div>
 
-  <h2>📊 總固碳量是什麼？</h2>
-  <p>總固碳量是指一棵樹或一片林地至今為止吸收並固定的二氧化碳總量。</p>
+        <div class="controls">
+          <button class="btn" id="togglePlay" aria-label="播放/暫停">⏸ 暫停</button>
+        </div>
 
-  <h2>📅 年固碳量是什麼？</h2>
-  <p>年固碳量指的是樹木每年能吸收多少 CO₂，會隨著年齡與生長速率而變動。</p>
+        <div class="caption" id="caption">森林是重要碳匯：透過光合作用把 CO₂ 變成生物量。</div>
+        <div class="progress"><div class="bar" id="progressBar"></div></div>
+      </div>
+    </section>
 
-  <h2>📐 計算公式（簡化版）：</h2>
-  <ul>
-    <li><strong>生物量：</strong> Biomass = 0.15 × DBH<sup>2.27</sup></li>
-    <li><strong>碳含量：</strong> Carbon = Biomass × 0.5</li>
-    <li><strong>CO₂ 固定量：</strong> CO₂ = Carbon × 3.67</li>
-    <li><strong>年固碳量：</strong> CO₂ / 樹齡</li>
-  </ul>
+    <h2>📘 什麼是碳匯？</h2>
+    <p>碳匯（Carbon Sink）是能夠吸收並儲存二氧化碳（CO₂）的自然或人工系統，是對抗氣候變遷的重要力量。</p>
+    <ul>
+      <li>🌳 森林：透過光合作用吸收 CO₂</li>
+      <li>🌿 草地與濕地：儲存碳於植物體與土壤</li>
+      <li>🌊 海洋：海藻與浮游植物也是重要碳匯</li>
+    </ul>
 
-  <h2>🧠 學習延伸</h2>
-  <p>學生可以透過觀察校園樹木，實地量測 DBH（胸高直徑）與樹高，推估該棵樹的碳匯能力。</p>
+    <h2>📊 固碳量與總固碳量</h2>
+    <ul>
+      <li><strong>年固碳量：</strong> 指樹木每年能吸收多少 CO₂，會隨樹齡與生長速率而變動。</li>
+      <li><strong>總固碳量：</strong> 指一棵樹或一片林地至今為止吸收並固定的 CO₂ 總量。</li>
+    </ul>
 
-  <h2>🌏 自然生態中的碳匯</h2>
-  <p>除了森林外，草地、濕地與海洋等生態系統也都是天然的碳吸存寶庫。</p>
-  <ul>
-    <li>🐝 濕地：含碳泥炭層，可儲存大量碳數千年</li>
-    <li>🌾 草原：低維護成本，面積廣，碳吸存穩定</li>
-    <li>🐟 海洋：浮游植物每年吸收全球 1/4 CO₂</li>
-  </ul>
+    <h2>📐 計算公式（簡化版）：</h2>
+    <ul>
+      <li><strong>生物量：</strong> Biomass = 0.15 × DBH<sup>2.27</sup></li>
+      <li><strong>碳含量：</strong> Carbon = Biomass × 0.5</li>
+      <li><strong>CO₂ 固定量：</strong> CO₂ = Carbon × 3.67</li>
+      <li><strong>年固碳量：</strong> CO₂ ÷ 樹齡</li>
+    </ul>
+  </main>
+
+  <script>
+    (function(){
+      const root = document.getElementById('carbonCarousel');
+      const slides = Array.from(root.querySelectorAll('.slide'));
+      const prevBtn = root.querySelector('.prev');
+      const nextBtn = root.querySelector('.next');
+      const dotsWrap = root.querySelector('.dots');
+      const progressBar = document.getElementById('progressBar');
+      const caption = document.getElementById('caption');
+      const togglePlayBtn = document.getElementById('togglePlay');
+
+      const AUTOPLAY_MS = 4000;
+      const DRAG_THRESHOLD = 40; // 水平拖曳觸發切換的門檻
+      let i = 0, timer = null, playing = true;
+
+      // 建立圓點
+      slides.forEach((_, idx)=>{
+        const d = document.createElement('div');
+        d.className = 'dot' + (idx===0 ? ' active':'');
+        d.title = `第 ${idx+1} 張`;
+        d.addEventListener('click', ()=>{ stop(); go(idx); play(); });
+        dotsWrap.appendChild(d);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function setCaption(idx){
+        const img = slides[idx].querySelector('img');
+        caption.textContent = img?.dataset?.caption || img?.alt || '';
+      }
+
+      function go(n){
+        slides[i].classList.remove('active');
+        dots[i].classList.remove('active');
+        i = (n + slides.length) % slides.length;
+        slides[i].classList.add('active');
+        dots[i].classList.add('active');
+        setCaption(i);
+        resetProgress();
+      }
+      function next(){ go(i+1); }
+      function prev(){ go(i-1); }
+
+      // 進度條控制
+      let startedAt = 0;
+      function resetProgress(){
+        startedAt = performance.now();
+        progressBar.style.width = '0%';
+      }
+      function tick(){
+        if(!playing) return;
+        const elapsed = performance.now() - startedAt;
+        const p = Math.min(1, elapsed / AUTOPLAY_MS);
+        progressBar.style.width = (p*100).toFixed(1) + '%';
+        if(p >= 1){ next(); }
+        timer = requestAnimationFrame(tick);
+      }
+
+      function play(){
+        if(playing) return;
+        playing = true;
+        togglePlayBtn.textContent = '⏸ 暫停';
+        resetProgress();
+        timer = requestAnimationFrame(tick);
+      }
+      function stop(){
+        playing = false;
+        togglePlayBtn.textContent = '▶️ 播放';
+        cancelAnimationFrame(timer);
+      }
+      togglePlayBtn.addEventListener('click', ()=> playing ? stop() : play());
+
+      nextBtn.addEventListener('click', ()=>{ stop(); next(); play(); });
+      prevBtn.addEventListener('click', ()=>{ stop(); prev(); play(); });
+
+      // 滑鼠移入暫停、移出繼續
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', ()=>{ if(!playing){ play(); } });
+
+      // 鍵盤操作：左右切換、空白鍵播放/暫停
+      root.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight'){ stop(); next(); play(); }
+        if(e.key === 'ArrowLeft'){  stop(); prev(); play(); }
+        if(e.key === ' '){ e.preventDefault(); playing ? stop() : play(); }
+      });
+
+      // 分頁不可見時暫停，回來後繼續
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.hidden){ stop(); }
+        else { play(); }
+      });
+
+      // 觸控 / 滑鼠拖曳
+      let startX = null, dragging = false;
+      const onPointerDown = (e)=>{
+        dragging = true;
+        startX = e.clientX ?? e.touches?.[0]?.clientX;
+        stop(); // 拖曳中暫停
+      };
+      const onPointerMove = (e)=>{
+        if(!dragging) return;
+        const x = e.clientX ?? e.touches?.[0]?.clientX;
+        const dx = x - startX;
+        // 可視需要做位移視覺效果，這裡保持簡潔
+      };
+      const onPointerUp = (e)=>{
+        if(!dragging) return;
+        const endX = e.clientX ?? (e.changedTouches?.[0]?.clientX);
+        const dx = endX - startX;
+        dragging = false;
+        if(Math.abs(dx) > DRAG_THRESHOLD){
+          if(dx < 0) next(); else prev();
+        }
+        play(); // 放開後繼續播放
+      };
+      // 支援滑鼠與觸控
+      const stage = root.querySelector('.stage');
+      stage.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+      stage.addEventListener('touchstart', onPointerDown, {passive:true});
+      stage.addEventListener('touchmove', onPointerMove, {passive:true});
+      stage.addEventListener('touchend', onPointerUp);
+
+      // 啟動
+      setCaption(0);
+      resetProgress();
+      timer = requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
