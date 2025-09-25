@@ -1,30 +1,179 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UDM ESG 永續教科書</title>
-</head>
-<body style="font-family:'Microsoft JhengHei', sans-serif; padding:20px; background:#fdfdfd;">
-  
-<nav style="background-color:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center; font-family:'Microsoft JhengHei', sans-serif;">
-  <div style="font-size:1.2em; font-weight:bold; color:#1e90ff;">
-    📘 UDM ESG 永續教科書
-  </div>
-  <div style="display:flex; gap:15px;">
-    <a href="index.html" style="text-decoration:none; color:#333;">🏠 首頁</a>
-    <a href="sunshine.html" style="text-decoration:none; color:#333;">🌞 陽光</a>
-    <a href="air.html" style="text-decoration:none; color:#333;">💨 空氣</a>
-    <a href="water.html" style="text-decoration:none; color:#333;">💧 水</a>
-    <a href="carbon.html" style="text-decoration:none; color:#333;">🌱 碳匯</a>
-  </div>
-</nav>
+  <style>
+    :root{
+      --ink:#2c3e50;
+      --muted:#667085;
+      --brand:#1e90ff;
+      --card:#ffffff;
+      --rail:#eef3fb;
+    }
+    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#f7f9fc; color:#1f2937}
+    nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center}
+    nav a{color:#333; text-decoration:none; margin-left:12px}
+    nav .brand{font-weight:700; color:#1e90ff}
+    main{max-width:1100px; margin:24px auto; padding:0 16px}
+    h1{color:var(--ink); margin:10px 0 8px}
+    p.lead{color:var(--muted); line-height:1.8; margin:0 0 14px}
 
-  <h1>UDM ESG 永續教科書</h1>
-  
-    <p>歡迎來到 UDM ESG 永續教科書網站！這裡提供國中小學生了解永續發展的重要知識，包含用電碳排、水資源管理、空氣品質與碳匯等主題。</p>
-    <img src="H1.png" alt="首頁圖" style="max-width:100%; margin-top:20px;">
-    
+    /* Icon cards */
+    .grid{display:grid; gap:16px; margin-top:18px}
+    @media (min-width:640px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (min-width:960px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--card);
+      border:1px solid #e7eef7;
+      border-radius:16px;
+      padding:16px;
+      display:flex; gap:14px; align-items:flex-start;
+      box-shadow:0 6px 18px rgba(0,0,0,.04);
+      transition:.22s ease;
+      text-decoration:none; color:inherit;
+    }
+    .card:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,0,0,.07) }
+    .icon{
+      width:56px; height:56px; border-radius:999px; display:grid; place-items:center;
+      font-size:28px; flex:0 0 auto; color:#fff;
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.18);
+    }
+    /* 彩色icon背景 */
+    .g1{background:linear-gradient(145deg,#4fc3f7,#1e90ff)}   /* 水/空氣 */
+    .g2{background:linear-gradient(145deg,#34d399,#059669)}   /* 綠色能源/森林 */
+    .g3{background:linear-gradient(145deg,#f59e0b,#ef4444)}   /* 低碳飲食/食物 */
+    .g4{background:linear-gradient(145deg,#a78bfa,#6366f1)}   /* 智慧科技 */
+    .g5{background:linear-gradient(145deg,#f472b6,#ec4899)}   /* 健康福祉 */
+    .g6{background:linear-gradient(145deg,#22d3ee,#06b6d4)}   /* 海洋/藍碳 */
+    .g7{background:linear-gradient(145deg,#fb923c,#f97316)}   /* 建築/住商 */
+    .g8{background:linear-gradient(145deg,#10b981,#14b8a6)}   /* 循環經濟 */
+    .g9{background:linear-gradient(145deg,#94a3b8,#64748b)}   /* 交通運具 */
+    .title{font-weight:700; color:var(--ink); margin:2px 0 4px}
+    .subtitle{font-size:12px; color:var(--muted); letter-spacing:.2px}
+    .desc{font-size:14px; color:#334155; line-height:1.7; margin-top:6px}
+
+    .divider{height:1px; background:#e7eef7; margin:22px 0}
+    .pill{display:inline-block; font-size:12px; background:var(--rail); color:#1b3c74; padding:2px 10px; border-radius:999px}
+
+    .hero{border:1px solid #e7eef7; background:#fff; border-radius:14px; overflow:hidden}
+    .hero img{width:100%; height:auto; display:block}
+    .hero .cap{padding:12px 14px; color:#475569; font-size:14px}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">📘 UDM ESG 永續教科書</div>
+    <div>
+      <a href="index.html">🏠 首頁</a>
+      <a href="sunshine.html">🌞 陽光</a>
+      <a href="air.html">💨 空氣</a>
+      <a href="water.html">💧 水</a>
+      <a href="carbon.html">🌱 碳匯</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>UDM ESG 永續教科書</h1>
+    <p class="lead">
+      歡迎來到 UDM ESG 永續教科書網站！這裡提供國中小學生了解永續發展的重要知識，
+      包含用電碳排、水資源管理、空氣品質與碳匯等主題。我們以輕鬆有趣的方式，帶你從生活中實作 ESG。
+    </p>
+
+    <!-- 首圖 -->
+    <section class="hero">
+      <img src="H1.png" alt="首頁圖">
+      <div class="cap">一起從校園與家庭做起：節能、節水、好空氣、愛地球 ❤️</div>
+    </section>
+
+    <div class="divider"></div>
+
+    <span class="pill">互動主題</span>
+    <h2 style="margin:10px 0 0; color:#1f2a44">Explore ESG Topics</h2>
+
+    <!-- ESG 有趣活潑 icon + 敘述 -->
+    <section class="grid" aria-label="ESG 主題快速導覽">
+      <a class="card" href="water.html">
+        <div class="icon g1">💧</div>
+        <div>
+          <div class="title">智慧用水 <span class="subtitle">Smart Water</span></div>
+          <div class="desc">記錄每日用水量，換算 <b>水足跡</b> 與 <b>間接碳排</b>。挑戰「一週省水 10%」任務！</div>
+        </div>
+      </a>
+
+      <a class="card" href="air.html">
+        <div class="icon g1">💨</div>
+        <div>
+          <div class="title">好空氣行動 <span class="subtitle">Clean Air</span></div>
+          <div class="desc">認識 PM2.5、CO₂ 與通風。學會用綠色通勤與植栽，打造健康教室與家中空間。</div>
+        </div>
+      </a>
+
+      <a class="card" href="sunshine.html">
+        <div class="icon g2">⚡</div>
+        <div>
+          <div class="title">綠色能源小達人 <span class="subtitle">Green Energy</span></div>
+          <div class="desc">從日常插座開始做 <b>省電家務</b>：待機斷電、風扇替代冷氣、LED 換燈，估算省下的 CO₂。</div>
+        </div>
+      </a>
+
+      <a class="card" href="carbon.html">
+        <div class="icon g2">🌲</div>
+        <div>
+          <div class="title">校園碳匯探險 <span class="subtitle">Tree Carbon</span></div>
+          <div class="desc">用皮尺量 DBH（胸高直徑），估算一棵樹的 <b>年固碳量</b> 與 <b>總固碳量</b>，做你自己的樹木身分證。</div>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="icon g8">♻️</div>
+        <div>
+          <div class="title">循環經濟任務 <span class="subtitle">Circular Economy</span></div>
+          <div class="desc">用「<b>5R：Refuse/Reduce/Reuse/Repair/Recycle</b>」設計一件校園減塑小發明。</div>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="icon g9">🚌</div>
+        <div>
+          <div class="title">綠色運具挑戰 <span class="subtitle">Green Transport</span></div>
+          <div class="desc">一週改搭大眾運輸或步行/自行車，計算與汽機車相比可少多少二氧化碳。</div>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="icon g7">🏠</div>
+        <div>
+          <div class="title">低碳建築觀察 <span class="subtitle">Low-carbon Building</span></div>
+          <div class="desc">觀察學校/社區建築的採光通風與隔熱，設計你的「零耗能教室」提案。</div>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="icon g6">🌊</div>
+        <div>
+          <div class="title">藍碳海洋 <span class="subtitle">Blue Carbon</span></div>
+          <div class="desc">了解海草床、紅樹林如何「鎖碳」。試做一張海洋碳循環小海報。</div>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="icon g5">💖</div>
+        <div>
+          <div class="title">全人健康 x ESG <span class="subtitle">Holistic Health</span></div>
+          <div class="desc">從飲食、運動、睡眠與情緒，建立「<b>低碳生活 + 身心健康</b>」的一週行程表。</div>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="icon g3">🍎</div>
+        <div>
+          <div class="title">食物轉型探險 <span class="subtitle">Food Transformation</span></div>
+          <div class="desc">比較「在地蔬果 vs. 遠洋進口」的食物里程，驗算餐盤背後的碳排差異。</div>
+        </div>
+      </a>
+    </section>
+  </main>
 </body>
 </html>
