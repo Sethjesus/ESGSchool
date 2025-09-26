@@ -1,29 +1,680 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💨 空氣：空氣偵測與品質</title>
-</head>
-<body style="font-family:'Microsoft JhengHei', sans-serif; padding:20px; background:#fdfdfd;">
-  
-<nav style="background-color:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center; font-family:'Microsoft JhengHei', sans-serif;">
-  <div style="font-size:1.2em; font-weight:bold; color:#1e90ff;">
-    📘 UDM ESG 永續教科書
-  </div>
-  <div style="display:flex; gap:15px;">
-    <a href="index.html" style="text-decoration:none; color:#333;">🏠 首頁</a>
-    <a href="sunshine.html" style="text-decoration:none; color:#333;">🌞 陽光</a>
-    <a href="air.html" style="text-decoration:none; color:#333;">💨 空氣</a>
-    <a href="water.html" style="text-decoration:none; color:#333;">💧 水</a>
-    <a href="carbon.html" style="text-decoration:none; color:#333;">🌱 碳匯</a>
-  </div>
-</nav>
 
-  <h1>💨 空氣：空氣偵測與品質</h1>
-  
-    <p>了解空氣污染來源及如何透過感測器來偵測 PM2.5、CO₂ 等指標，維護校園與生活環境的空氣品質。</p>
-    
+  <title>💨 空氣：好空氣行動</title>
+
+  <style>
+    /* ===== Base ===== */
+    body {
+      font-family: "Microsoft JhengHei", sans-serif;
+      margin: 0;
+      background: #fdfdfd;
+      color: #222;
+    }
+
+    nav {
+      background: #f4f4f4;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin-left: 12px;
+    }
+
+    nav .brand {
+      font-weight: 700;
+      color: #1e90ff;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    h1 {
+      margin: 8px 0 16px;
+      color: #2c3e50;
+    }
+
+    p {
+      line-height: 1.75;
+    }
+
+    /* ===== Carousel ===== */
+    .carousel {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .07);
+    }
+
+    .carousel:focus {
+      outline: 2px solid #1e90ff55;
+      outline-offset: 2px;
+    }
+
+    .carousel .stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #111;
+    }
+
+    .carousel .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      color: #fff;
+    }
+
+    .carousel .slide.active {
+      display: block;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .35s ease;
+    }
+
+    .carousel:hover .slide.active img {
+      transform: scale(1.02);
+    }
+
+    .caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, .55);
+      color: #fff;
+      padding: 12px 14px;
+      text-align: center;
+      line-height: 1.45;
+    }
+
+    .caption small {
+      display: block;
+      opacity: .9;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, .45);
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .arrow:hover {
+      background: rgba(0, 0, 0, .6);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, .9);
+      background: rgba(255, 255, 255, .25);
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: #fff;
+    }
+
+    .controls {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .btn {
+      background: rgba(0, 0, 0, .45);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: rgba(0, 0, 0, .6);
+    }
+
+    .progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #5fb3ff, #1e90ff);
+    }
+
+    /* ===== Sections ===== */
+    .section {
+      margin-top: 40px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+    }
+
+    .cards {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+    }
+
+    .card .i {
+      font-size: 28px;
+    }
+
+    .card .t {
+      font-weight: 700;
+    }
+
+    .muted {
+      font-size: 13px;
+      color: #475569;
+    }
+
+    /* ===== Bottom Hero (a8.png) ===== */
+    .hero {
+      margin-top: 50px;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+    }
+
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      animation: zoomIn 20s ease-in-out infinite alternate;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: 700;
+      animation: floatText 4s ease-in-out infinite;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes floatText {
+      0%,
+      100% {
+        transform: translate(-50%, -50%) translateY(0);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) translateY(-10px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Top Nav ===== -->
+  <nav>
+    <div class="brand">
+      📘 UDM ESG 永續教科書
+    </div>
+
+    <div>
+      <a href="index.html">🏠 首頁</a>
+      <a href="sunshine.html">🌞 陽光</a>
+      <a href="air.html">💨 空氣</a>
+      <a href="water.html">💧 水</a>
+      <a href="carbon.html">🌱 碳匯</a>
+    </div>
+  </nav>
+
+  <!-- ===== Main ===== -->
+  <main>
+
+    <h1>
+      💨 空氣：好空氣行動
+    </h1>
+
+    <p>
+      從日常出發，透過通風、綠化、低碳通勤與感測監測，一起守護好空氣。
+    </p>
+
+    <!-- ===== Carousel a1~a7 ===== -->
+    <section class="carousel" id="airCarousel" aria-label="好空氣行動" tabindex="0">
+
+      <div class="stage">
+
+        <div class="slide active">
+          <img src="a1.png" alt="開窗通風">
+          <div class="caption">
+            🏠 開窗通風：保持空氣流通，降低室內污染
+            <small>Ventilation keeps indoor air fresh</small>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="a2.png" alt="大眾運輸">
+          <div class="caption">
+            🚌 大眾運輸：以乘載效率降低排放
+            <small>Public transit reduces per-capita emissions</small>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="a3.png" alt="綠色通勤">
+          <div class="caption">
+            🚲 綠色通勤：步行/單車，零油耗零廢氣
+            <small>Bike or walk for zero tailpipe emissions</small>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="a4.png" alt="空氣清淨">
+          <div class="caption">
+            😷 淨化與過濾：PM2.5 來了也不怕
+            <small>Filtration improves indoor air quality</small>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="a5.png" alt="校園綠化">
+          <div class="caption">
+            🌳 校園綠化：增加遮蔭與碳吸存
+            <small>More trees, more shade, better air</small>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="a6.png" alt="友善住家">
+          <div class="caption">
+            🏡 友善住家：節能 + 綠化，一起好空氣
+            <small>Greener homes for cleaner air</small>
+            <br></br>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="a7.png" alt="藍天白雲">
+          <div class="caption">
+            ☁️ 藍天白雲：共同維護低污染城市
+            <small>Clean sky is a shared effort</small>
+            <br></br>
+          </div>
+        </div>
+
+        <button class="arrow prev" aria-label="上一張">
+          ‹
+        </button>
+
+        <button class="arrow next" aria-label="下一張">
+          ›
+        </button>
+
+        <div class="dots" aria-hidden="true">
+          <!-- JS 生成 dot -->
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="togglePlay" aria-label="播放/暫停">
+            ⏸ 暫停
+          </button>
+        </div>
+
+        <div class="progress">
+          <div class="bar" id="progressBar">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Section: PM2.5 & CO2 ===== -->
+    <section class="section" style="background:#f9fafb;">
+
+      <h2 style="color:#1e3a8a; margin-bottom:12px;">
+        🫁 PM2.5 與 CO₂ 對健康的重要
+      </h2>
+
+      <p style="line-height:1.8; color:#334155;">
+        PM2.5（細懸浮微粒）能深入肺泡，增加氣喘、慢性支氣管炎與心血管疾病風險。<br></br>
+        CO₂ 過高會造成頭暈、疲倦與專注力下降，影響學習效率。<br></br>
+        透過<strong>ESG 行動</strong>，我們可以一起改善空氣品質！
+      </p>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="i">🌳</div>
+          <div>
+            <div class="t" style="color:#1e3a8a;">植樹造林</div>
+            <div class="muted">吸收 CO₂、提供遮蔭與降溫</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="i">🚲</div>
+          <div>
+            <div class="t" style="color:#1e3a8a;">低碳通勤</div>
+            <div class="muted">步行/單車/大眾運輸，減少廢氣排放</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="i">🏫</div>
+          <div>
+            <div class="t" style="color:#1e3a8a;">智慧校園</div>
+            <div class="muted">偵測 PM2.5 與 CO₂，打造健康環境</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="i">💡</div>
+          <div>
+            <div class="t" style="color:#1e3a8a;">節能減排</div>
+            <div class="muted">提高能源效率，間接降低空污</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Section: Air Filtration ===== -->
+    <section class="section" style="background:#eef9ff;">
+
+      <h2 style="color:#0369a1; margin-bottom:12px;">
+        🌬️ 空氣濾淨的重要性
+      </h2>
+
+      <p style="line-height:1.8; color:#334155;">
+        外部污染嚴重時，空氣濾淨設備（如清淨機、濾網）能有效過濾 PM2.5、花粉與部分細菌，<br></br>
+        對兒童、長者與敏感族群特別重要。請記得<strong>定期更換濾網</strong>並搭配<strong>良好通風</strong>，才能發揮最佳效果。
+      </p>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="i">😷</div>
+          <div>
+            <div class="t" style="color:#0369a1;">口罩與濾材</div>
+            <div class="muted">降低 PM2.5 與病原吸入</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="i">🌀</div>
+          <div>
+            <div class="t" style="color:#0369a1;">空氣清淨機</div>
+            <div class="muted">HEPA/活性碳濾網強化過濾與除味</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="i">🔄</div>
+          <div>
+            <div class="t" style="color:#0369a1;">定期換濾網</div>
+            <div class="muted">按使用時數/指示燈更換，維持效率</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="i">🏡</div>
+          <div>
+            <div class="t" style="color:#0369a1;">室內通風</div>
+            <div class="muted">交叉通風 + 濾淨，維持清新空氣</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Bottom Hero a8 ===== -->
+    <section class="hero">
+
+      <img src="a8.png" alt="空氣偵測與過濾">
+
+      <div class="hero-text" id="heroText">
+        🌬️ 空氣偵測
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    (function () {
+      const root = document.getElementById('airCarousel');
+
+      if (!root) return;
+
+      const slides = Array.from(root.querySelectorAll('.slide'));
+      const prevBtn = root.querySelector('.prev');
+      const nextBtn = root.querySelector('.next');
+      const dotsWrap = root.querySelector('.dots');
+      const progressBar = document.getElementById('progressBar');
+      const togglePlayBtn = document.getElementById('togglePlay');
+
+      const AUTOPLAY_MS = 4000;
+
+      let i = 0;
+      let playing = true;
+      let raf = null;
+
+      /* build dots */
+      slides.forEach((_, idx) => {
+        const d = document.createElement('div');
+        d.className = 'dot' + (idx === 0 ? ' active' : '');
+        d.addEventListener('click', () => {
+          stop();
+          go(idx);
+          play();
+        });
+        dotsWrap.appendChild(d);
+      });
+
+      const dots = Array.from(dotsWrap.children);
+
+      function go(n) {
+        slides[i].classList.remove('active');
+        dots[i].classList.remove('active');
+
+        i = (n + slides.length) % slides.length;
+
+        slides[i].classList.add('active');
+        dots[i].classList.add('active');
+
+        startedAt = performance.now();
+        if (progressBar) progressBar.style.width = '0%';
+      }
+
+      function next() {
+        go(i + 1);
+      }
+
+      function prev() {
+        go(i - 1);
+      }
+
+      /* autoplay with progress bar */
+      let startedAt = performance.now();
+
+      function tick() {
+        if (!playing) return;
+
+        const p = Math.min(1, (performance.now() - startedAt) / AUTOPLAY_MS);
+
+        if (progressBar) {
+          progressBar.style.width = (p * 100).toFixed(1) + '%';
+        }
+
+        if (p >= 1) next();
+
+        raf = requestAnimationFrame(tick);
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        if (togglePlayBtn) togglePlayBtn.textContent = '⏸ 暫停';
+        startedAt = performance.now();
+        raf = requestAnimationFrame(tick);
+      }
+
+      function stop() {
+        playing = false;
+        if (togglePlayBtn) togglePlayBtn.textContent = '▶️ 播放';
+        cancelAnimationFrame(raf);
+      }
+
+      if (togglePlayBtn) {
+        togglePlayBtn.addEventListener('click', () => playing ? stop() : play());
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          stop();
+          next();
+          play();
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          stop();
+          prev();
+          play();
+        });
+      }
+
+      /* hover pause / resume */
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', () => {
+        if (!playing) play();
+      });
+
+      /* keyboard */
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          stop();
+          next();
+          play();
+        }
+        if (e.key === 'ArrowLeft') {
+          stop();
+          prev();
+          play();
+        }
+        if (e.key === ' ') {
+          e.preventDefault();
+          playing ? stop() : play();
+        }
+      });
+
+      /* start */
+      raf = requestAnimationFrame(tick);
+
+    })();
+
+    /* ===== Hero Text Auto Switch ===== */
+    (function () {
+      const heroTexts = ["🌬️ 空氣偵測", "🌀 過濾", "🏡 好環境"];
+      let idx = 0;
+      const heroTextEl = document.getElementById("heroText");
+
+      if (!heroTextEl) return;
+
+      setInterval(() => {
+        idx = (idx + 1) % heroTexts.length;
+        heroTextEl.textContent = heroTexts[idx];
+      }, 3000);
+    })();
+  </script>
+
 </body>
+
 </html>
