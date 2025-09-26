@@ -1,29 +1,146 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌞 陽光：用電與碳排</title>
-</head>
-<body style="font-family:'Microsoft JhengHei', sans-serif; padding:20px; background:#fdfdfd;">
-  
-<nav style="background-color:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center; font-family:'Microsoft JhengHei', sans-serif;">
-  <div style="font-size:1.2em; font-weight:bold; color:#1e90ff;">
-    📘 UDM ESG 永續教科書
-  </div>
-  <div style="display:flex; gap:15px;">
-    <a href="index.html" style="text-decoration:none; color:#333;">🏠 首頁</a>
-    <a href="sunshine.html" style="text-decoration:none; color:#333;">🌞 陽光</a>
-    <a href="air.html" style="text-decoration:none; color:#333;">💨 空氣</a>
-    <a href="water.html" style="text-decoration:none; color:#333;">💧 水</a>
-    <a href="carbon.html" style="text-decoration:none; color:#333;">🌱 碳匯</a>
-  </div>
-</nav>
+  <style>
+    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#fdfdfd; color:#222;}
+    nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center;}
+    nav a{color:#333; text-decoration:none; margin-left:12px}
+    nav .brand{font-weight:700; color:#1e90ff}
+    main{max-width:1080px; margin:24px auto; padding:0 16px;}
+    h1{margin:8px 0 16px; color:#2c3e50}
+    p{line-height:1.75}
 
-  <h1>🌞 陽光：用電與碳排</h1>
-  
+    /* Carousel */
+    .carousel{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.07);}
+    .carousel .stage{position:relative; width:100%; aspect-ratio:16/9; background:#111;}
+    .carousel .slide{position:absolute; inset:0; display:none;}
+    .carousel .slide.active{display:block;}
+    .carousel img{width:100%; height:100%; object-fit:cover;}
+    .caption{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.55); color:#fff; padding:12px 14px; text-align:center;}
+    .arrow{position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.45); color:#fff; border:none; width:42px; height:42px; border-radius:50%; cursor:pointer;}
+    .prev{left:10px} .next{right:10px}
+    .dots{position:absolute; left:0; right:0; bottom:10px; display:flex; gap:8px; justify-content:center;}
+    .dot{width:10px; height:10px; border-radius:50%; border:2px solid rgba(255,255,255,.9); background:rgba(255,255,255,.25); cursor:pointer;}
+    .dot.active{background:#fff}
+
+    /* Sections */
+    .section{margin-top:40px; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05);}
+    .cards{display:grid; gap:16px; margin-top:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .card{background:#fff; padding:14px; border-radius:12px; display:flex; gap:12px; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); transition:transform .3s ease;}
+    .card:hover{transform:scale(1.05);}
+    .card .i{font-size:28px;}
+    .card .t{font-weight:700;}
+    .muted{font-size:13px; color:#475569;}
+
+    /* Hero */
+    .hero{margin-top:50px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.15);}
+    .hero img{width:100%; height:auto; display:block; animation:zoomIn 20s ease-in-out infinite alternate;}
+    .hero-text{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.45); color:#fff; padding:20px 30px; border-radius:12px; text-align:center; font-size:1.6em; font-weight:700; animation:floatText 4s ease-in-out infinite;}
+    @keyframes zoomIn{from{transform:scale(1);} to{transform:scale(1.1);} }
+    @keyframes floatText{0%,100%{transform:translate(-50%,-50%) translateY(0);} 50%{transform:translate(-50%,-50%) translateY(-10px);} }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">📘 UDM ESG 永續教科書</div>
+    <div>
+      <a href="index.html">🏠 首頁</a>
+      <a href="sunshine.html">🌞 陽光</a>
+      <a href="air.html">💨 空氣</a>
+      <a href="water.html">💧 水</a>
+      <a href="carbon.html">🌱 碳匯</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>🌞 陽光：用電與碳排</h1>
     <p>介紹電力消耗與碳排放的關聯。透過用電數據學習如何節能減碳，降低溫室氣體排放。</p>
-    
+
+    <!-- 輪播 s1~s6 -->
+    <section class="carousel" id="sunCarousel">
+      <div class="stage">
+        <div class="slide active"><img src="s1.png" alt="用電趨勢"><div class="caption">📈 用電趨勢：掌握每日耗電變化<br></br></div></div>
+        <div class="slide"><img src="s2.png" alt="總碳排放"><div class="caption">🌍 總碳排放：觀察能源使用帶來的排放<br></br></div></div>
+        <div class="slide"><img src="s3.png" alt="直方圖"><div class="caption">📊 直方圖：比對不同時間的用電分布<br></br></div></div>
+        <div class="slide"><img src="s4.png" alt="圓餅圖"><div class="caption">🥧 圓餅圖：各設備用電比例一目了然<br></br></div></div>
+        <div class="slide"><img src="s5.png" alt="每日碳排放"><div class="caption">📅 每日追蹤：了解日常碳排放<br></br></div></div>
+        <div class="slide"><img src="s6.png" alt="統計分析"><div class="caption">📐 統計分析與預測：掌握未來用電需求<br></br></div></div>
+        <button class="arrow prev">‹</button>
+        <button class="arrow next">›</button>
+        <div class="dots"></div>
+      </div>
+    </section>
+
+    <!-- 節約用電的重要性 -->
+    <section class="section" style="background:#f9fafb;">
+      <h2 style="color:#1e3a8a;">💡 節約用電的重要性</h2>
+      <p style="line-height:1.8; color:#334155;">
+        用電不只是花錢，更與碳排放直接相關。<br>
+        每一度電背後都伴隨一定量的 CO₂ 排放。<br>
+        節電 = 減少碳排，對抗氣候變遷的重要行動。
+      </p>
+      <div class="cards">
+        <div class="card"><div class="i">🔌</div><div><div class="t">拔掉插頭</div><div class="muted">待機耗電雖小，但累積驚人</div></div></div>
+        <div class="card"><div class="i">💡</div><div><div class="t">節能燈具</div><div class="muted">LED 比傳統燈泡省電 80%</div></div></div>
+        <div class="card"><div class="i">🌞</div><div><div class="t">善用自然光</div><div class="muted">白天少開燈，節省能源</div></div></div>
+        <div class="card"><div class="i">🏠</div><div><div class="t">智慧家庭</div><div class="muted">用智慧插座監控用電</div></div></div>
+      </div>
+    </section>
+
+    <!-- Hero s7 -->
+    <section class="hero">
+      <img src="s7.png" alt="用電設備">
+      <div class="hero-text" id="heroText">🔋 節能減碳</div>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const root=document.getElementById('sunCarousel');
+      const slides=root.querySelectorAll('.slide');
+      const prevBtn=root.querySelector('.prev');
+      const nextBtn=root.querySelector('.next');
+      const dotsWrap=root.querySelector('.dots');
+      let i=0, timer=null;
+
+      slides.forEach((_,idx)=>{
+        const d=document.createElement('div');
+        d.className='dot'+(idx===0?' active':'');
+        d.addEventListener('click',()=>go(idx));
+        dotsWrap.appendChild(d);
+      });
+      const dots=dotsWrap.querySelectorAll('.dot');
+
+      function go(n){
+        slides[i].classList.remove('active');
+        dots[i].classList.remove('active');
+        i=(n+slides.length)%slides.length;
+        slides[i].classList.add('active');
+        dots[i].classList.add('active');
+      }
+      function next(){go(i+1);}
+      function prev(){go(i-1);}
+      function play(){timer=setInterval(next,4000);}
+      function stop(){clearInterval(timer); timer=null;}
+
+      nextBtn.addEventListener('click',()=>{stop(); next(); play();});
+      prevBtn.addEventListener('click',()=>{stop(); prev(); play();});
+      root.addEventListener('mouseenter',stop);
+      root.addEventListener('mouseleave',()=>!timer&&play());
+      play();
+    })();
+
+    /* Hero 標語輪播 */
+    const heroTexts=["🔋 節能減碳","⚡ 聰明用電","🌍 減少碳排","🏠 永續生活"];
+    let idx=0;
+    const heroTextEl=document.getElementById("heroText");
+    setInterval(()=>{
+      idx=(idx+1)%heroTexts.length;
+      heroTextEl.textContent=heroTexts[idx];
+    },3000);
+  </script>
 </body>
 </html>
