@@ -1,55 +1,104 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💧 水：用水與環境</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💧 水：用水與環境（互動增強版）</title>
   <style>
-    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#fdfdfd; color:#222;}
-    nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center;}
-    nav a{color:#333; text-decoration:none; margin-left:12px}
-    nav .brand{font-weight:700; color:#1e90ff}
-    main{max-width:1080px; margin:24px auto; padding:0 16px;}
-    h1{margin:8px 0 16px; color:#2c3e50}
+    :root{
+      --bg:#fdfdfd; --fg:#222; --muted:#475569; --card:#fff; --shadow:0 4px 12px rgba(0,0,0,.05);
+      --brand:#1e90ff; --brand-ink:#0f172a; --soft:#f4f4f4; --hero-mask:rgba(0,0,0,.45);
+    }
+    [data-theme="dark"]{
+      --bg:#0b1220; --fg:#e5e7eb; --muted:#9aa4b2; --card:#0f172a; --shadow:0 4px 16px rgba(0,0,0,.35);
+      --brand:#60a5fa; --brand-ink:#e5e7eb; --soft:#111826; --hero-mask:rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+    body{font-family:"Microsoft JhengHei",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:var(--fg);}
+    a{color:inherit}
+    nav{background:var(--soft); padding:10px; display:flex; gap:12px; align-items:center; position:sticky; top:0; z-index:10; box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    nav .brand{font-weight:700; color:var(--brand); margin-right:auto}
+    nav a{color:var(--fg); text-decoration:none; margin-left:12px}
+    nav .controls{display:flex; align-items:center; gap:10px}
+    .btn{border:1px solid #0000; background:var(--card); color:var(--fg); padding:8px 10px; border-radius:10px; box-shadow:var(--shadow); cursor:pointer}
+    .btn:hover{filter:brightness(1.05)}
+    .chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--soft); color:var(--fg); cursor:pointer; user-select:none}
+
+    main{max-width:1080px; margin:24px auto; padding:0 16px}
+    h1{margin:8px 0 16px; color:var(--brand-ink)}
     p{line-height:1.75}
 
-    .section{margin-top:40px; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05);}
-    .cards{display:grid; gap:16px; margin-top:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-    .card{background:#fff; padding:14px; border-radius:12px; display:flex; gap:12px; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); transition:transform .3s ease;}
-    .card:hover{transform:scale(1.05);}
-    .card .i{font-size:28px;}
-    .card .t{font-weight:700;}
-    .muted{font-size:13px; color:#475569;}
+    .section{margin-top:40px; padding:20px; border-radius:12px; box-shadow:var(--shadow); background:var(--card)}
+    .muted{font-size:13px; color:var(--muted)}
 
-    /* --- 圖片圖卡（非 slide） --- */
-    .gallery{margin-top:26px; display:grid; gap:16px; grid-template-columns:repeat(2,minmax(0,1fr));}
+    .cards{display:grid; gap:16px; margin-top:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .card{background:var(--card); padding:14px; border-radius:12px; display:flex; gap:12px; align-items:center; box-shadow:var(--shadow); transition:transform .3s ease}
+    .card:hover{transform:translateY(-2px)}
+    .card .i{font-size:28px}
+    .card .t{font-weight:700}
+
+    /* Gallery */
+    .gallery{margin-top:16px; display:grid; gap:16px; grid-template-columns:repeat(2,minmax(0,1fr));}
     @media (max-width:720px){ .gallery{grid-template-columns:1fr;} }
-    .tile{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 24px rgba(0,0,0,.08); background:#000;}
-    .tile .frame{width:100%; aspect-ratio:16/10; overflow:hidden;}
-    .tile img{width:100%; height:100%; object-fit:cover; transition:transform .35s ease;}
-    .tile:hover img{transform:scale(1.05);}
-    .tile .cap{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); color:#fff; padding:10px 12px; font-weight:700; text-align:center;}
+    .tile{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 24px rgba(0,0,0,.08); background:#000; cursor:pointer}
+    [data-theme="dark"] .tile{box-shadow:0 10px 24px rgba(0,0,0,.45)}
+    .tile .frame{width:100%; aspect-ratio:16/10; overflow:hidden}
+    .tile img{width:100%; height:100%; object-fit:cover; transition:transform .35s ease}
+    .tile:hover img{transform:scale(1.05)}
+    .tile .cap{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); color:#fff; padding:10px 12px; font-weight:700; text-align:center}
+
+    /* Filter bar */
+    .filterbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:12px 0 6px}
+    .filterbar input[type="search"]{flex:1 1 260px; padding:9px 12px; border-radius:10px; border:1px solid #0000; background:var(--soft); color:var(--fg)}
 
     /* Lightbox */
-    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:50;}
-    .lightbox.open{display:flex;}
-    .lightbox .inner{max-width:min(92vw,1100px); max-height:90vh; position:relative;}
-    .lightbox img{width:100%; height:auto; max-height:90vh; object-fit:contain; border-radius:12px; box-shadow:0 12px 36px rgba(0,0,0,.4);}
-    .lightbox .txt{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); color:#fff; padding:10px 14px; border-radius:0 0 12px 12px; text-align:center;}
-    .lightbox .close{position:absolute; top:-12px; right:-12px; width:40px; height:40px; border:none; border-radius:50%; background:rgba(255,255,255,.9); cursor:pointer; font-size:20px;}
-    .lightbox .close:hover{background:#fff;}
+    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:50}
+    .lightbox.open{display:flex}
+    .lightbox .inner{max-width:min(92vw,1100px); max-height:90vh; position:relative}
+    .lightbox img{width:100%; height:auto; max-height:90vh; object-fit:contain; border-radius:12px; box-shadow:0 12px 36px rgba(0,0,0,.4)}
+    .lightbox .txt{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); color:#fff; padding:10px 14px; border-radius:0 0 12px 12px; text-align:center}
+    .lightbox .close{position:absolute; top:-12px; right:-12px; width:40px; height:40px; border:none; border-radius:50%; background:rgba(255,255,255,.9); cursor:pointer; font-size:20px}
+    .lightbox .close:hover{background:#fff}
+    .lightbox .navBtn{position:absolute; top:50%; transform:translateY(-50%); border:none; background:rgba(255,255,255,.9); width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:18px}
+    .lightbox .prev{left:-12px}
+    .lightbox .next{right:-12px}
+    .lightbox .actions{position:absolute; top:-52px; left:0; right:0; display:flex; gap:8px; justify-content:center}
 
     /* Hero */
-    .hero{margin-top:50px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.15);}
-    .hero img{width:100%; height:auto; display:block; animation:zoomIn 20s ease-in-out infinite alternate;}
-    .hero-text{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.45); color:#fff; padding:20px 30px; border-radius:12px; text-align:center; font-size:1.6em; font-weight:700; animation:floatText 4s ease-in-out infinite;}
-    @keyframes zoomIn{from{transform:scale(1);} to{transform:scale(1.1);} }
-    @keyframes floatText{0%,100%{transform:translate(-50%,-50%) translateY(0);} 50%{transform:translate(-50%,-50%) translateY(-10px);} }
+    .hero{margin-top:50px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .hero img{width:100%; height:auto; display:block; animation:zoomIn 20s ease-in-out infinite alternate}
+    .hero-text{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--hero-mask); color:#fff; padding:16px 22px; border-radius:12px; text-align:center; font-size:1.4em; font-weight:700; animation:floatText 4s ease-in-out infinite}
+    .hero-edit{position:absolute; right:12px; bottom:12px}
+    .hero-edit input{padding:8px 10px; border-radius:10px; border:1px solid #0000; background:rgba(255,255,255,.9)}
+    @keyframes zoomIn{from{transform:scale(1)} to{transform:scale(1.08)}}
+    @keyframes floatText{0%,100%{transform:translate(-50%,-50%) translateY(0)} 50%{transform:translate(-50%,-50%) translateY(-10px)}}
+
+    /* Tools grid */
+    .tools{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+    .tool{background:var(--card); border-radius:12px; padding:16px; box-shadow:var(--shadow)}
+    .tool h3{margin:0 0 10px}
+    .tool .row{display:flex; gap:10px; align-items:center; margin:8px 0}
+
+    /* Checklist */
+    .checklist .item{display:flex; align-items:center; gap:10px; margin:8px 0}
+    .progress{height:10px; background:var(--soft); border-radius:999px; overflow:hidden; margin-top:8px}
+    .progress > span{display:block; height:100%; background:linear-gradient(90deg,#22c55e,#16a34a); width:0%}
+
+    /* Back to top */
+    .to-top{position:fixed; right:16px; bottom:16px; width:44px; height:44px; display:grid; place-items:center; border-radius:50%; background:var(--brand); color:#fff; box-shadow:0 6px 22px rgba(0,0,0,.25); cursor:pointer; opacity:0; transform:translateY(20px); transition:all .25s}
+    .to-top.show{opacity:1; transform:translateY(0)}
   </style>
 </head>
 <body>
   <nav>
     <div class="brand">📘 UDM ESG 永續教科書</div>
+    <div class="controls">
+      <label class="chip" title="深色模式">
+        <input id="themeToggle" type="checkbox" style="accent-color:#60a5fa"> 深色
+      </label>
+      <button class="btn" id="shuffleBtn" title="隨機排列圖庫">🔀 隨機</button>
+    </div>
     <div>
       <a href="index.html">🏠 首頁</a>
       <a href="sunshine.html">🌞 陽光</a>
@@ -64,52 +113,44 @@
     <p>了解用水行為與水資源保護，從校園與家庭一起做到節水與護水。</p>
 
     <!-- 圖片圖卡（非 slide）：w1~w4 -->
-    <section class="section" style="background:#fff;">
-      <h2 style="margin:0 0 6px; color:#0f172a;">📷 用水設備圖集</h2>
-      <p style="color:#334155; margin:6px 0 0;">點圖可放大查看細節。</p>
+    <section class="section">
+      <h2 style="margin:0 0 6px;">📷 用水設備圖集</h2>
+      <div class="muted">點圖可放大、左右方向鍵切換、支援搜尋/篩選。</div>
+
+      <!-- Filter/Search -->
+      <div class="filterbar">
+        <input type="search" id="search" placeholder="搜尋：關鍵字或標籤（如：meter, gateway, dashboard）" />
+        <span class="chip" data-filter="all">全部</span>
+        <span class="chip" data-filter="meter">水表</span>
+        <span class="chip" data-filter="display">顯示器</span>
+        <span class="chip" data-filter="gateway">閘道器</span>
+        <span class="chip" data-filter="dashboard">用水儀錶板</span>
+      </div>
 
       <div class="gallery" id="gallery">
-        <!-- w1 水表 -->
-        <figure class="tile" data-cap="水表（meter）">
-          <div class="frame">
-            <img src="w1.png" alt="水表">
-          </div>
+        <figure class="tile" data-cap="水表（meter）" data-tags="meter,hardware">
+          <div class="frame"><img src="w1.png" alt="水表"></div>
           <figcaption class="cap">水表</figcaption>
         </figure>
-
-        <!-- w2 用水顯示器 -->
-        <figure class="tile" data-cap="用水顯示器（display module）">
-          <div class="frame">
-            <img src="w2.png" alt="用水顯示器">
-          </div>
+        <figure class="tile" data-cap="用水顯示器（display module）" data-tags="display,hardware">
+          <div class="frame"><img src="w2.png" alt="用水顯示器"></div>
           <figcaption class="cap">用水顯示器</figcaption>
         </figure>
-
-        <!-- w3 gateway -->
-        <figure class="tile" data-cap="Gateway（通訊匯流）">
-          <div class="frame">
-            <img src="w3.png" alt="Gateway">
-          </div>
+        <figure class="tile" data-cap="Gateway（通訊匯流）" data-tags="gateway,network">
+          <div class="frame"><img src="w3.png" alt="Gateway"></div>
           <figcaption class="cap">Gateway</figcaption>
         </figure>
-
-        <!-- w4 用水電儀表板 -->
-        <figure class="tile" data-cap="用水電儀表板（dashboard）">
-          <div class="frame">
-            <img src="w4.png" alt="用水電儀表板">
-          </div>
+        <figure class="tile" data-cap="用水電儀表板（dashboard）" data-tags="dashboard,ui">
+          <div class="frame"><img src="w4.png" alt="用水電儀表板"></div>
           <figcaption class="cap">用水電儀表板</figcaption>
         </figure>
       </div>
     </section>
 
     <!-- 節水的重要性＋互動卡片 -->
-    <section class="section" style="background:#f0f9ff;">
-      <h2 style="color:#075985;">💡 節約用水的重要性</h2>
-      <p style="line-height:1.8; color:#334155;">
-        清潔可用的淡水有限；節水能減少抽取與淨化能耗，也就間接降低碳排。<br>
-        校園與家庭只要改變小習慣，就能守護河川、海洋與生態系。
-      </p>
+    <section class="section" style="background:linear-gradient(180deg,rgba(56,189,248,.08),transparent)">
+      <h2>💡 節約用水的重要性</h2>
+      <p class="muted">清潔可用的淡水有限；節水能減少抽取與淨化能耗，也就間接降低碳排。校園與家庭只要改變小習慣，就能守護河川與生態系。</p>
       <div class="cards">
         <div class="card"><div class="i">🚿</div><div><div class="t">短時間淋浴</div><div class="muted">控制在 5–8 分鐘，省水又省能</div></div></div>
         <div class="card"><div class="i">🧼</div><div><div class="t">關水搓洗</div><div class="muted">洗手洗碗時關水，沖洗再開</div></div></div>
@@ -118,54 +159,254 @@
       </div>
     </section>
 
+    <!-- 小工具：用水試算 + 目標清單 -->
+    <section class="section">
+      <h2>🧪 互動工具</h2>
+      <div class="tools">
+        <!-- Calculator -->
+        <div class="tool" id="calc">
+          <h3>即時用水試算（估算）</h3>
+          <div class="muted">可依實際情況調整參數；結果僅供教育參考。</div>
+          <div class="row"><label style="width:140px">淋浴分鐘數：</label><input type="range" id="showerMin" min="0" max="20" value="6"><span id="showerMinVal">6</span> 分</div>
+          <div class="row"><label style="width:140px">水龍頭分鐘數：</label><input type="range" id="tapMin" min="0" max="30" value="5"><span id="tapMinVal">5</span> 分</div>
+          <div class="row"><label style="width:140px">馬桶沖水次數：</label><input type="range" id="flushCnt" min="0" max="20" value="5"><span id="flushCntVal">5</span> 次</div>
+          <div class="row"><label style="width:140px">每 m³ 碳係數：</label><input type="number" id="co2Factor" step="0.01" value="0.16" style="width:90px"> kg CO₂e/m³</div>
+          <div class="row"><button class="btn" id="calcBtn">計算</button><button class="btn" id="resetCalc">重置</button></div>
+          <div id="calcOut" class="muted"></div>
+        </div>
+
+        <!-- Checklist with progress -->
+        <div class="tool checklist" id="cl">
+          <h3>節水行動清單</h3>
+          <div class="item"><input type="checkbox" data-k="a"> 減少淋浴時間至 8 分鐘內</div>
+          <div class="item"><input type="checkbox" data-k="b"> 洗手刷牙關水搓洗</div>
+          <div class="item"><input type="checkbox" data-k="c"> 修復滴水水龍頭/馬桶</div>
+          <div class="item"><input type="checkbox" data-k="d"> 回收洗菜水澆花</div>
+          <div class="progress" aria-label="完成度"><span id="clBar"></span></div>
+          <div class="muted" id="clInfo">完成度 0%</div>
+        </div>
+      </div>
+    </section>
+
     <!-- 最底部 Hero -->
     <section class="hero">
       <img src="w5.png" alt="節水行動">
       <div class="hero-text" id="waterHeroText">💧 節水</div>
+      <div class="hero-edit">
+        <input id="heroInput" type="text" placeholder="自訂標語（按 Enter 儲存）">
+      </div>
     </section>
   </main>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="inner">
+      <div class="actions">
+        <button class="btn" id="dlBtn" title="下載目前圖片">⬇️ 下載</button>
+        <button class="btn" id="openNew" title="在新分頁開啟">🗔 新分頁</button>
+      </div>
+      <button class="navBtn prev" id="lbPrev" aria-label="上一張">⟨</button>
+      <button class="navBtn next" id="lbNext" aria-label="下一張">⟩</button>
       <button class="close" aria-label="關閉">✕</button>
       <img id="lbImg" alt="">
       <div class="txt" id="lbTxt"></div>
     </div>
   </div>
 
+  <button class="to-top" id="toTop" title="回到頂部">↑</button>
+
   <script>
-    // Hero 標語輪播（節水 → 淨水 → 好環境）
+    // ===== Theme toggle =====
     (function(){
-      const msgs = ["💧 節水", "🫧 淨水", "🏞️ 好環境"];
-      let i = 0;
-      const el = document.getElementById('waterHeroText');
-      setInterval(()=>{ i=(i+1)%msgs.length; el.textContent = msgs[i]; }, 3000);
+      const tKey = 'udm_water_theme';
+      const cb = document.getElementById('themeToggle');
+      const saved = localStorage.getItem(tKey) || 'light';
+      if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark'); cb.checked=true}
+      cb.addEventListener('change',()=>{
+        const mode = cb.checked?'dark':'light';
+        document.documentElement.setAttribute('data-theme',mode);
+        localStorage.setItem(tKey,mode);
+      });
     })();
 
-    // 圖片 lightbox
+    // ===== Shuffle gallery =====
+    (function(){
+      const btn = document.getElementById('shuffleBtn');
+      const g = document.getElementById('gallery');
+      btn.addEventListener('click',()=>{
+        const items = Array.from(g.children);
+        for(let i=items.length-1;i>0;i--){
+          const j = Math.floor(Math.random()*(i+1));
+          g.appendChild(items[j]); items.splice(j,1);
+        }
+      });
+    })();
+
+    // ===== Filter + search =====
+    (function(){
+      const chips = document.querySelectorAll('.chip[data-filter]');
+      const q = document.getElementById('search');
+      const tiles = Array.from(document.querySelectorAll('.tile'));
+      let activeTag = 'all';
+      function apply(){
+        const s = q.value.trim().toLowerCase();
+        tiles.forEach(t=>{
+          const tags = (t.getAttribute('data-tags')||'').toLowerCase();
+          const cap = (t.getAttribute('data-cap')||'').toLowerCase();
+          const showByTag = (activeTag==='all') || tags.includes(activeTag);
+          const showByText = !s || tags.includes(s) || cap.includes(s);
+          t.style.display = (showByTag && showByText)?'block':'none';
+        });
+      }
+      chips.forEach(c=>c.addEventListener('click',()=>{activeTag=c.dataset.filter; apply();}));
+      q.addEventListener('input',apply);
+    })();
+
+    // ===== Lightbox with nav / keys / swipe =====
     (function(){
       const box = document.getElementById('lightbox');
       const img = document.getElementById('lbImg');
       const txt = document.getElementById('lbTxt');
       const closeBtn = box.querySelector('.close');
-      const tiles = document.querySelectorAll('.tile');
+      const tiles = Array.from(document.querySelectorAll('.tile'));
+      const prev = document.getElementById('lbPrev');
+      const next = document.getElementById('lbNext');
+      const dlBtn = document.getElementById('dlBtn');
+      const openNew = document.getElementById('openNew');
+      let idx = 0;
 
-      tiles.forEach(tile=>{
-        tile.addEventListener('click', ()=>{
-          const el = tile.querySelector('img');
-          img.src = el.getAttribute('src');
-          img.alt = el.getAttribute('alt') || '';
-          txt.textContent = tile.getAttribute('data-cap') || el.getAttribute('alt') || '';
-          box.classList.add('open');
-          box.setAttribute('aria-hidden','false');
-        });
+      function open(i){
+        idx = i;
+        const el = tiles[idx].querySelector('img');
+        img.src = el.getAttribute('src');
+        img.alt = el.getAttribute('alt')||'';
+        txt.textContent = tiles[idx].getAttribute('data-cap') || el.getAttribute('alt') || '';
+        box.classList.add('open');
+        box.setAttribute('aria-hidden','false');
+      }
+      function close(){ box.classList.remove('open'); box.setAttribute('aria-hidden','true'); img.src=''; }
+      function step(d){
+        const visible = tiles.filter(t=>t.style.display!=="none");
+        const current = visible.indexOf(tiles[idx]);
+        const target = (current+d+visible.length)%visible.length;
+        const newIdx = tiles.indexOf(visible[target]);
+        open(newIdx);
+      }
+
+      tiles.forEach((t,i)=> t.addEventListener('click',()=> open(i)));
+      closeBtn.addEventListener('click', close);
+      box.addEventListener('click', (e)=>{ if(e.target===box) close(); });
+      document.addEventListener('keydown', (e)=>{
+        if(!box.classList.contains('open')) return;
+        if(e.key==='Escape') close();
+        if(e.key==='ArrowLeft') step(-1);
+        if(e.key==='ArrowRight') step(1);
+      });
+      prev.addEventListener('click',()=>step(-1));
+      next.addEventListener('click',()=>step(1));
+
+      // swipe
+      let sx=0, sy=0;
+      box.addEventListener('touchstart',e=>{sx=e.touches[0].clientX; sy=e.touches[0].clientY});
+      box.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-sx; const dy=e.changedTouches[0].clientY-sy;
+        if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)) step(dx>0?-1:1);
       });
 
-      const close = ()=>{ box.classList.remove('open'); box.setAttribute('aria-hidden','true'); img.src = ''; };
-      closeBtn.addEventListener('click', close);
-      box.addEventListener('click', (e)=>{ if(e.target === box) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+      // actions
+      dlBtn.addEventListener('click',()=>{
+        const a=document.createElement('a'); a.href=img.src; a.download=img.alt||'image'; a.click();
+      });
+      openNew.addEventListener('click',()=>{ window.open(img.src,'_blank'); });
+    })();
+
+    // ===== Hero 標語輪播 ＋ 自訂保存 =====
+    ;(function(){
+      const msgs = ["💧 節水", "🫧 淨水", "🏞️ 好環境"]; let i = 0;
+      const el = document.getElementById('waterHeroText');
+      const key = 'udm_water_hero';
+      const saved = localStorage.getItem(key);
+      if(saved){ el.textContent = saved; }
+      setInterval(()=>{
+        if(localStorage.getItem(key)) return; // 若使用者自訂則停用輪播
+        i=(i+1)%msgs.length; el.textContent = msgs[i];
+      }, 3000);
+      const input = document.getElementById('heroInput');
+      input.addEventListener('keydown', (e)=>{
+        if(e.key==='Enter'){
+          const v = input.value.trim();
+          if(v){ el.textContent=v; localStorage.setItem(key,v); input.value=''; }
+        }
+      });
+    })();
+
+    // ===== 試算器 =====
+    (function(){
+      const showerMin = document.getElementById('showerMin');
+      const tapMin = document.getElementById('tapMin');
+      const flushCnt = document.getElementById('flushCnt');
+      const f1 = document.getElementById('showerMinVal');
+      const f2 = document.getElementById('tapMinVal');
+      const f3 = document.getElementById('flushCntVal');
+      const out = document.getElementById('calcOut');
+      const factor = document.getElementById('co2Factor');
+      const btn = document.getElementById('calcBtn');
+      const reset = document.getElementById('resetCalc');
+
+      const sync = ()=>{ f1.textContent=showerMin.value; f2.textContent=tapMin.value; f3.textContent=flushCnt.value; };
+      [showerMin,tapMin,flushCnt].forEach(el=>el.addEventListener('input',sync)); sync();
+
+      function calc(){
+        // 基本假設（可自行調整）：
+        const showerLpm = 9;   // 淋浴出水量 (L/分)
+        const tapLpm = 6;      // 水龍頭出水量 (L/分)
+        const flushL = 6;      // 馬桶每次用水 (L)
+        const L = showerLpm*+showerMin.value + tapLpm*+tapMin.value + flushL*+flushCnt.value;
+        const m3 = L/1000;
+        const co2 = m3 * (+factor.value||0);
+        out.innerHTML = `估算用水：<b>${L.toFixed(0)}</b> L（約 <b>${m3.toFixed(2)}</b> m³）｜估算碳排：<b>${co2.toFixed(2)}</b> kg CO₂e`;
+      }
+      btn.addEventListener('click',calc);
+      reset.addEventListener('click',()=>{ showerMin.value=6; tapMin.value=5; flushCnt.value=5; factor.value=0.35; sync(); out.textContent=''; });
+    })();
+
+    // ===== Checklist with progress + localStorage =====
+    (function(){
+      const key='udm_water_checklist';
+      const state = JSON.parse(localStorage.getItem(key)||'{}');
+      const boxes = Array.from(document.querySelectorAll('#cl input[type="checkbox"]'));
+      const bar = document.getElementById('clBar');
+      const info = document.getElementById('clInfo');
+
+      boxes.forEach(b=>{ if(state[b.dataset.k]) b.checked=true; });
+      function refresh(){
+        const done = boxes.filter(b=>b.checked).length;
+        const pct = Math.round(done/boxes.length*100);
+        bar.style.width=pct+'%';
+        info.textContent = `完成度 ${pct}%`;
+        if(pct===100){ confetti(); }
+      }
+      boxes.forEach(b=> b.addEventListener('change',()=>{ state[b.dataset.k]=b.checked; localStorage.setItem(key,JSON.stringify(state)); refresh(); }));
+      refresh();
+
+      // 簡易 confetti（無外部套件）
+      function confetti(){
+        for(let i=0;i<60;i++){
+          const s=document.createElement('span');
+          s.textContent='🎉'; s.style.position='fixed'; s.style.left=Math.random()*100+'vw'; s.style.top='-10px'; s.style.fontSize=(16+Math.random()*16)+'px'; s.style.transition='transform 2.2s ease, opacity 2.2s ease'; s.style.zIndex=99; document.body.appendChild(s);
+          setTimeout(()=>{ s.style.transform=`translateY(${120+Math.random()*80}vh) rotate(${(Math.random()*360)|0}deg)`; s.style.opacity='0'; }, 10);
+          setTimeout(()=> s.remove(), 2400);
+        }
+      }
+    })();
+
+    // ===== Back to top =====
+    (function(){
+      const b = document.getElementById('toTop');
+      window.addEventListener('scroll',()=>{
+        if(window.scrollY>300){ b.classList.add('show'); } else { b.classList.remove('show'); }
+      });
+      b.addEventListener('click',()=> window.scrollTo({top:0, behavior:'smooth'}));
     })();
   </script>
 </body>
