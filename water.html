@@ -1,29 +1,172 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💧 水：水資源與碳排</title>
-</head>
-<body style="font-family:'Microsoft JhengHei', sans-serif; padding:20px; background:#fdfdfd;">
-  
-<nav style="background-color:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center; font-family:'Microsoft JhengHei', sans-serif;">
-  <div style="font-size:1.2em; font-weight:bold; color:#1e90ff;">
-    📘 UDM ESG 永續教科書
-  </div>
-  <div style="display:flex; gap:15px;">
-    <a href="index.html" style="text-decoration:none; color:#333;">🏠 首頁</a>
-    <a href="sunshine.html" style="text-decoration:none; color:#333;">🌞 陽光</a>
-    <a href="air.html" style="text-decoration:none; color:#333;">💨 空氣</a>
-    <a href="water.html" style="text-decoration:none; color:#333;">💧 水</a>
-    <a href="carbon.html" style="text-decoration:none; color:#333;">🌱 碳匯</a>
-  </div>
-</nav>
+  <title>💧 水：用水與環境</title>
+  <style>
+    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#fdfdfd; color:#222;}
+    nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center;}
+    nav a{color:#333; text-decoration:none; margin-left:12px}
+    nav .brand{font-weight:700; color:#1e90ff}
+    main{max-width:1080px; margin:24px auto; padding:0 16px;}
+    h1{margin:8px 0 16px; color:#2c3e50}
+    p{line-height:1.75}
 
-  <h1>💧 水：水資源與碳排</h1>
-  
-    <p>探討節水行為與碳排之間的關係。學習如何珍惜每一滴水，並了解水的處理與能源消耗。</p>
-    
+    .section{margin-top:40px; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05);}
+    .cards{display:grid; gap:16px; margin-top:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .card{background:#fff; padding:14px; border-radius:12px; display:flex; gap:12px; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); transition:transform .3s ease;}
+    .card:hover{transform:scale(1.05);}
+    .card .i{font-size:28px;}
+    .card .t{font-weight:700;}
+    .muted{font-size:13px; color:#475569;}
+
+    /* --- 圖片圖卡（非 slide） --- */
+    .gallery{margin-top:26px; display:grid; gap:16px; grid-template-columns:repeat(2,minmax(0,1fr));}
+    @media (max-width:720px){ .gallery{grid-template-columns:1fr;} }
+    .tile{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 24px rgba(0,0,0,.08); background:#000;}
+    .tile .frame{width:100%; aspect-ratio:16/10; overflow:hidden;}
+    .tile img{width:100%; height:100%; object-fit:cover; transition:transform .35s ease;}
+    .tile:hover img{transform:scale(1.05);}
+    .tile .cap{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); color:#fff; padding:10px 12px; font-weight:700; text-align:center;}
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:50;}
+    .lightbox.open{display:flex;}
+    .lightbox .inner{max-width:min(92vw,1100px); max-height:90vh; position:relative;}
+    .lightbox img{width:100%; height:auto; max-height:90vh; object-fit:contain; border-radius:12px; box-shadow:0 12px 36px rgba(0,0,0,.4);}
+    .lightbox .txt{position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); color:#fff; padding:10px 14px; border-radius:0 0 12px 12px; text-align:center;}
+    .lightbox .close{position:absolute; top:-12px; right:-12px; width:40px; height:40px; border:none; border-radius:50%; background:rgba(255,255,255,.9); cursor:pointer; font-size:20px;}
+    .lightbox .close:hover{background:#fff;}
+
+    /* Hero */
+    .hero{margin-top:50px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.15);}
+    .hero img{width:100%; height:auto; display:block; animation:zoomIn 20s ease-in-out infinite alternate;}
+    .hero-text{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.45); color:#fff; padding:20px 30px; border-radius:12px; text-align:center; font-size:1.6em; font-weight:700; animation:floatText 4s ease-in-out infinite;}
+    @keyframes zoomIn{from{transform:scale(1);} to{transform:scale(1.1);} }
+    @keyframes floatText{0%,100%{transform:translate(-50%,-50%) translateY(0);} 50%{transform:translate(-50%,-50%) translateY(-10px);} }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">📘 UDM ESG 永續教科書</div>
+    <div>
+      <a href="index.html">🏠 首頁</a>
+      <a href="sunshine.html">🌞 陽光</a>
+      <a href="air.html">💨 空氣</a>
+      <a href="water.html">💧 水</a>
+      <a href="carbon.html">🌱 碳匯</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>💧 水：用水與環境</h1>
+    <p>了解用水行為與水資源保護，從校園與家庭一起做到節水與護水。</p>
+
+    <!-- 圖片圖卡（非 slide）：w1~w4 -->
+    <section class="section" style="background:#fff;">
+      <h2 style="margin:0 0 6px; color:#0f172a;">📷 用水設備圖集</h2>
+      <p style="color:#334155; margin:6px 0 0;">點圖可放大查看細節。</p>
+
+      <div class="gallery" id="gallery">
+        <!-- w1 水表 -->
+        <figure class="tile" data-cap="水表（meter）">
+          <div class="frame">
+            <img src="w1.png" alt="水表">
+          </div>
+          <figcaption class="cap">水表</figcaption>
+        </figure>
+
+        <!-- w2 用水顯示器 -->
+        <figure class="tile" data-cap="用水顯示器（display module）">
+          <div class="frame">
+            <img src="w2.png" alt="用水顯示器">
+          </div>
+          <figcaption class="cap">用水顯示器</figcaption>
+        </figure>
+
+        <!-- w3 gateway -->
+        <figure class="tile" data-cap="Gateway（通訊匯流）">
+          <div class="frame">
+            <img src="w3.png" alt="Gateway">
+          </div>
+          <figcaption class="cap">Gateway</figcaption>
+        </figure>
+
+        <!-- w4 用水電儀表板 -->
+        <figure class="tile" data-cap="用水電儀表板（dashboard）">
+          <div class="frame">
+            <img src="w4.png" alt="用水電儀表板">
+          </div>
+          <figcaption class="cap">用水電儀表板</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 節水的重要性＋互動卡片 -->
+    <section class="section" style="background:#f0f9ff;">
+      <h2 style="color:#075985;">💡 節約用水的重要性</h2>
+      <p style="line-height:1.8; color:#334155;">
+        清潔可用的淡水有限；節水能減少抽取與淨化能耗，也就間接降低碳排。<br>
+        校園與家庭只要改變小習慣，就能守護河川、海洋與生態系。
+      </p>
+      <div class="cards">
+        <div class="card"><div class="i">🚿</div><div><div class="t">短時間淋浴</div><div class="muted">控制在 5–8 分鐘，省水又省能</div></div></div>
+        <div class="card"><div class="i">🧼</div><div><div class="t">關水搓洗</div><div class="muted">洗手洗碗時關水，沖洗再開</div></div></div>
+        <div class="card"><div class="i">🛠️</div><div><div class="t">修漏檢測</div><div class="muted">定期檢查水龍頭與馬桶漏水</div></div></div>
+        <div class="card"><div class="i">♻️</div><div><div class="t">回收再利用</div><div class="muted">收集洗菜水澆花拖地</div></div></div>
+      </div>
+    </section>
+
+    <!-- 最底部 Hero -->
+    <section class="hero">
+      <img src="w5.png" alt="節水行動">
+      <div class="hero-text" id="waterHeroText">💧 節水</div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="inner">
+      <button class="close" aria-label="關閉">✕</button>
+      <img id="lbImg" alt="">
+      <div class="txt" id="lbTxt"></div>
+    </div>
+  </div>
+
+  <script>
+    // Hero 標語輪播（節水 → 淨水 → 好環境）
+    (function(){
+      const msgs = ["💧 節水", "🫧 淨水", "🏞️ 好環境"];
+      let i = 0;
+      const el = document.getElementById('waterHeroText');
+      setInterval(()=>{ i=(i+1)%msgs.length; el.textContent = msgs[i]; }, 3000);
+    })();
+
+    // 圖片 lightbox
+    (function(){
+      const box = document.getElementById('lightbox');
+      const img = document.getElementById('lbImg');
+      const txt = document.getElementById('lbTxt');
+      const closeBtn = box.querySelector('.close');
+      const tiles = document.querySelectorAll('.tile');
+
+      tiles.forEach(tile=>{
+        tile.addEventListener('click', ()=>{
+          const el = tile.querySelector('img');
+          img.src = el.getAttribute('src');
+          img.alt = el.getAttribute('alt') || '';
+          txt.textContent = tile.getAttribute('data-cap') || el.getAttribute('alt') || '';
+          box.classList.add('open');
+          box.setAttribute('aria-hidden','false');
+        });
+      });
+
+      const close = ()=>{ box.classList.remove('open'); box.setAttribute('aria-hidden','true'); img.src = ''; };
+      closeBtn.addEventListener('click', close);
+      box.addEventListener('click', (e)=>{ if(e.target === box) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+    })();
+  </script>
 </body>
 </html>
