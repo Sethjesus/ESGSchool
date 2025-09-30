@@ -5,31 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌞 陽光：用電與碳排</title>
   <style>
-    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#fdfdfd; color:#222; transition:background .3s,color .3s;}
-    nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center;}
-    nav a{color:#333; text-decoration:none; margin-left:12px}
-    nav .brand{font-weight:700; color:#1e90ff}
+    :root{
+      --bg:#fdfdfd; --fg:#222; --nav:#f4f4f4; --link:#333;
+      --card:#fff; --muted:#475569; --shadow:0 4px 12px rgba(0,0,0,.05);
+      --accent:#1e90ff; --chip:#e2e8f0; --ok:#16a34a; --warn:#ef4444; --soft:#f9fafb;
+    }
+    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:var(--bg); color:var(--fg); transition:background .3s,color .3s;}
+    nav{background:var(--nav); padding:10px; display:flex; justify-content:space-between; align-items:center;}
+    nav a{color:var(--link); text-decoration:none; margin-left:12px}
+    nav .brand{font-weight:700; color:var(--accent)}
     main{max-width:1080px; margin:24px auto; padding:0 16px;}
     h1{margin:8px 0 16px; color:#2c3e50}
     p{line-height:1.75}
 
     /* 深色模式（與其他頁一致） */
-    body.dark{background:#0f172a; color:#e5e7eb}
-    body.dark nav{background:#1e293b}
-    body.dark nav a{color:#e5e7eb}
+    body.dark{--bg:#0f172a; --fg:#e5e7eb; --nav:#1e293b; --link:#e5e7eb; --card:#0b1220; --muted:#94a3b8; --shadow:0 4px 16px rgba(0,0,0,.35); --chip:#0f2038; --soft:#111827}
 
     /* Switch（44x24，與其他頁一致） */
     .switch{margin-left:16px; position:relative; display:inline-block; width:44px; height:24px; vertical-align:middle;}
     .switch input{opacity:0; width:0; height:0;}
     .slider{position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.4s; border-radius:24px;}
     .slider:before{position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:white; transition:.4s; border-radius:50%;}
-    .switch input:checked + .slider{background:#1e90ff;}
-    .switch input:checked + .slider:before{transform:translateX(20px);}
+    .switch input:checked + .slider{background:var(--accent);}
+    .switch input:checked + .slider:before{transform:translateX(20px);} 
     .switch-text{margin-left:8px; font-size:14px; color:#333; cursor:pointer; user-select:none; vertical-align:middle;}
     body.dark .switch-text{color:#e5e7eb;}
 
     /* Carousel */
-    .carousel{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.07);}
+    .carousel{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.07);} 
     .carousel .stage{position:relative; width:100%; aspect-ratio:16/9; background:#111;}
     .carousel .slide{position:absolute; inset:0; display:none;}
     .carousel .slide.active{display:block;}
@@ -42,20 +45,40 @@
     .dot.active{background:#fff}
 
     /* Sections */
-    .section{margin-top:40px; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05);}
+    .section{margin-top:40px; padding:20px; border-radius:12px; box-shadow:var(--shadow);} 
     .cards{display:grid; gap:16px; margin-top:18px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-    .card{background:#fff; padding:14px; border-radius:12px; display:flex; gap:12px; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); transition:transform .3s ease;}
-    .card:hover{transform:scale(1.05);}
+    .card{background:var(--card); padding:14px; border-radius:12px; display:flex; gap:12px; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); transition:transform .3s ease;}
+    .card:hover{transform:scale(1.05);} 
     .card .i{font-size:28px;}
     .card .t{font-weight:700;}
-    .muted{font-size:13px; color:#475569;}
+    .muted{font-size:13px; color:var(--muted);} 
 
     /* Hero */
-    .hero{margin-top:50px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.15);}
+    .hero{margin-top:50px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.15);} 
     .hero img{width:100%; height:auto; display:block; animation:zoomIn 20s ease-in-out infinite alternate;}
     .hero-text{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.45); color:#fff; padding:20px 30px; border-radius:12px; text-align:center; font-size:1.6em; font-weight:700; animation:floatText 4s ease-in-out infinite;}
     @keyframes zoomIn{from{transform:scale(1);} to{transform:scale(1.1);} }
     @keyframes floatText{0%,100%{transform:translate(-50%,-50%) translateY(0);} 50%{transform:translate(-50%,-50%) translateY(-10px);} }
+
+    /* ===== 節電小遊戲：用電挑戰 ===== */
+    .game{margin-top:40px; border-radius:14px; padding:18px; background:var(--soft); box-shadow:var(--shadow);} 
+    .game h2{margin:0 0 8px;}
+    .status{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:10px 0 14px;}
+    .chip{padding:8px 12px; border-radius:999px; background:var(--chip); font-size:14px;}
+    .power{font-weight:800;}
+    .goal.ok{color:var(--ok);} .goal.bad{color:var(--warn);} 
+    .appliances{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+    .appliance{background:var(--card); border-radius:12px; padding:12px; display:flex; gap:10px; align-items:center; justify-content:space-between; box-shadow:var(--shadow);} 
+    .appliance .name{font-weight:700;}
+    .appliance .w{font-size:12px; color:var(--muted);} 
+    .appliance button{border:none; padding:8px 10px; border-radius:10px; cursor:pointer; background:#0ea5e9; color:#fff;}
+    .appliance button.off{background:#475569;} 
+    .bar{height:12px; background:#e5e7eb; border-radius:999px; overflow:hidden;}
+    .bar>i{display:block; height:100%; width:0%; background:linear-gradient(90deg,#22c55e,#eab308,#ef4444);} 
+    .tips{margin-top:12px; font-size:14px; color:var(--muted);} 
+    .controls{margin-top:14px; display:flex; gap:12px;}
+    .controls button{border:none; padding:10px 14px; border-radius:10px; cursor:pointer; background:#111827; color:#fff;}
+    .msg{margin-top:10px; font-weight:800;}
   </style>
 </head>
 <body>
@@ -116,6 +139,27 @@
       <img src="s7.png" alt="用電設備">
       <div class="hero-text" id="heroText">🔋 節能減碳</div>
     </section>
+
+    <!-- ===== 節電小遊戲：用電挑戰 ===== -->
+    <section class="game" id="game">
+      <h2>🎮 節電小遊戲：把即時功率壓到 <span id="goal"></span> 以內！</h2>
+      <div class="status">
+        <span class="chip">目前功率：<span class="power" id="powerNow">0 W</span></span>
+        <span class="chip">每小時 CO₂：<span id="co2Now">0 g</span></span>
+        <span class="chip">目標狀態：<span id="goalState" class="goal">—</span></span>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+
+      <div class="appliances" id="appliances"></div>
+      <div class="tips" id="tips">提示：關閉高瓦數電器最有效，例如冷氣、電熱水器、烤箱等。</div>
+      <div class="controls">
+        <button id="reset">🔁 重新抽題</button>
+        <button id="allOff">📴 全部關閉</button>
+        <button id="allOn">🟢 全部開啟</button>
+      </div>
+      <div class="msg" id="msg"></div>
+    </section>
+
   </main>
 
   <script>
@@ -127,13 +171,11 @@
       const saved=localStorage.getItem(KEY);
       if(saved==='dark'){ document.body.classList.add('dark'); cb.checked=true; }
       cb.addEventListener('change',()=>{
-        const dark=cb.checked;
-        document.body.classList.toggle('dark',dark);
-        localStorage.setItem(KEY, dark ? 'dark' : 'light');
+        const dark=cb.checked; document.body.classList.toggle('dark',dark); localStorage.setItem(KEY, dark ? 'dark' : 'light');
       });
     })();
 
-    // 輪播（保持原樣）
+    // 輪播
     (function(){
       const root=document.getElementById('sunCarousel');
       const slides=root.querySelectorAll('.slide');
@@ -151,16 +193,11 @@
       const dots=dotsWrap.querySelectorAll('.dot');
 
       function go(n){
-        slides[i].classList.remove('active');
-        dots[i].classList.remove('active');
-        i=(n+slides.length)%slides.length;
-        slides[i].classList.add('active');
-        dots[i].classList.add('active');
+        slides[i].classList.remove('active'); dots[i].classList.remove('active');
+        i=(n+slides.length)%slides.length; slides[i].classList.add('active'); dots[i].classList.add('active');
       }
-      function next(){go(i+1);}
-      function prev(){go(i-1);}
-      function play(){timer=setInterval(next,4000);}
-      function stop(){clearInterval(timer); timer=null;}
+      function next(){go(i+1);} function prev(){go(i-1);} 
+      function play(){timer=setInterval(next,4000);} function stop(){clearInterval(timer); timer=null;}
 
       nextBtn.addEventListener('click',()=>{stop(); next(); play();});
       prevBtn.addEventListener('click',()=>{stop(); prev(); play();});
@@ -169,11 +206,122 @@
       play();
     })();
 
-    // Hero 標語輪播（保持原樣）
-    const heroTexts=["🔋 節能減碳","⚡ 聰明用電","🌍 減少碳排","🏠 永續生活"];
-    let idx=0;
-    const heroTextEl=document.getElementById("heroText");
+    // Hero 標語輪播
+    const heroTexts=["🔋 節能減碳","⚡ 聰明用電","🌍 減少碳排","🏠 永續生活"]; let idx=0; const heroTextEl=document.getElementById("heroText");
     setInterval(()=>{ idx=(idx+1)%heroTexts.length; heroTextEl.textContent=heroTexts[idx]; },3000);
+
+    // ===== 小遊戲邏輯 =====
+    (function(){
+      // 排碳係數：0.495 kg/kWh → 每小時 g = (W/1000)*0.495*1000 = W*0.495
+      const CO2_PER_WATT_PER_HOUR_G = 0.495; 
+
+      const APPLIANCE_BANK=[
+        {name:'冷氣(變頻)', base:900, tips:'提高1℃可省 3~5% 用電'},
+        {name:'電熱水器', base:2000, tips:'洗澡改用節流蓮蓬頭省水又省電'},
+        {name:'電冰箱', base:120, tips:'門封條要緊密、熱菜放涼再進冰箱'},
+        {name:'電視', base:90, tips:'降低亮度或使用節能模式'},
+        {name:'電腦桌機', base:180, tips:'螢幕 10 分鐘自動休眠'},
+        {name:'筆電', base:40, tips:'省電模式+關閉高耗能應用'},
+        {name:'烤箱/氣炸鍋', base:1200, tips:'一次多烤、善用預熱餘溫'},
+        {name:'洗衣機(脫水)', base:400, tips:'滿桶洗更省電省水'},
+        {name:'吹風機', base:1000, tips:'先以毛巾壓乾再吹'},
+        {name:'照明(LED)', base:10, tips:'白天改用自然光'},
+        {name:'路由器', base:8, tips:'散熱良好可降耗損'},
+        {name:'除濕機', base:250, tips:'濕度設定 55~60%'}
+      ];
+
+      const $ = (q)=>document.querySelector(q);
+      const $$ = (q)=>document.querySelectorAll(q);
+      const listEl = $('#appliances');
+      const powerNowEl = $('#powerNow');
+      const co2NowEl = $('#co2Now');
+      const barFillEl = $('#barFill');
+      const goalEl = $('#goal');
+      const goalStateEl = $('#goalState');
+      const tipsEl = $('#tips');
+      const msgEl = $('#msg');
+
+      const resetBtn = $('#reset');
+      const allOffBtn = $('#allOff');
+      const allOnBtn = $('#allOn');
+
+      let appliances = [];
+      let goalW = 0;
+
+      function randomPick(n){
+        const arr=[...APPLIANCE_BANK];
+        for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+        return arr.slice(0,n);
+      }
+
+      function newRound(){
+        // 亂數抽 6~8 個電器
+        const count=6+Math.floor(Math.random()*3);
+        appliances = randomPick(count).map(x=>({ ...x, on: Math.random() < 0.6 }));
+        // 目標：隨機設定為當前總功率的 50%~70%
+        const currentW=sumW(appliances);
+        goalW = Math.floor(currentW * (0.5 + Math.random()*0.2));
+        render();
+        showMsg('試著把裝置關到『綠色』區域，達成目標！');
+      }
+
+      function sumW(items){ return Math.round(items.reduce((s,a)=>s + (a.on ? a.base : 0), 0)); }
+
+      function render(){
+        // Header info
+        goalEl.textContent = `${goalW} W`;
+
+        // List
+        listEl.innerHTML='';
+        appliances.forEach((a,idx)=>{
+          const card=document.createElement('div'); card.className='appliance';
+          const left=document.createElement('div');
+          left.innerHTML=`<div class="name">${a.name}</div><div class="w">${a.base} W</div>`;
+          const btn=document.createElement('button'); btn.textContent=a.on?'ON':'OFF'; btn.className=a.on?'':'off';
+          btn.addEventListener('click',()=>{ a.on=!a.on; btn.textContent=a.on?'ON':'OFF'; btn.className=a.on?'':'off'; update(); });
+          card.appendChild(left); card.appendChild(btn); listEl.appendChild(card);
+        });
+        update();
+      }
+
+      function update(){
+        const w = sumW(appliances);
+        powerNowEl.textContent = `${w} W`;
+        const co2g = Math.round(w * CO2_PER_WATT_PER_HOUR_G);
+        co2NowEl.textContent = `${co2g} g / 小時`;
+
+        // 進度條：0~120% 的視覺化
+        const pct = Math.max(0, Math.min(1.2, w / goalW));
+        barFillEl.style.width = `${Math.min(100, pct*100)}%`;
+
+        // 目標狀態
+        const ok = w <= goalW;
+        goalStateEl.textContent = ok ? '✅ 達標' : '⏳ 未達';
+        goalStateEl.className = 'goal ' + (ok? 'ok':'bad');
+
+        // 提示：找出耗電前三名且為 ON
+        const hot = appliances.filter(a=>a.on).sort((a,b)=>b.base-a.base).slice(0,3);
+        if(hot.length){
+          tipsEl.textContent = '建議先關：' + hot.map(a=>`${a.name}(${a.base}W)`).join('、') + '。';
+        }else{
+          tipsEl.textContent = '做得好！目前沒有高耗電裝置。';
+        }
+
+        if(ok){ showMsg('🎉 太棒了！你已經把即時功率壓到目標以下。'); }
+        else{ clearMsg(); }
+      }
+
+      function showMsg(t){ msgEl.textContent=t; }
+      function clearMsg(){ msgEl.textContent=''; }
+
+      // Controls
+      resetBtn.addEventListener('click', newRound);
+      allOffBtn.addEventListener('click',()=>{ appliances.forEach(a=>a.on=false); update(); });
+      allOnBtn.addEventListener('click',()=>{ appliances.forEach(a=>a.on=true); update(); });
+
+      // 啟動
+      newRound();
+    })();
   </script>
 </body>
 </html>
