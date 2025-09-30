@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌱 碳匯：固碳原理與公式</title>
+  <title>🌱 碳匯：固碳原理與公式 + 小小造林家</title>
   <style>
+    /* ===== 基礎樣式（延續你的設計） ===== */
     body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#fdfdfd; color:#222; transition:background .3s, color .3s;}
     body.dark{background:#1e293b; color:#f1f5f9;}
     nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center;}
@@ -24,32 +25,79 @@
     .slider{position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.4s; border-radius:24px;}
     .slider:before{position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:white; transition:.4s; border-radius:50%;}
     input:checked + .slider{background:#1e90ff;}
-    input:checked + .slider:before{transform:translateX(20px);}
-
-    /* switch 文字（可點擊） */
+    input:checked + .slider:before{transform:translateX(20px);} 
     .switch-text{margin-left:8px; font-size:14px; color:#333; cursor:pointer; user-select:none; vertical-align:middle;}
     body.dark .switch-text{color:#f1f5f9;}
 
     /* Carousel */
-    .carousel{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.07);}
+    .carousel{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.07);} 
     .carousel .stage{position:relative; width:100%; aspect-ratio:16/9; background:#111;}
     .carousel .slide{position:absolute; inset:0; display:none;}
     .carousel .slide.active{display:block;}
     .carousel img{width:100%; height:100%; object-fit:cover; transition:transform .35s ease;}
-    .carousel:hover .slide.active img{transform:scale(1.02);}
+    .carousel:hover .slide.active img{transform:scale(1.02);} 
     .arrow{position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.45); color:#fff; border:none; width:42px; height:42px; border-radius:50%; cursor:pointer; display:grid; place-items:center; font-size:18px;}
-    .arrow:hover{background:rgba(0,0,0,.6);}
-    .prev{left:10px}
-    .next{right:10px}
+    .arrow:hover{background:rgba(0,0,0,.6);} .prev{left:10px} .next{right:10px}
     .dots{position:absolute; left:0; right:0; bottom:10px; display:flex; gap:8px; justify-content:center;}
-    .dot{width:10px; height:10px; border-radius:50%; border:2px solid rgba(255,255,255,.9); background:rgba(255,255,255,.25); cursor:pointer;}
-    .dot.active{background:#fff}
-    .progress{position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(255,255,255,.18);}
-    .progress .bar{height:100%; width:0%; background:linear-gradient(90deg,#5fb3ff,#1e90ff);}
+    .dot{width:10px; height:10px; border-radius:50%; border:2px solid rgba(255,255,255,.9); background:rgba(255,255,255,.25); cursor:pointer;} .dot.active{background:#fff}
+    .progress{position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(255,255,255,.18);} .progress .bar{height:100%; width:0%; background:linear-gradient(90deg,#5fb3ff,#1e90ff);} 
     .caption{position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.42); color:#fff; font-size:14px; padding:6px 10px; border-radius:8px; max-width:min(80%, 800px); line-height:1.5;}
-    .controls{position:absolute; right:10px; bottom:10px; display:flex; gap:8px;}
-    .btn{background:rgba(0,0,0,.45); color:#fff; border:none; border-radius:10px; padding:6px 10px; font-size:13px; cursor:pointer;}
-    .btn:hover{background:rgba(0,0,0,.6);}
+    .controls{position:absolute; right:10px; bottom:10px; display:flex; gap:8px;} .btn{background:rgba(0,0,0,.45); color:#fff; border:none; border-radius:10px; padding:6px 10px; font-size:13px; cursor:pointer;} .btn:hover{background:rgba(0,0,0,.6);} 
+
+    /* ===== 小遊戲：小小造林家（國小友善） ===== */
+    .game{margin-top:36px; background:#f9fafb; border-radius:14px; padding:18px; box-shadow:0 8px 20px rgba(0,0,0,.06);} 
+    body.dark .game{background:#0f172a;}
+    .game h2{display:flex; align-items:center; gap:8px; margin:0 0 8px;}
+    .game .desc{color:#475569; font-size:14px; margin-bottom:12px;}
+    body.dark .game .desc{color:#94a3b8;}
+    .status{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:8px 0 14px;}
+    .chip{padding:8px 12px; border-radius:999px; background:#e2e8f0; font-size:14px;}
+    body.dark .chip{background:#0b1220;}
+    .chip b{font-size:15px;}
+    .bar{height:14px; background:#e5e7eb; border-radius:999px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);} 
+    .bar>i{display:block; height:100%; width:0%; background:linear-gradient(90deg,#22c55e,#eab308,#ef4444);} 
+
+    .actions{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:14px;}
+    .card{background:#fff; border-radius:12px; padding:12px; display:flex; gap:10px; align-items:center; justify-content:space-between; box-shadow:0 2px 8px rgba(0,0,0,.05);} 
+    body.dark .card{background:#0b1220;}
+    .card .left{display:flex; gap:10px; align-items:center;}
+    .card .emoji{font-size:24px;}
+    .card .title{font-weight:700;}
+    .card .note{font-size:12px; color:#64748b;}
+    body.dark .card .note{color:#94a3b8;}
+    .card button{border:none; padding:8px 12px; border-radius:10px; cursor:pointer; background:#1e90ff; color:#fff;}
+    .card button:disabled{opacity:.6; cursor:not-allowed;}
+
+    .row{display:grid; grid-template-columns:1fr; gap:12px; margin-top:12px;}
+    @media (min-width:900px){ .row{grid-template-columns:2fr 1fr;} }
+
+    .panel{background:#fff; border-radius:12px; padding:12px; box-shadow:0 2px 8px rgba(0,0,0,.05);} 
+    body.dark .panel{background:#0b1220;}
+    .panel h3{margin:0 0 8px;}
+    .tips li{margin:6px 0;}
+    .msg{margin-top:10px; font-weight:800;}
+    .ok{color:#16a34a;} .warn{color:#ef4444;}
+    .controls{display:flex; gap:8px; margin-top:10px;}
+    .controls button{border:none; padding:8px 12px; border-radius:10px; cursor:pointer;}
+    .controls .primary{background:#111827; color:#fff;}
+
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#e5e7eb; padding:2px 6px; border-radius:6px;}
+    body.dark .kbd{background:#0b1220;}
+      /* ===== Sticky 底部控制列 ===== */
+    .sticky-controls{position:sticky; bottom:0; left:0; right:0; display:flex; gap:8px; padding:10px 12px; background:rgba(248,250,252,.88); backdrop-filter:saturate(180%) blur(10px); border-top:1px solid rgba(0,0,0,.08); border-bottom-left-radius:12px; border-bottom-right-radius:12px;}
+    body.dark .sticky-controls{background:rgba(15,23,42,.85); border-top:1px solid rgba(255,255,255,.08);} 
+    /* 避免被底部控制列遮到內容 */
+    .game{ padding-bottom:72px; }
+      /* ===== Sticky 底部控制列 ===== */
+    .sticky-controls{position:sticky; bottom:0; left:0; right:0; display:flex; gap:8px; padding:10px 12px; background:rgba(248,250,252,.88); backdrop-filter:saturate(180%) blur(10px); border-top:1px solid rgba(0,0,0,.08); border-bottom-left-radius:12px; border-bottom-right-radius:12px;}
+    body.dark .sticky-controls{background:rgba(15,23,42,.85); border-top:1px solid rgba(255,255,255,.08);} 
+    .game{ padding-bottom:72px; position:relative; }
+
+    /* ===== 慶祝動畫 & 勳章 ===== */
+    #confettiCanvas{position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+    .medal{position:absolute; top:18px; right:18px; display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; font-weight:700; background:rgba(255,255,255,.9); box-shadow:0 2px 10px rgba(0,0,0,.12);} 
+    body.dark .medal{background:rgba(2,6,23,.9);} 
+    .medal .tier{font-size:20px;} .medal .label{font-size:14px;}
   </style>
 </head>
 <body>
@@ -65,7 +113,6 @@
         <input type="checkbox" id="darkToggle" aria-label="切換深色模式">
         <span class="slider"></span>
       </label>
-      <!-- 新增：可點擊的文字標籤（與 water/index 對齊） -->
       <label class="switch-text" for="darkToggle">深色</label>
     </div>
   </nav>
@@ -73,7 +120,8 @@
   <main>
     <h1>🌱 碳匯：固碳原理與公式</h1>
 
-    <section class="carousel" id="carbonCarousel" tabindex="0">
+    <!-- ===== 碳匯介紹輪播 ===== -->
+    <section class="carousel" id="carbonCarousel" tabindex="0" aria-label="碳匯介紹輪播">
       <div class="stage">
         <div class="slide active"><img src="C1.png" alt="森林碳匯" data-caption="森林是重要碳匯：透過光合作用把 CO₂ 變成生物量。"></div>
         <div class="slide"><img src="C2.png" alt="草地碳匯" data-caption="草地與濕地把碳長期儲存在植物體與土壤中。"></div>
@@ -82,7 +130,6 @@
         <div class="slide"><img src="C5.png" alt="樹齡碳匯" data-caption="樹齡不同，年固碳量也不同，成長最快時吸收最多。"></div>
         <div class="slide"><img src="C6.png" alt="永續經營" data-caption="永續經營：保育、生產、教育三合一。"></div>
         <div class="slide"><img src="C7.png" alt="資料碳匯" data-caption="以資料驅動的碳匯盤點與教學活動。"></div>
-
         <button class="arrow prev" aria-label="上一張">‹</button>
         <button class="arrow next" aria-label="下一張">›</button>
         <div class="dots" aria-hidden="true"></div>
@@ -100,107 +147,256 @@
       <li>🌊 海洋：海藻與浮游植物也是重要碳匯</li>
     </ul>
 
-    <h2>📊 固碳量與總固碳量</h2>
-    <ul>
-      <li><strong>年固碳量：</strong> 指樹木每年能吸收多少 CO₂，會隨樹齡與生長速率而變動。</li>
-      <li><strong>總固碳量：</strong> 指一棵樹或一片林地至今為止吸收並固定的 CO₂ 總量。</li>
-    </ul>
-
-    <h2>📐 計算公式（簡化版）：</h2>
+    <h2>📐 簡化計算：</h2>
     <ul>
       <li><strong>生物量：</strong> Biomass = 0.15 × DBH<sup>2.27</sup></li>
       <li><strong>碳含量：</strong> Carbon = Biomass × 0.5</li>
       <li><strong>CO₂ 固定量：</strong> CO₂ = Carbon × 3.67</li>
-      <li><strong>年固碳量：</strong> CO₂ ÷ 樹齡</li>
     </ul>
+
+    <!-- ===== 小遊戲：小小造林家 ===== -->
+    <section class="game" id="game">
+      <h2>🎮 小小造林家：一起把 CO₂ 收進樹和海裡！</h2>
+      <div class="desc">目標：在 10 步內，讓「已固定 CO₂」達到 <b id="goal"></b>。每做一個行動算 1 步。提示會告訴你下一步該做什麼更有效！</div>
+
+      <div class="status">
+        <span class="chip">已固定 CO₂：<b id="score">0 g</b></span>
+        <span class="chip">剩餘步數：<b id="steps">10</b></span>
+        <span class="chip">保護狀態：<b id="shield">無</b></span>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+
+      <div class="row">
+        <div>
+          <div class="actions" id="actions"></div>
+          <div class="msg" id="msg"></div>
+        </div>
+        <aside class="panel">
+          <h3>🧠 知識小卡</h3>
+          <ul class="tips" id="tips">
+            <li>🌳 樹木長大會吸更多 CO₂，幼樹要保護好！</li>
+            <li>🌿 不焚燒落葉，讓它變成土壤的養分。</li>
+            <li>🌊 海藻和浮游植物也很會「吃」CO₂。</li>
+            <li>🪵 砍伐後的木材如果被燃燒，會把碳又放回空氣。</li>
+          </ul>
+        </aside>
+      </div>
+
+      <!-- 慶祝區域：勳章 + 紙花 -->
+      <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+      <div id="medal" class="medal" hidden>
+        <span class="tier" id="medalTier">🥇</span>
+        <span class="label" id="medalLabel">金牌造林家！</span>
+      </div>
+
+      <!-- Sticky 控制列：固定在遊戲區塊底部 -->
+      <div class="sticky-controls" role="toolbar" aria-label="遊戲控制列">
+        <button class="primary" id="nextRound">🔁 重新開始</button>
+        <button id="teacherMode">🎓 老師模式：顯示知識小卡</button>
+      </div>
+    </section>
   </main>
 
   <script>
-  // Dark mode toggle
-  const darkToggle = document.getElementById("darkToggle");
-  darkToggle?.addEventListener("change", ()=> document.body.classList.toggle("dark", darkToggle.checked));
+    // ===== 深色模式 =====
+    const darkToggle = document.getElementById("darkToggle");
+    darkToggle?.addEventListener("change", ()=> document.body.classList.toggle("dark", darkToggle.checked));
 
-  // Carousel
-  (function(){
-    const root = document.getElementById('carbonCarousel');
-    if (!root) return;
-    const slides = Array.from(root.querySelectorAll('.slide'));
-    const prevBtn = root.querySelector('.prev');
-    const nextBtn = root.querySelector('.next');
-    const dotsWrap = root.querySelector('.dots');
-    const progressBar = document.getElementById('progressBar');
-    const caption = document.getElementById('caption');
-    const togglePlayBtn = document.getElementById('togglePlay');
+    // ===== 輪播 =====
+    (function(){
+      const root = document.getElementById('carbonCarousel');
+      if (!root) return;
+      const slides = Array.from(root.querySelectorAll('.slide'));
+      const prevBtn = root.querySelector('.prev');
+      const nextBtn = root.querySelector('.next');
+      const dotsWrap = root.querySelector('.dots');
+      const progressBar = document.getElementById('progressBar');
+      const caption = document.getElementById('caption');
+      const togglePlayBtn = document.getElementById('togglePlay');
 
-    const AUTOPLAY_MS = 4000;
-    const DRAG_THRESHOLD = 40;
-    let i = 0, timer = null, playing = true, startedAt=0;
+      const AUTOPLAY_MS = 4000; const DRAG_THRESHOLD = 40;
+      let i = 0, timer = null, playing = true, startedAt=0;
 
-    slides.forEach((_, idx)=>{
-      const d=document.createElement('div');
-      d.className='dot'+(idx===0?' active':'');
-      d.addEventListener('click', ()=>{stop();go(idx);play();});
-      dotsWrap.appendChild(d);
-    });
-    const dots=Array.from(dotsWrap.children);
+      slides.forEach((_, idx)=>{ const d=document.createElement('div'); d.className='dot'+(idx===0?' active':''); d.addEventListener('click', ()=>{stop();go(idx);play();}); dotsWrap.appendChild(d); });
+      const dots=Array.from(dotsWrap.children);
 
-    function setCaption(idx){
-      const img=slides[idx].querySelector('img');
-      caption.textContent=img?.dataset?.caption||img?.alt||'';
-    }
-    function go(n){
-      slides[i].classList.remove('active');
-      dots[i].classList.remove('active');
-      i=(n+slides.length)%slides.length;
-      slides[i].classList.add('active');
-      dots[i].classList.add('active');
-      setCaption(i);
-      resetProgress();
-    }
-    function next(){go(i+1);}
-    function prev(){go(i-1);}
-    function resetProgress(){startedAt=performance.now(); progressBar.style.width='0%';}
-    function tick(){
-      if(!playing)return;
-      const elapsed=performance.now()-startedAt;
-      const p=Math.min(1,elapsed/AUTOPLAY_MS);
-      progressBar.style.width=(p*100).toFixed(1)+'%';
-      if(p>=1) next();
-      timer=requestAnimationFrame(tick);
-    }
-    function play(){if(playing)return; playing=true; togglePlayBtn.textContent='⏸ 暫停'; resetProgress(); timer=requestAnimationFrame(tick);}
-    function stop(){playing=false; togglePlayBtn.textContent='▶️ 播放'; cancelAnimationFrame(timer);}
+      function setCaption(idx){ const img=slides[idx].querySelector('img'); caption.textContent=img?.dataset?.caption||img?.alt||''; }
+      function go(n){ slides[i].classList.remove('active'); dots[i].classList.remove('active'); i=(n+slides.length)%slides.length; slides[i].classList.add('active'); dots[i].classList.add('active'); setCaption(i); resetProgress(); }
+      function next(){go(i+1);} function prev(){go(i-1);} function resetProgress(){startedAt=performance.now(); progressBar.style.width='0%';}
+      function tick(){ if(!playing)return; const elapsed=performance.now()-startedAt; const p=Math.min(1,elapsed/AUTOPLAY_MS); progressBar.style.width=(p*100).toFixed(1)+'%'; if(p>=1) next(); timer=requestAnimationFrame(tick); }
+      function play(){ if(playing)return; playing=true; togglePlayBtn.textContent='⏸ 暫停'; resetProgress(); timer=requestAnimationFrame(tick);} 
+      function stop(){ playing=false; togglePlayBtn.textContent='▶️ 播放'; cancelAnimationFrame(timer);} 
 
-    togglePlayBtn.addEventListener('click',()=>playing?stop():play());
-    nextBtn.addEventListener('click',()=>{stop();next();play();});
-    prevBtn.addEventListener('click',()=>{stop();prev();play();});
-    root.addEventListener('mouseenter',stop);
-    root.addEventListener('mouseleave',()=>{if(!playing)play();});
-    document.addEventListener('visibilitychange',()=>{document.hidden?stop():play();});
-    root.addEventListener('keydown',e=>{
-      if(e.key==='ArrowRight'){stop();next();play();}
-      if(e.key==='ArrowLeft'){stop();prev();play();}
-      if(e.key===' '){e.preventDefault(); playing?stop():play();}
-    });
-    let startX=null,dragging=false;
-    const stage=root.querySelector('.stage');
-    const onPointerDown=e=>{dragging=true;startX=e.clientX??e.touches?.[0]?.clientX;stop();}
-    const onPointerUp=e=>{
-      if(!dragging)return;
-      const endX=e.clientX??e.changedTouches?.[0]?.clientX;
-      const dx=endX-startX; dragging=false;
-      if(Math.abs(dx)>DRAG_THRESHOLD){dx<0?next():prev();}
-      play();
-    }
-    stage.addEventListener('mousedown',onPointerDown);
-    window.addEventListener('mouseup',onPointerUp);
-    stage.addEventListener('touchstart',onPointerDown,{passive:true});
-    stage.addEventListener('touchend',onPointerUp);
+      togglePlayBtn.addEventListener('click',()=>playing?stop():play());
+      nextBtn.addEventListener('click',()=>{stop();next();play();}); prevBtn.addEventListener('click',()=>{stop();prev();play();});
+      root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',()=>{if(!playing)play();});
+      document.addEventListener('visibilitychange',()=>{document.hidden?stop():play();});
+      root.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'){stop();next();play();} if(e.key==='ArrowLeft'){stop();prev();play();} if(e.key===' '){e.preventDefault(); playing?stop():play();} });
+      let startX=null,dragging=false; const stage=root.querySelector('.stage');
+      const onPointerDown=e=>{dragging=true;startX=e.clientX??e.touches?.[0]?.clientX;stop();}
+      const onPointerUp=e=>{ if(!dragging)return; const endX=e.clientX??e.changedTouches?.[0]?.clientX; const dx=endX-startX; dragging=false; if(Math.abs(dx)>DRAG_THRESHOLD){dx<0?next():prev();} play(); }
+      stage.addEventListener('mousedown',onPointerDown); window.addEventListener('mouseup',onPointerUp); stage.addEventListener('touchstart',onPointerDown,{passive:true}); stage.addEventListener('touchend',onPointerUp);
+      setCaption(0); resetProgress(); timer=requestAnimationFrame(tick);
+    })();
 
-    setCaption(0);
-    resetProgress();
-    timer=requestAnimationFrame(tick);
-  })();
+    // ===== 小遊戲：小小造林家 =====
+    (function(){
+      const $=(q)=>document.querySelector(q);
+      const actionsEl = $('#actions');
+      const scoreEl = $('#score');
+      const stepsEl = $('#steps');
+      const shieldEl = $('#shield');
+      const barFillEl = $('#barFill');
+      const goalEl = $('#goal');
+      const msgEl = $('#msg');
+      const nextBtn = $('#nextRound');
+      const teacherBtn = $('#teacherMode');
+      const confettiCanvas = document.getElementById('confettiCanvas');
+      const medalEl = document.getElementById('medal');
+      const medalTierEl = document.getElementById('medalTier');
+      const medalLabelEl = document.getElementById('medalLabel');
+
+      // 目標（g CO2）介於 1200~2000
+      let goal = 1500 + Math.floor(Math.random()*500);
+      let score = 0;   // 已固定 CO2（g）
+      let steps = 10;  // 行動次數
+      let shield = 0;  // 保護點數
+      let teacher = false; // 顯示知識小卡
+
+      goalEl.textContent = goal + ' g';
+      updateStatus();
+
+      // 行動清單
+      const ACTION_BANK = [
+        { key:'tree',   title:'種一棵小樹', emoji:'🌳', gain:[350, 550], tip:'幼樹要定期澆水與護木！' },
+        { key:'water',  title:'澆水護樹',   emoji:'💧', gain:[120, 220], tip:'乾旱時多澆水，樹更健康。' },
+        { key:'fence',  title:'圍起保護網', emoji:'🧱', gain:[0, 0],    shield:2, tip:'可抵擋 2 次風害或蟲害。' },
+        { key:'sea',    title:'種海藻/海草',emoji:'🪸', gain:[250, 450], tip:'海藻也會吸 CO₂，是海洋碳匯。' },
+        { key:'leaves', title:'落葉做堆肥', emoji:'🍂', gain:[150, 250], tip:'不要焚燒！讓落葉變肥沃的土。' },
+        { key:'clean',  title:'淨山/撿海廢', emoji:'🧹', gain:[80, 160],  tip:'讓樹和海更健康、吸更多碳。' }
+      ];
+
+      // ====== 音效（WebAudio，無需檔案） ======
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      let actx = null; function getCtx(){ return actx||(actx=new AudioCtx()); }
+      function beep(freq=660, dur=0.08, type='sine', vol=0.05){
+        try{
+          const ctx=getCtx(); const o=ctx.createOscillator(); const g=ctx.createGain();
+          o.type=type; o.frequency.value=freq; g.gain.value=vol; o.connect(g); g.connect(ctx.destination);
+          const t=ctx.currentTime; o.start(t); o.stop(t+dur);
+        }catch(e){}
+      }
+      function successJingle(){ setTimeout(()=>beep(880,0.1,'triangle',0.06),0); setTimeout(()=>beep(1175,0.12,'triangle',0.06),110); setTimeout(()=>beep(1568,0.14,'triangle',0.06),230); }
+
+      // ====== 紙花（簡易粒子動畫） ======
+      const confetti = (function(){
+        const ctx = confettiCanvas.getContext('2d');
+        let W,H,particles=[],running=false,startT=0;
+        function resize(){ W=confettiCanvas.width=confettiCanvas.clientWidth; H=confettiCanvas.height=confettiCanvas.clientHeight; }
+        window.addEventListener('resize', resize, {passive:true}); resize();
+        function spawn(n=120){
+          particles=[]; for(let i=0;i<n;i++){
+            particles.push({
+              x: Math.random()*W,
+              y: -10-Math.random()*H*0.3,
+              r: 2+Math.random()*4,
+              vx: -1+Math.random()*2,
+              vy: 2+Math.random()*3,
+              a: Math.random()*Math.PI*2
+            });
+          }
+        }
+        function draw(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.a+=0.05; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle = `hsl(${(p.x/W)*360},90%,60%)`; ctx.fillRect(-p.r,-p.r,p.r*2,p.r*2); ctx.restore(); }); }
+        function step(ts){ if(!running) return; if(!startT) startT=ts; draw(); if(ts-startT<3500) requestAnimationFrame(step); else{ running=false; ctx.clearRect(0,0,W,H);} }
+        return { fire(){ spawn(); running=true; startT=0; requestAnimationFrame(step); } };
+      })();
+
+      function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+      function pickGain(a){ return randInt(a.gain[0], a.gain[1]); }
+
+      function renderActions(){
+        actionsEl.innerHTML = '';
+        ACTION_BANK.forEach((a)=>{
+          const card = document.createElement('div'); card.className='card';
+          const left = document.createElement('div'); left.className='left';
+          left.innerHTML = `<span class="emoji" aria-hidden="true">${a.emoji}</span><div><div class="title">${a.title}</div><div class="note">${a.gain[0]}~${a.gain[1]} g CO₂${a.shield?`；保護+${a.shield}`:''}</div></div>`;
+          const btn = document.createElement('button'); btn.textContent='執行'; btn.addEventListener('click',()=>doAction(a));
+          card.appendChild(left); card.appendChild(btn); actionsEl.appendChild(card);
+        });
+      }
+
+      function doAction(a){
+        if(steps<=0){ toast('已沒有步數，請重新開始。'); return; }
+        steps--; beep(520,0.05,'sine',0.04);
+        let g = pickGain(a);
+        if(a.shield){ shield += a.shield; g = 0; }
+        score += g;
+
+        // 20% 機率觸發隨機事件
+        if(Math.random() < 0.2){
+          const bads=[{t:'🌪️ 小颱風來襲',d:180},{t:'🐛 蟲害出現',d:120},{t:'🥵 熱浪乾旱',d:150}];
+          const b = bads[randInt(0,bads.length-1)];
+          if(shield>0){ shield--; toast(`${b.t} 被保護網擋住了！保護-1`); }
+          else{ score = Math.max(0, score - b.d); toast(`${b.t}：損失 ${b.d} g`); }
+        }
+
+        updateStatus();
+        checkEnd();
+        smartHint(a);
+      }
+
+      function smartHint(lastAction){
+        if(shield===0 && Math.random()<0.5){ info('提示：試試「🧱 圍起保護網」，可抵擋 2 次災害。'); return; }
+        const best = ['tree','sea'];
+        if(!best.includes(lastAction.key)){ info('提示：想快速達標，可以多種幾棵樹或海藻！'); }
+      }
+
+      function updateStatus(){
+        scoreEl.textContent = `${score} g`;
+        stepsEl.textContent = steps;
+        shieldEl.textContent = shield>0 ? `${shield} 次` : '無';
+        const pct = Math.min(1, score/goal);
+        barFillEl.style.width = (pct*100).toFixed(1)+'%';
+      }
+
+      function awardMedal(){
+        // 依剩餘步數頒發：≥6 金、≥3 銀、其他 銅
+        const left = steps; let tier='gold', icon='🥇', text='金牌造林家！';
+        if(left>=6){ tier='gold'; icon='🥇'; text='金牌造林家！'; }
+        else if(left>=3){ tier='silver'; icon='🥈'; text='銀牌造林家！'; }
+        else { tier='bronze'; icon='🥉'; text='銅牌造林家！'; }
+        medalTierEl.textContent = icon; medalLabelEl.textContent = text; medalEl.hidden=false;
+        successJingle(); confetti.fire();
+      }
+
+      function checkEnd(){
+        if(score>=goal){ msgEl.innerHTML = '<span class="ok">🎉 太棒了！你成功把 CO₂ 收起來了！</span>'; disableAll(true); awardMedal(); }
+        else if(steps===0){ msgEl.innerHTML = '<span class="warn">🕑 步數用完了，再試一次吧！</span>'; disableAll(true); }
+      }
+
+      function disableAll(disabled){ actionsEl.querySelectorAll('button').forEach(b=>b.disabled=disabled); }
+
+      function toast(t){ msgEl.textContent=t; }
+      function info(t){ msgEl.textContent=t; }
+
+      function reset(){
+        goal = 1500 + Math.floor(Math.random()*500);
+        score = 0; steps = 10; shield = 0; teacher = false;
+        goalEl.textContent = goal + ' g';
+        msgEl.textContent = '';
+        medalEl.hidden=true; // 隱藏勳章
+        renderActions(); updateStatus();
+        document.getElementById('tips').style.display='block';
+      }
+
+      nextBtn.addEventListener('click', reset);
+      teacherBtn.addEventListener('click', ()=>{
+        teacher = !teacher; document.getElementById('tips').style.display = teacher ? 'block' : 'none';
+      });
+
+      // 啟動
+      renderActions();
+    })();
   </script>
 </body>
 </html>
