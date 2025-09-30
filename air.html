@@ -269,25 +269,33 @@
     }
 
     @keyframes zoomIn {
-      from {
-        transform: scale(1);
-      }
-
-      to {
-        transform: scale(1.1);
-      }
+      from { transform: scale(1); }
+      to   { transform: scale(1.1); }
     }
 
     @keyframes floatText {
-      0%,
-      100% {
-        transform: translate(-50%, -50%) translateY(0);
-      }
-
-      50% {
-        transform: translate(-50%, -50%) translateY(-10px);
-      }
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50%      { transform: translate(-50%, -50%) translateY(-10px); }
     }
+
+    /* ===== Minimal dark-mode patch (與 index / water 一致的 44×24 勾選＋文字) ===== */
+    :root{
+      --bg:#fdfdfd; --fg:#222; --muted-ink:#475569; --soft:#f4f4f4; --card:#fff;
+    }
+    body{background:var(--bg); color:var(--fg); transition:background .25s,color .25s;}
+    body.dark{--bg:#0b1220; --fg:#e5e7eb; --muted-ink:#9aa4b2; --soft:#0f172a; --card:#111827;}
+    body.dark nav{background:var(--soft);}
+    body.dark nav a{color:var(--fg);}
+    body.dark .section, body.dark .card{background:var(--card);}
+    body.dark .muted{color:var(--muted-ink);}
+
+    .switch{margin-left:16px; position:relative; display:inline-block; width:44px; height:24px; vertical-align:middle;}
+    .switch input{opacity:0; width:0; height:0;}
+    .slider{position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.4s; border-radius:24px;}
+    .slider:before{position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:#fff; transition:.4s; border-radius:50%;}
+    .switch input:checked + .slider{background:#1e90ff;}
+    .switch input:checked + .slider:before{transform:translateX(20px);}
+    .switch-text{margin-left:8px; font-size:14px; color:inherit; cursor:pointer; user-select:none; vertical-align:middle;}
   </style>
 </head>
 
@@ -305,6 +313,12 @@
       <a href="air.html">💨 空氣</a>
       <a href="water.html">💧 水</a>
       <a href="carbon.html">🌱 碳匯</a>
+      <!-- 深色開關（與 index / water 同尺寸/樣式/位置，預設淺色） -->
+      <label class="switch">
+        <input type="checkbox" id="darkToggle" aria-label="切換深色模式">
+        <span class="slider"></span>
+      </label>
+      <label class="switch-text" for="darkToggle">深色</label>
     </div>
   </nav>
 
@@ -387,28 +401,16 @@
           </div>
         </div>
 
-        <button class="arrow prev" aria-label="上一張">
-          ‹
-        </button>
+        <button class="arrow prev" aria-label="上一張">‹</button>
+        <button class="arrow next" aria-label="下一張">›</button>
 
-        <button class="arrow next" aria-label="下一張">
-          ›
-        </button>
-
-        <div class="dots" aria-hidden="true">
-          <!-- JS 生成 dot -->
-        </div>
+        <div class="dots" aria-hidden="true"></div>
 
         <div class="controls">
-          <button class="btn" id="togglePlay" aria-label="播放/暫停">
-            ⏸ 暫停
-          </button>
+          <button class="btn" id="togglePlay" aria-label="播放/暫停">⏸ 暫停</button>
         </div>
 
-        <div class="progress">
-          <div class="bar" id="progressBar">
-          </div>
-        </div>
+        <div class="progress"><div class="bar" id="progressBar"></div></div>
 
       </div>
     </section>
@@ -427,7 +429,6 @@
       </p>
 
       <div class="cards">
-
         <div class="card">
           <div class="i">🌳</div>
           <div>
@@ -476,7 +477,6 @@
       </p>
 
       <div class="cards">
-
         <div class="card">
           <div class="i">😷</div>
           <div>
@@ -514,22 +514,29 @@
 
     <!-- ===== Bottom Hero a8 ===== -->
     <section class="hero">
-
       <img src="a8.png" alt="空氣偵測與過濾">
-
-      <div class="hero-text" id="heroText">
-        🌬️ 空氣偵測
-      </div>
-
+      <div class="hero-text" id="heroText">🌬️ 空氣偵測</div>
     </section>
 
   </main>
 
   <!-- ===== Scripts ===== -->
   <script>
+    /* 深色模式：預設淺色、與 index/water 統一，記憶至 localStorage */
+    (function(){
+      const KEY='udm_theme';
+      const cb=document.getElementById('darkToggle');
+      const saved=localStorage.getItem(KEY);
+      if(saved==='dark'){ document.body.classList.add('dark'); if(cb) cb.checked=true; }
+      cb?.addEventListener('change',()=>{
+        const dark=cb.checked;
+        document.body.classList.toggle('dark', dark);
+        localStorage.setItem(KEY, dark?'dark':'light');
+      });
+    })();
+
     (function () {
       const root = document.getElementById('airCarousel');
-
       if (!root) return;
 
       const slides = Array.from(root.querySelectorAll('.slide'));
@@ -545,15 +552,10 @@
       let playing = true;
       let raf = null;
 
-      /* build dots */
       slides.forEach((_, idx) => {
         const d = document.createElement('div');
         d.className = 'dot' + (idx === 0 ? ' active' : '');
-        d.addEventListener('click', () => {
-          stop();
-          go(idx);
-          play();
-        });
+        d.addEventListener('click', () => { stop(); go(idx); play(); });
         dotsWrap.appendChild(d);
       });
 
@@ -562,112 +564,58 @@
       function go(n) {
         slides[i].classList.remove('active');
         dots[i].classList.remove('active');
-
         i = (n + slides.length) % slides.length;
-
         slides[i].classList.add('active');
         dots[i].classList.add('active');
-
         startedAt = performance.now();
         if (progressBar) progressBar.style.width = '0%';
       }
+      function next(){ go(i+1); }
+      function prev(){ go(i-1); }
 
-      function next() {
-        go(i + 1);
-      }
-
-      function prev() {
-        go(i - 1);
-      }
-
-      /* autoplay with progress bar */
       let startedAt = performance.now();
-
       function tick() {
         if (!playing) return;
-
         const p = Math.min(1, (performance.now() - startedAt) / AUTOPLAY_MS);
-
-        if (progressBar) {
-          progressBar.style.width = (p * 100).toFixed(1) + '%';
-        }
-
+        if (progressBar) progressBar.style.width = (p * 100).toFixed(1) + '%';
         if (p >= 1) next();
-
         raf = requestAnimationFrame(tick);
       }
 
-      function play() {
+      function play(){
         if (playing) return;
         playing = true;
         if (togglePlayBtn) togglePlayBtn.textContent = '⏸ 暫停';
         startedAt = performance.now();
         raf = requestAnimationFrame(tick);
       }
-
-      function stop() {
+      function stop(){
         playing = false;
         if (togglePlayBtn) togglePlayBtn.textContent = '▶️ 播放';
         cancelAnimationFrame(raf);
       }
 
-      if (togglePlayBtn) {
-        togglePlayBtn.addEventListener('click', () => playing ? stop() : play());
-      }
+      togglePlayBtn?.addEventListener('click', ()=> playing ? stop() : play());
+      nextBtn?.addEventListener('click', ()=> { stop(); next(); play(); });
+      prevBtn?.addEventListener('click', ()=> { stop(); prev(); play(); });
 
-      if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-          stop();
-          next();
-          play();
-        });
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-          stop();
-          prev();
-          play();
-        });
-      }
-
-      /* hover pause / resume */
       root.addEventListener('mouseenter', stop);
-      root.addEventListener('mouseleave', () => {
-        if (!playing) play();
+      root.addEventListener('mouseleave', ()=> { if (!playing) play(); });
+
+      root.addEventListener('keydown', (e)=>{
+        if (e.key === 'ArrowRight'){ stop(); next(); play(); }
+        if (e.key === 'ArrowLeft'){  stop(); prev(); play(); }
+        if (e.key === ' '){ e.preventDefault(); playing ? stop() : play(); }
       });
 
-      /* keyboard */
-      root.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-          stop();
-          next();
-          play();
-        }
-        if (e.key === 'ArrowLeft') {
-          stop();
-          prev();
-          play();
-        }
-        if (e.key === ' ') {
-          e.preventDefault();
-          playing ? stop() : play();
-        }
-      });
-
-      /* start */
       raf = requestAnimationFrame(tick);
-
     })();
 
-    /* ===== Hero Text Auto Switch ===== */
     (function () {
       const heroTexts = ["🌬️ 空氣偵測", "🌀 過濾", "🏡 好環境"];
       let idx = 0;
       const heroTextEl = document.getElementById("heroText");
-
       if (!heroTextEl) return;
-
       setInterval(() => {
         idx = (idx + 1) % heroTexts.length;
         heroTextEl.textContent = heroTexts[idx];
@@ -676,5 +624,4 @@
   </script>
 
 </body>
-
 </html>

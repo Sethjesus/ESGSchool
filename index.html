@@ -12,7 +12,7 @@
       --card:#ffffff;
       --rail:#eef3fb;
     }
-    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#f7f9fc; color:#1f2937}
+    body{font-family:"Microsoft JhengHei",sans-serif; margin:0; background:#f7f9fc; color:#1f2937; transition:background .3s,color .3s}
     nav{background:#f4f4f4; padding:10px; display:flex; justify-content:space-between; align-items:center}
     nav a{color:#333; text-decoration:none; margin-left:12px}
     nav .brand{font-weight:700; color:#1e90ff}
@@ -60,6 +60,23 @@
     .hero{border:1px solid #e7eef7; background:#fff; border-radius:14px; overflow:hidden}
     .hero img{width:100%; height:auto; display:block}
     .hero .cap{padding:12px 14px; color:#475569; font-size:14px}
+
+    /* === 深色模式（與各頁一致） === */
+    body.dark{background:#0f172a; color:#e5e7eb}
+    body.dark nav{background:#1e293b}
+    body.dark nav a{color:#e5e7eb}
+    body.dark .card{background:#0b1220; border-color:#22314a}
+    body.dark .pill{background:#12213a; color:#dbeafe}
+
+    /* === Switch（44x24，與各頁一致） === */
+    .switch{margin-left:16px; position:relative; display:inline-block; width:44px; height:24px; vertical-align:middle;}
+    .switch input{opacity:0; width:0; height:0}
+    .slider{position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.4s; border-radius:24px}
+    .slider:before{position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:#fff; transition:.4s; border-radius:50%}
+    .switch input:checked + .slider{background:#1e90ff}
+    .switch input:checked + .slider:before{transform:translateX(20px)}
+    .switch-text{margin-left:8px; font-size:14px; color:#333; cursor:pointer; user-select:none; vertical-align:middle;}
+    body.dark .switch-text{color:#e5e7eb}
   </style>
 </head>
 <body>
@@ -71,6 +88,12 @@
       <a href="air.html">💨 空氣</a>
       <a href="water.html">💧 水</a>
       <a href="carbon.html">🌱 碳匯</a>
+      <!-- 深色開關（含文字） -->
+      <label class="switch">
+        <input type="checkbox" id="darkToggle" aria-label="切換深色模式">
+        <span class="slider"></span>
+      </label>
+      <label class="switch-text" for="darkToggle">深色</label>
     </div>
   </nav>
 
@@ -175,5 +198,20 @@
       </a>
     </section>
   </main>
+
+  <script>
+    (function(){
+      const KEY='udm_theme';
+      const cb=document.getElementById('darkToggle');
+      if(!cb) return;
+      const saved=localStorage.getItem(KEY);
+      if(saved==='dark'){ document.body.classList.add('dark'); cb.checked=true; }
+      cb.addEventListener('change',()=>{
+        const dark=cb.checked;
+        document.body.classList.toggle('dark',dark);
+        localStorage.setItem(KEY, dark ? 'dark' : 'light');
+      });
+    })();
+  </script>
 </body>
 </html>

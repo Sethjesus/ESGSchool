@@ -9,22 +9,17 @@
       --bg:#fdfdfd; --fg:#222; --muted:#475569; --card:#fff; --shadow:0 4px 12px rgba(0,0,0,.05);
       --brand:#1e90ff; --brand-ink:#0f172a; --soft:#f4f4f4; --hero-mask:rgba(0,0,0,.45);
     }
-    [data-theme="dark"]{
+    body.dark{
       --bg:#0b1220; --fg:#e5e7eb; --muted:#9aa4b2; --card:#0f172a; --shadow:0 4px 16px rgba(0,0,0,.35);
       --brand:#60a5fa; --brand-ink:#e5e7eb; --soft:#111826; --hero-mask:rgba(0,0,0,.55);
     }
 
     *{box-sizing:border-box}
-    body{font-family:"Microsoft JhengHei",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:var(--fg);}
+    body{font-family:"Microsoft JhengHei",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; margin:0; background:var(--bg); color:var(--fg); transition:background .3s,color .3s}
     a{color:inherit}
-    nav{background:var(--soft); padding:10px; display:flex; gap:12px; align-items:center; position:sticky; top:0; z-index:10; box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    nav .brand{font-weight:700; color:var(--brand); margin-right:auto}
+    nav{background:var(--soft); padding:10px; display:flex; justify-content:space-between; align-items:center; gap:12px; position:sticky; top:0; z-index:10; box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    nav .brand{font-weight:700; color:var(--brand)}
     nav a{color:var(--fg); text-decoration:none; margin-left:12px}
-    nav .controls{display:flex; align-items:center; gap:10px}
-    .btn{border:1px solid #0000; background:var(--card); color:var(--fg); padding:8px 10px; border-radius:10px; box-shadow:var(--shadow); cursor:pointer}
-    .btn:hover{filter:brightness(1.05)}
-    .chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--soft); color:var(--fg); cursor:pointer; user-select:none}
-
     main{max-width:1080px; margin:24px auto; padding:0 16px}
     h1{margin:8px 0 16px; color:var(--brand-ink)}
     p{line-height:1.75}
@@ -42,7 +37,7 @@
     .gallery{margin-top:16px; display:grid; gap:16px; grid-template-columns:repeat(2,minmax(0,1fr));}
     @media (max-width:720px){ .gallery{grid-template-columns:1fr;} }
     .tile{position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 24px rgba(0,0,0,.08); background:#000; cursor:pointer}
-    [data-theme="dark"] .tile{box-shadow:0 10px 24px rgba(0,0,0,.45)}
+    body.dark .tile{box-shadow:0 10px 24px rgba(0,0,0,.45)}
     .tile .frame{width:100%; aspect-ratio:16/10; overflow:hidden}
     .tile img{width:100%; height:100%; object-fit:cover; transition:transform .35s ease}
     .tile:hover img{transform:scale(1.05)}
@@ -51,6 +46,9 @@
     /* Filter bar */
     .filterbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:12px 0 6px}
     .filterbar input[type="search"]{flex:1 1 260px; padding:9px 12px; border-radius:10px; border:1px solid #0000; background:var(--soft); color:var(--fg)}
+    .chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:var(--soft); color:var(--fg); cursor:pointer; user-select:none}
+    .btn{border:1px solid #0000; background:var(--card); color:var(--fg); padding:8px 10px; border-radius:10px; box-shadow:var(--shadow); cursor:pointer}
+    .btn:hover{filter:brightness(1.05)}
 
     /* Lightbox */
     .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:50}
@@ -88,23 +86,32 @@
     /* Back to top */
     .to-top{position:fixed; right:16px; bottom:16px; width:44px; height:44px; display:grid; place-items:center; border-radius:50%; background:var(--brand); color:#fff; box-shadow:0 6px 22px rgba(0,0,0,.25); cursor:pointer; opacity:0; transform:translateY(20px); transition:all .25s}
     .to-top.show{opacity:1; transform:translateY(0)}
+
+    /* === Switch（44x24，與其他頁一致） === */
+    .switch{margin-left:16px; position:relative; display:inline-block; width:44px; height:24px; vertical-align:middle;}
+    .switch input{opacity:0; width:0; height:0}
+    .slider{position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.4s; border-radius:24px}
+    .slider:before{position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:#fff; transition:.4s; border-radius:50%}
+    .switch input:checked + .slider{background:#1e90ff}
+    .switch input:checked + .slider:before{transform:translateX(20px)}
+    .switch-text{margin-left:8px; font-size:14px; color:var(--fg); cursor:pointer; user-select:none; vertical-align:middle;}
   </style>
 </head>
 <body>
   <nav>
     <div class="brand">📘 UDM ESG 永續教科書</div>
-    <div class="controls">
-      <label class="chip" title="深色模式">
-        <input id="themeToggle" type="checkbox" style="accent-color:#60a5fa"> 深色
-      </label>
-      <button class="btn" id="shuffleBtn" title="隨機排列圖庫">🔀 隨機</button>
-    </div>
     <div>
       <a href="index.html">🏠 首頁</a>
       <a href="sunshine.html">🌞 陽光</a>
       <a href="air.html">💨 空氣</a>
       <a href="water.html">💧 水</a>
       <a href="carbon.html">🌱 碳匯</a>
+      <!-- 深色開關（統一樣式與位置） -->
+      <label class="switch">
+        <input type="checkbox" id="darkToggle" aria-label="切換深色模式">
+        <span class="slider"></span>
+      </label>
+      <label class="switch-text" for="darkToggle">深色</label>
     </div>
   </nav>
 
@@ -117,26 +124,27 @@
       <h2 style="margin:0 0 6px;">📷 用水設備圖集</h2>
       <div class="muted">點圖可放大、左右方向鍵切換、支援搜尋/篩選。</div>
 
-      <!-- Filter/Search -->
+      <!-- Filter/Search（把隨機按鈕移到這裡，避免佔用 nav） -->
       <div class="filterbar">
-        <input type="search" id="search" placeholder="搜尋：關鍵字或標籤（如：meter, gateway, dashboard）" />
+        <input type="search" id="search" placeholder="搜尋：請用中英文關鍵字或標籤 如：智慧水表,meter, gateway, dashboard,display",>
         <span class="chip" data-filter="all">全部</span>
-        <span class="chip" data-filter="meter">水表</span>
+        <span class="chip" data-filter="meter">智慧水表</span>
         <span class="chip" data-filter="display">顯示器</span>
         <span class="chip" data-filter="gateway">閘道器</span>
-        <span class="chip" data-filter="dashboard">用水儀錶板</span>
+        <span class="chip" data-filter="dashboard">儀錶板</span>
+        <button class="btn" id="shuffleBtn" title="隨機排列圖庫">🔀 隨機</button>
       </div>
 
       <div class="gallery" id="gallery">
-        <figure class="tile" data-cap="水表（meter）" data-tags="meter,hardware">
-          <div class="frame"><img src="w1.png" alt="水表"></div>
-          <figcaption class="cap">水表</figcaption>
+        <figure class="tile" data-cap="智慧水表（meter）" data-tags="meter,hardware">
+          <div class="frame"><img src="w1.png" alt="智慧水表"></div>
+          <figcaption class="cap">智慧水表</figcaption>
         </figure>
         <figure class="tile" data-cap="用水顯示器（display module）" data-tags="display,hardware">
           <div class="frame"><img src="w2.png" alt="用水顯示器"></div>
           <figcaption class="cap">用水顯示器</figcaption>
         </figure>
-        <figure class="tile" data-cap="Gateway（通訊匯流）" data-tags="gateway,network">
+        <figure class="tile" data-cap="Gateway（通訊匯流）" data-tags="gateway閘道器,network">
           <div class="frame"><img src="w3.png" alt="Gateway"></div>
           <figcaption class="cap">Gateway</figcaption>
         </figure>
@@ -216,16 +224,17 @@
   <button class="to-top" id="toTop" title="回到頂部">↑</button>
 
   <script>
-    // ===== Theme toggle =====
+    // ===== 深色開關（統一：body.dark + localStorage 'udm_theme'）=====
     (function(){
-      const tKey = 'udm_water_theme';
-      const cb = document.getElementById('themeToggle');
-      const saved = localStorage.getItem(tKey) || 'light';
-      if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark'); cb.checked=true}
+      const KEY='udm_theme';
+      const cb=document.getElementById('darkToggle');
+      if(!cb) return;
+      const saved=localStorage.getItem(KEY);
+      if(saved==='dark'){ document.body.classList.add('dark'); cb.checked=true; }
       cb.addEventListener('change',()=>{
-        const mode = cb.checked?'dark':'light';
-        document.documentElement.setAttribute('data-theme',mode);
-        localStorage.setItem(tKey,mode);
+        const dark=cb.checked;
+        document.body.classList.toggle('dark',dark);
+        localStorage.setItem(KEY, dark ? 'dark' : 'light');
       });
     })();
 
@@ -367,7 +376,7 @@
         out.innerHTML = `估算用水：<b>${L.toFixed(0)}</b> L（約 <b>${m3.toFixed(2)}</b> m³）｜估算碳排：<b>${co2.toFixed(2)}</b> kg CO₂e`;
       }
       btn.addEventListener('click',calc);
-      reset.addEventListener('click',()=>{ showerMin.value=6; tapMin.value=5; flushCnt.value=5; factor.value=0.35; sync(); out.textContent=''; });
+      reset.addEventListener('click',()=>{ showerMin.value=6; tapMin.value=5; flushCnt.value=5; factor.value=0.16; sync(); out.textContent=''; });
     })();
 
     // ===== Checklist with progress + localStorage =====
