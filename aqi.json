@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-01T08:12:41Z",
+  "generated_utc": "2025-10-01T08:33:27Z",
   "count": 86,
   "records": [
     {
@@ -2000,7 +2000,7 @@
       "co_8hr": "",
       "pm2_5_avg": "",
       "pm10_avg": "",
-      "so2_avg": "",
+      "so2_avg": "1",
       "longitude": "120.26964167",
       "latitude": "23.85493056",
       "siteid": "85"
@@ -2060,15 +2060,15 @@
     {
       "sitename": "高雄（湖內）",
       "county": "高雄市",
-      "aqi": "83",
-      "pollutant": "懸浮微粒",
+      "aqi": "62",
+      "pollutant": "細懸浮微粒",
       "status": "普通",
       "so2": "",
       "co": "0.13",
       "o3": "",
       "o3_8hr": "",
-      "pm10": "157",
-      "pm2_5": "30",
+      "pm10": "",
+      "pm2_5": "",
       "no2": "",
       "nox": "",
       "no": "",
@@ -2076,8 +2076,8 @@
       "wind_direc": "279",
       "publishtime": "2025/10/01 16:00:00",
       "co_8hr": "0.1",
-      "pm2_5_avg": "16.5",
-      "pm10_avg": "60",
+      "pm2_5_avg": "12.6",
+      "pm10_avg": "",
       "so2_avg": "5",
       "longitude": "120.24535",
       "latitude": "22.87985556",
