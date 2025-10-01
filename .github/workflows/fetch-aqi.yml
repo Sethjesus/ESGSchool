@@ -2,8 +2,8 @@ name: Fetch AQI cache
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # 每 10 分鐘（UTC）
-  workflow_dispatch: {}       # 允許手動執行
+    - cron: "*/10 * * * *"     # 每 10 分鐘（UTC）
+  workflow_dispatch: {}
 
 permissions:
   contents: write
@@ -15,33 +15,49 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install jq (JSON 處理工具)
+      - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      # 小診斷：確認 Secret 有帶到（不會顯示金鑰內容）
-      - name: Debug secrets presence
+      # 1) 檢查 Secret 是否帶進來（不會顯示金鑰）
+      - name: Debug - check secrets & tree
         env:
           HAS_KEY: ${{ secrets.MOENV_API_KEY != '' }}
-        run: echo "MOENV_API_KEY present? $HAS_KEY"
+        run: |
+          echo "MOENV_API_KEY present? $HAS_KEY"
+          echo "Top-level files:"; ls -la | sed -n '1,120p'
 
-      - name: Fetch MoENV AQI → normalize keys → aqi.json
+      # 2) 取 MoENV，檢查 HTTP 狀態，失敗時把回應前 200 行印出來
+      - name: Fetch MoENV → raw.json
+        id: fetch
         env:
           MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
           DATASET: aqx_p_432
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
+          if [[ -z "${MOENV_API_KEY:-}" ]]; then
+            echo "❌ MOENV_API_KEY not found (check Settings → Secrets → Actions → Repository secrets)"; exit 1
+          fi
           URL="https://data.moenv.gov.tw/api/v2/${DATASET}?offset=0&limit=1000&api_key=${MOENV_API_KEY}"
           echo "GET $URL"
-          # 1) 取原始 JSON
-          curl -sS "$URL" -o raw.json
-          # 2) 轉鍵名：全小寫、把 . 和 - 換成 _
-          #    只處理 records 內每個 object 的鍵
+          HTTP_CODE=$(curl -sS -w "%{http_code}" -o raw.json "$URL" || true)
+          echo "HTTP_CODE=$HTTP_CODE"
+          if [[ "$HTTP_CODE" != "200" ]]; then
+            echo "❌ HTTP $HTTP_CODE"; echo "Response preview:"; sed -n '1,200p' raw.json; exit 2
+          fi
+          echo "✅ Downloaded raw.json (size: $(wc -c < raw.json) bytes)"
+
+      # 3) 正規化鍵名（小寫、把 . 和 - 換成 _），輸出 aqi.json
+      - name: Normalize → aqi.json
+        run: |
+          set -euo pipefail
           jq '{
-                source: "'"$URL"'",
+                source: "https://data.moenv.gov.tw/api/v2/aqx_p_432",
                 generated_utc: (now | todateiso8601),
                 count: (.records | length),
                 records: (.records | map(
@@ -49,14 +65,15 @@ jobs:
                 ))
               }' raw.json > aqi.json
           rm -f raw.json
-          echo "Wrote $(wc -c < aqi.json) bytes to aqi.json"
+          echo "✅ Wrote aqi.json (size: $(wc -c < aqi.json) bytes, count: $(jq -r '.count' aqi.json))"
 
-      # 如果你的 GitHub Pages 是 /docs 模式，取消註解以下兩行，並改前端讀取 docs/aqi.json
-      # - name: Move cache to docs/ for Pages
+      # 如果你的 Pages 用 docs/ 目錄，取消註解以下兩行，並讓前端讀 docs/aqi.json
+      # - name: Move cache to docs/
       #   run: |
       #     mkdir -p docs
       #     mv -f aqi.json docs/aqi.json
 
+      # 4) 有變更才 commit
       - name: Commit and push if changed
         run: |
           if [[ -n "$(git status --porcelain aqi.json docs/aqi.json 2>/dev/null)" ]]; then
@@ -65,6 +82,7 @@ jobs:
             git add aqi.json docs/aqi.json 2>/dev/null || true
             git commit -m "chore(aqi): update cache $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             git push
+            echo "✅ Pushed updated cache"
           else
-            echo "✅ aqi.json 無變更或尚未生成"
+            echo "ℹ️ No changes to commit"
           fi
