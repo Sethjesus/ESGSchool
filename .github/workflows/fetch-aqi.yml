@@ -3,7 +3,7 @@ name: Fetch AQI cache
 on:
   schedule:
     - cron: "*/10 * * * *"     # 每 10 分鐘（UTC）
-  workflow_dispatch: {}
+  workflow_dispatch: {}         # 允許手動執行
 
 permissions:
   contents: write
@@ -52,25 +52,59 @@ jobs:
           echo "✅ Downloaded raw.json (size: $(wc -c < raw.json) bytes)"
 
       # 正規化鍵名（不使用 gsub，轉小寫並把 .、- -> _）
+      # 如需只保留台北測站，可將下面 FILTER_TAIPEI=1，並在 jq 加上 select 條件（見註解）
       - name: Normalize → aqi.json
         shell: bash
+        env:
+          FILTER_TAIPEI: "0"     # 想只輸出台北站改成 "1"
         run: |
           set -euo pipefail
-          jq '{
-                source: "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-                generated_utc: (now | todateiso8601),
-                count: (.records | length),
-                records: (.records | map(
-                  with_entries(
-                    .key |= (
-                      ascii_downcase
-                      | explode
-                      | map(if .==46 or .==45 then 95 else . end)  # 46=".", 45="-", 95="_"
-                      | implode
+
+          # jq 過程：鍵名小寫 & '.' / '-' 變成 '_'（兼容舊版 jq）
+          JQ_BASE='
+            {
+              source: "https://data.moenv.gov.tw/api/v2/aqx_p_432",
+              generated_utc: (now | todateiso8601),
+              count: ( ( .records
+                | map(
+                    with_entries(
+                      .key |= ( ascii_downcase | explode
+                                | map( if .==46 or .==45 then 95 else . end ) # 46 ".", 45 "-", 95 "_"
+                                | implode )
                     )
                   )
-                ))
-              }' raw.json > aqi.json
+                ) | length ),
+              records: (
+                .records
+                | map(
+                    with_entries(
+                      .key |= ( ascii_downcase | explode
+                                | map( if .==46 or .==45 then 95 else . end )
+                                | implode )
+                    )
+                  )
+              )
+            }
+          '
+
+          if [[ "$FILTER_TAIPEI" == "1" ]]; then
+            # 只保留台北市（可改白名單：sitename 局部選擇）
+            jq "$JQ_BASE
+                | .records = (.records
+                    | map(
+                        select(
+                          (.county? == \"臺北市\") or
+                          (.county? == \"台北市\") or
+                          (.sitename? | IN(\"中山\",\"大同\",\"大直\",\"士林\",\"內湖\",\"松山\",\"南港\",\"萬華\",\"古亭\",\"景美\",\"陽明\",\"文山\",\"大安\"))
+                        )
+                      )
+                  )
+                | .count = (.records | length)
+              " raw.json > aqi.json
+          else
+            jq "$JQ_BASE" raw.json > aqi.json
+          fi
+
           rm -f raw.json
           echo "✅ Wrote aqi.json (size: $(wc -c < aqi.json) bytes, count: $(jq -r '.count' aqi.json))"
 
@@ -80,16 +114,24 @@ jobs:
       #     mkdir -p docs
       #     mv -f aqi.json docs/aqi.json
 
+      # 強制加入（即使 .gitignore 忽略 *.json），且只有有變更才 commit
       - name: Commit and push if changed
         shell: bash
         run: |
-          if [[ -n "$(git status --porcelain aqi.json docs/aqi.json 2>/dev/null)" ]]; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add aqi.json docs/aqi.json 2>/dev/null || true
-            git commit -m "chore(aqi): update cache $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git push
-            echo "✅ Pushed updated cache"
-          else
-            echo "ℹ️ No changes to commit"
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 強制追蹤
+          if [ -f aqi.json ]; then git add -f aqi.json; fi
+          if [ -f docs/aqi.json ]; then git add -f docs/aqi.json; fi
+
+          # 沒有 staged 變更就跳過
+          if git diff --cached --quiet; then
+            echo "ℹ️ No staged changes to commit"
+            exit 0
           fi
+
+          git commit -m "chore(aqi): update cache $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          git push
+          echo "✅ Pushed updated cache"
