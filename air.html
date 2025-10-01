@@ -46,9 +46,7 @@
       color: #2c3e50;
     }
 
-    p {
-      line-height: 1.75;
-    }
+    p { line-height: 1.75; }
 
     /* ===== Carousel ===== */
     .carousel {
@@ -57,246 +55,71 @@
       overflow: hidden;
       box-shadow: 0 8px 20px rgba(0, 0, 0, .07);
     }
-
-    .carousel:focus {
-      outline: 2px solid #1e90ff55;
-      outline-offset: 2px;
-    }
-
-    .carousel .stage {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #111;
-    }
-
-    .carousel .slide {
-      position: absolute;
-      inset: 0;
-      display: none;
-      color: #fff;
-    }
-
-    .carousel .slide.active {
-      display: block;
-    }
-
+    .carousel:focus { outline: 2px solid #1e90ff55; outline-offset: 2px; }
+    .carousel .stage { position: relative; width: 100%; aspect-ratio: 16/9; background: #111; }
+    .carousel .slide { position: absolute; inset: 0; display: none; color: #fff; }
+    .carousel .slide.active { display: block; }
     .carousel img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transition: transform .35s ease;
+      width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .35s ease;
     }
-
-    .carousel:hover .slide.active img {
-      transform: scale(1.02);
-    }
-
+    .carousel:hover .slide.active img { transform: scale(1.02); }
     .caption {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, .55);
-      color: #fff;
-      padding: 12px 14px;
-      text-align: center;
-      line-height: 1.45;
+      position: absolute; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, .55); color: #fff; padding: 12px 14px; text-align: center; line-height: 1.45;
     }
-
-    .caption small {
-      display: block;
-      opacity: .9;
-    }
-
+    .caption small { display: block; opacity: .9; }
     .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, .45);
-      color: #fff;
-      border: none;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      font-size: 18px;
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0, 0, 0, .45); color: #fff; border: none;
+      width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; font-size: 18px;
     }
-
-    .arrow:hover {
-      background: rgba(0, 0, 0, .6);
-    }
-
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
-
-    .dots {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 10px;
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, .9);
-      background: rgba(255, 255, 255, .25);
-      cursor: pointer;
-    }
-
-    .dot.active {
-      background: #fff;
-    }
-
-    .controls {
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-      display: flex;
-      gap: 8px;
-      z-index: 2;
-    }
-
-    .btn {
-      background: rgba(0, 0, 0, .45);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 6px 10px;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: rgba(0, 0, 0, .6);
-    }
-
-    .progress {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 4px;
-      background: rgba(255, 255, 255, .18);
-    }
-
-    .bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #5fb3ff, #1e90ff);
-    }
+    .arrow:hover { background: rgba(0, 0, 0, .6); }
+    .prev { left: 10px; } .next { right: 10px; }
+    .dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; gap: 8px; justify-content: center; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .9); background: rgba(255, 255, 255, .25); cursor: pointer; }
+    .dot.active { background: #fff; }
+    .controls { position: absolute; right: 10px; bottom: 10px; display: flex; gap: 8px; z-index: 2; }
+    .btn { background: rgba(0, 0, 0, .45); color: #fff; border: none; border-radius: 10px; padding: 6px 10px; font-size: 13px; cursor: pointer; }
+    .btn:hover { background: rgba(0, 0, 0, .6); }
+    .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255, 255, 255, .18); }
+    .bar { height: 100%; width: 0%; background: linear-gradient(90deg, #5fb3ff, #1e90ff); }
 
     /* ===== Sections ===== */
-    .section {
-      margin-top: 40px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
-      background: #fff;
-    }
+    .section { margin-top: 40px; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, .05); background: #fff; }
+    .cards { display: grid; gap: 16px; margin-top: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { background: #fff; padding: 14px; border-radius: 12px; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 8px rgba(0, 0, 0, .05); }
+    .card .i { font-size: 28px; } .card .t { font-weight: 700; }
+    .muted { font-size: 13px; color: #475569; }
 
-    .cards {
-      display: grid;
-      gap: 16px;
-      margin-top: 18px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .card {
-      background: #fff;
-      padding: 14px;
-      border-radius: 12px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
-    }
-
-    .card .i {
-      font-size: 28px;
-    }
-
-    .card .t {
-      font-weight: 700;
-    }
-
-    .muted {
-      font-size: 13px;
-      color: #475569;
-    }
-
-    /* ===== Bottom Hero (a8.png) ===== */
-    .hero {
-      margin-top: 50px;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
-    }
-
-    .hero img {
-      width: 100%;
-      height: auto;
-      display: block;
-      animation: zoomIn 20s ease-in-out infinite alternate;
-    }
-
+    /* ===== Bottom Hero ===== */
+    .hero { margin-top: 50px; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0, 0, 0, .15); }
+    .hero img { width: 100%; height: auto; display: block; animation: zoomIn 20s ease-in-out infinite alternate; }
     .hero-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.45);
-      color: #fff;
-      padding: 20px 30px;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 1.6em;
-      font-weight: 700;
-      animation: floatText 4s ease-in-out infinite;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.45); color: #fff; padding: 20px 30px; border-radius: 12px; text-align: center;
+      font-size: 1.6em; font-weight: 700; animation: floatText 4s ease-in-out infinite;
     }
+    @keyframes zoomIn { from { transform: scale(1); } to { transform: scale(1.1); } }
+    @keyframes floatText { 0%, 100% { transform: translate(-50%, -50%) translateY(0); } 50% { transform: translate(-50%, -50%) translateY(-10px); } }
 
-    @keyframes zoomIn {
-      from { transform: scale(1); }
-      to   { transform: scale(1.1); }
-    }
-
-    @keyframes floatText {
-      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-      50%      { transform: translate(-50%, -50%) translateY(-10px); }
-    }
-
-    /* ===== Minimal dark-mode patch (與 index / water 一致的 44×24 勾選＋文字) ===== */
-    :root{
-      --bg:#fdfdfd; --fg:#222; --muted-ink:#475569; --soft:#f4f4f4; --card:#fff;
-    }
+    /* ===== Dark mode ===== */
+    :root{ --bg:#fdfdfd; --fg:#222; --muted-ink:#475569; --soft:#f4f4f4; --card:#fff; }
     body{background:var(--bg); color:var(--fg); transition:background .25s,color .25s;}
     body.dark{--bg:#0b1220; --fg:#e5e7eb; --muted-ink:#9aa4b2; --soft:#0f172a; --card:#111827;}
-    body.dark nav{background:var(--soft);}
-    body.dark nav a{color:var(--fg);}
-    body.dark .section, body.dark .card{background:var(--card);}
-    body.dark .muted{color:var(--muted-ink);}
-
+    body.dark nav{background:var(--soft);} body.dark nav a{color:var(--fg);}
+    body.dark .section, body.dark .card{background:var(--card);} body.dark .muted{color:var(--muted-ink);}
     .switch{margin-left:16px; position:relative; display:inline-block; width:44px; height:24px; vertical-align:middle;}
     .switch input{opacity:0; width:0; height:0;}
     .slider{position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.4s; border-radius:24px;}
     .slider:before{position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:#fff; transition:.4s; border-radius:50%;}
-    .switch input:checked + .slider{background:#1e90ff;}
-    .switch input:checked + .slider:before{transform:translateX(20px);}
+    .switch input:checked + .slider{background:#1e90ff;} .switch input:checked + .slider:before{transform:translateX(20px);}
     .switch-text{margin-left:8px; font-size:14px; color:inherit; cursor:pointer; user-select:none; vertical-align:middle;}
+
+    /* ===== Dashboard chips ===== */
+    .pill { padding:6px 10px; border-radius:999px; border:1px solid #e5e7eb; background:#fff; }
+    .seg { display:inline-flex; border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; }
+    .seg button { padding:6px 10px; border:0; background:#fff; cursor:pointer; }
+    .seg button.active { background:#0f172a; color:#fff; }
   </style>
 
   <!-- Chart.js（儀表板用） -->
@@ -307,17 +130,13 @@
 
   <!-- ===== Top Nav ===== -->
   <nav>
-    <div class="brand">
-      📘 UDM ESG 永續教科書
-    </div>
-
+    <div class="brand">📘 UDM ESG 永續教科書</div>
     <div>
       <a href="index.html">🏠 首頁</a>
       <a href="sunshine.html">🌞 陽光</a>
       <a href="air.html">💨 空氣</a>
       <a href="water.html">💧 水</a>
       <a href="carbon.html">🌱 碳匯</a>
-      <!-- 深色開關（與 index / water 同尺寸/樣式/位置，預設淺色） -->
       <label class="switch">
         <input type="checkbox" id="darkToggle" aria-label="切換深色模式">
         <span class="slider"></span>
@@ -329,79 +148,59 @@
   <!-- ===== Main ===== -->
   <main>
 
-    <h1>
-      💨 空氣：好空氣行動
-    </h1>
-
-    <p>
-      從日常出發，透過通風、綠化、低碳通勤與感測監測，一起守護好空氣。
-    </p>
+    <h1>💨 空氣：好空氣行動</h1>
+    <p>從日常出發，透過通風、綠化、低碳通勤與感測監測，一起守護好空氣。</p>
 
     <!-- ===== Carousel a1~a7 ===== -->
     <section class="carousel" id="airCarousel" aria-label="好空氣行動" tabindex="0">
-
       <div class="stage">
 
         <div class="slide active">
           <img src="a1.png" alt="開窗通風">
-          <div class="caption">
-            🏠 開窗通風：保持空氣流通，降低室內污染
-            <small>Ventilation keeps indoor air fresh</small>
-            <br></br>
+          <div class="caption">🏠 開窗通風：保持空氣流通，降低室內污染
+            <small>Ventilation keeps indoor air fresh</small><br></br>
           </div>
         </div>
 
         <div class="slide">
           <img src="a2.png" alt="大眾運輸">
-          <div class="caption">
-            🚌 大眾運輸：以乘載效率降低排放
-            <small>Public transit reduces per-capita emissions</small>
-            <br></br>
+          <div class="caption">🚌 大眾運輸：以乘載效率降低排放
+            <small>Public transit reduces per-capita emissions</small><br></br>
           </div>
         </div>
 
         <div class="slide">
           <img src="a3.png" alt="綠色通勤">
-          <div class="caption">
-            🚲 綠色通勤：步行/單車，零油耗零廢氣
-            <small>Bike or walk for zero tailpipe emissions</small>
-            <br></br>
+          <div class="caption">🚲 綠色通勤：步行/單車，零油耗零廢氣
+            <small>Bike or walk for zero tailpipe emissions</small><br></br>
           </div>
         </div>
 
         <div class="slide">
           <img src="a4.png" alt="空氣清淨">
-          <div class="caption">
-            😷 淨化與過濾：PM2.5 來了也不怕
-            <small>Filtration improves indoor air quality</small>
-            <br></br>
+          <div class="caption">😷 淨化與過濾：PM2.5 來了也不怕
+            <small>Filtration improves indoor air quality</small><br></br>
           </div>
         </div>
 
         <div class="slide">
           <img src="a5.png" alt="校園綠化">
-          <div class="caption">
-            🌳 校園綠化：增加遮蔭與碳吸存
-            <small>More trees, more shade, better air</small>
-            <br></br>
+          <div class="caption">🌳 校園綠化：增加遮蔭與碳吸存
+            <small>More trees, more shade, better air</small><br></br>
           </div>
         </div>
 
         <div class="slide">
           <img src="a6.png" alt="友善住家">
-          <div class="caption">
-            🏡 友善住家：節能 + 綠化，一起好空氣
-            <small>Greener homes for cleaner air</small>
-            <br></br>
+          <div class="caption">🏡 友善住家：節能 + 綠化，一起好空氣
+            <small>Greener homes for cleaner air</small><br></br>
           </div>
         </div>
 
         <div class="slide">
           <img src="a7.png" alt="藍天白雲">
-          <div class="caption">
-            ☁️ 藍天白雲：共同維護低污染城市
-            <small>Clean sky is a shared effort</small>
-            <br></br>
+          <div class="caption">☁️ 藍天白雲：共同維護低污染城市
+            <small>Clean sky is a shared effort</small><br></br>
           </div>
         </div>
 
@@ -409,11 +208,7 @@
         <button class="arrow next" aria-label="下一張">›</button>
 
         <div class="dots" aria-hidden="true"></div>
-
-        <div class="controls">
-          <button class="btn" id="togglePlay" aria-label="播放/暫停">⏸ 暫停</button>
-        </div>
-
+        <div class="controls"><button class="btn" id="togglePlay" aria-label="播放/暫停">⏸ 暫停</button></div>
         <div class="progress"><div class="bar" id="progressBar"></div></div>
 
       </div>
@@ -421,109 +216,43 @@
 
     <!-- ===== Section: PM2.5 & CO2 ===== -->
     <section class="section" style="background:#f9fafb;">
-
-      <h2 style="color:#1e3a8a; margin-bottom:12px;">
-        🫁 PM2.5 與 CO₂ 對健康的重要
-      </h2>
-
+      <h2 style="color:#1e3a8a; margin-bottom:12px;">🫁 PM2.5 與 CO₂ 對健康的重要</h2>
       <p style="line-height:1.8; color:#334155;">
         PM2.5（細懸浮微粒）能深入肺泡，增加氣喘、慢性支氣管炎與心血管疾病風險。<br></br>
         CO₂ 過高會造成頭暈、疲倦與專注力下降，影響學習效率。<br></br>
         透過<strong>ESG 行動</strong>，我們可以一起改善空氣品質！
       </p>
-
       <div class="cards">
-        <div class="card">
-          <div class="i">🌳</div>
-          <div>
-            <div class="t" style="color:#1e3a8a;">植樹造林</div>
-            <div class="muted">吸收 CO₂、提供遮蔭與降溫</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="i">🚲</div>
-          <div>
-            <div class="t" style="color:#1e3a8a;">低碳通勤</div>
-            <div class="muted">步行/單車/大眾運輸，減少廢氣排放</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="i">🏫</div>
-          <div>
-            <div class="t" style="color:#1e3a8a;">智慧校園</div>
-            <div class="muted">偵測 PM2.5 與 CO₂，打造健康環境</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="i">💡</div>
-          <div>
-            <div class="t" style="color:#1e3a8a;">節能減排</div>
-            <div class="muted">提高能源效率，間接降低空污</div>
-          </div>
-        </div>
-
+        <div class="card"><div class="i">🌳</div><div><div class="t" style="color:#1e3a8a;">植樹造林</div><div class="muted">吸收 CO₂、提供遮蔭與降溫</div></div></div>
+        <div class="card"><div class="i">🚲</div><div><div class="t" style="color:#1e3a8a;">低碳通勤</div><div class="muted">步行/單車/大眾運輸，減少廢氣排放</div></div></div>
+        <div class="card"><div class="i">🏫</div><div><div class="t" style="color:#1e3a8a;">智慧校園</div><div class="muted">偵測 PM2.5 與 CO₂，打造健康環境</div></div></div>
+        <div class="card"><div class="i">💡</div><div><div class="t" style="color:#1e3a8a;">節能減排</div><div class="muted">提高能源效率，間接降低空污</div></div></div>
       </div>
     </section>
 
     <!-- ===== Section: Air Filtration ===== -->
     <section class="section" style="background:#eef9ff;">
-
-      <h2 style="color:#0369a1; margin-bottom:12px;">
-        🌬️ 空氣濾淨的重要性
-      </h2>
-
+      <h2 style="color:#0369a1; margin-bottom:12px;">🌬️ 空氣濾淨的重要性</h2>
       <p style="line-height:1.8; color:#334155;">
         外部污染嚴重時，空氣濾淨設備（如清淨機、濾網）能有效過濾 PM2.5、花粉與部分細菌，<br></br>
         對兒童、長者與敏感族群特別重要。請記得<strong>定期更換濾網</strong>並搭配<strong>良好通風</strong>，才能發揮最佳效果。
       </p>
-
       <div class="cards">
-        <div class="card">
-          <div class="i">😷</div>
-          <div>
-            <div class="t" style="color:#0369a1;">口罩與濾材</div>
-            <div class="muted">降低 PM2.5 與病原吸入</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="i">🌀</div>
-          <div>
-            <div class="t" style="color:#0369a1;">空氣清淨機</div>
-            <div class="muted">HEPA/活性碳濾網強化過濾與除味</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="i">🔄</div>
-          <div>
-            <div class="t" style="color:#0369a1;">定期換濾網</div>
-            <div class="muted">按使用時數/指示燈更換，維持效率</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="i">🏡</div>
-          <div>
-            <div class="t" style="color:#0369a1;">室內通風</div>
-            <div class="muted">交叉通風 + 濾淨，維持清新空氣</div>
-          </div>
-        </div>
-
+        <div class="card"><div class="i">😷</div><div><div class="t" style="color:#0369a1;">口罩與濾材</div><div class="muted">降低 PM2.5 與病原吸入</div></div></div>
+        <div class="card"><div class="i">🌀</div><div><div class="t" style="color:#0369a1;">空氣清淨機</div><div class="muted">HEPA/活性碳濾網強化過濾與除味</div></div></div>
+        <div class="card"><div class="i">🔄</div><div><div class="t" style="color:#0369a1;">定期換濾網</div><div class="muted">按使用時數/指示燈更換，維持效率</div></div></div>
+        <div class="card"><div class="i">🏡</div><div><div class="t" style="color:#0369a1;">室內通風</div><div class="muted">交叉通風 + 濾淨，維持清新空氣</div></div></div>
       </div>
     </section>
 
     <!-- ===== Taipei Air Dashboard (MoENV) ===== -->
     <section id="taipei-air" class="section" style="background:#fff;">
-      <h2 style="color:#2c3e50; margin-bottom:12px;">📊 台北市空氣品質（即時）</h2>
+      <h2 style="color:#2c3e50; margin-bottom:12px;">📊 台北市空氣品質（快取 / 即時）</h2>
 
       <!-- 控制列 -->
       <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px">
         <label>測項：
-          <select id="air-metric" class="form-select" style="padding:6px 8px">
+          <select id="air-metric" class="pill">
             <option value="aqi">AQI</option>
             <option value="pm2_5">PM2.5</option>
             <option value="pm10">PM10</option>
@@ -534,12 +263,18 @@
           </select>
         </label>
 
-        <label>測站：
-          <select id="air-site" class="form-select" style="padding:6px 8px"></select>
-        </label>
+        <label>測站：<select id="air-site" class="pill"></select></label>
 
-        <button id="air-edit-key" class="btn" style="padding:6px 10px; border-radius:8px; background:#1e90ff; color:#fff; border:none;">設定 / 更換 API Key</button>
-        <button id="air-refresh" class="btn" style="padding:6px 10px; border-radius:8px; background:#0f172a; color:#fff; border:none;">立即更新</button>
+        <!-- 資料來源切換 -->
+        <div class="seg" role="tablist" aria-label="資料來源">
+          <button id="src-cache" class="active" aria-selected="true">💾 快取</button>
+          <button id="src-live" aria-selected="false">🌐 即時</button>
+        </div>
+
+        <!-- 即時模式用 -->
+        <button id="air-edit-key" class="btn" style="display:none; background:#1e90ff;">設定 / 更換 API Key</button>
+
+        <button id="air-refresh" class="btn" style="background:#0f172a;">立即更新</button>
 
         <label style="margin-left:auto; display:flex; align-items:center; gap:6px;">
           <input type="checkbox" id="air-auto" checked> 每 10 分鐘自動更新
@@ -553,14 +288,14 @@
       </div>
 
       <div class="card" style="flex:1;">
-        <div class="t" style="margin-bottom:6px;">單站短期趨勢（以本頁歷次抓取建立）</div>
+        <div class="t" style="margin-bottom:6px;">單站短期趨勢（本頁歷次抓取）</div>
         <canvas id="air-line" height="130"></canvas>
       </div>
 
       <div class="muted" style="margin-top:10px;">
+        <span id="air-src">資料來源：快取</span>　|　
         <span id="air-pub">發布時間：—</span>　|　
-        <span id="air-last">最後更新：—</span>　|　
-        資料源：環境部資料開放平臺（MoENV）
+        <span id="air-last">最後更新：—</span>
       </div>
     </section>
     <!-- ===== /Taipei Air Dashboard ===== -->
@@ -575,7 +310,7 @@
 
   <!-- ===== Scripts ===== -->
   <script>
-    /* 深色模式：預設淺色、與 index/water 統一，記憶至 localStorage */
+    /* 深色模式：記憶至 localStorage */
     (function(){
       const KEY='udm_theme';
       const cb=document.getElementById('darkToggle');
@@ -588,6 +323,7 @@
       });
     })();
 
+    /* 輪播 */
     (function () {
       const root = document.getElementById('airCarousel');
       if (!root) return;
@@ -664,6 +400,7 @@
       raf = requestAnimationFrame(tick);
     })();
 
+    /* 英雄文字輪播 */
     (function () {
       const heroTexts = ["🌬️ 空氣偵測", "🌀 過濾", "🏡 好環境"];
       let idx = 0;
@@ -680,11 +417,12 @@
   <script>
 (() => {
   // === 可調整 ===
-  const API = "https://data.moenv.gov.tw/api/v2/aqx_p_432";
+  const JSON_PATH = "aqi.json"; // 如果 Pages 用 /docs，改成 "docs/aqi.json"
+  const LIVE_API  = "https://data.moenv.gov.tw/api/v2/aqx_p_432";
   const STORAGE_KEY = "moenv_api_key";
-  const TAIPEI_SITES = ["中山","大同","大直","士林","內湖","松山","南港","萬華","古亭","景美","陽明","文山","大安"]; // 需要可增刪
-  const POLL_INTERVAL_MS = 10 * 60 * 1000; // 10 分鐘
-  const TREND_MAX = 20; // 單站單測項最多保留 20 筆
+  const TAIPEI_SITES = ["中山","大同","大直","士林","內湖","松山","南港","萬華","古亭","景美","陽明","文山","大安"];
+  const POLL_INTERVAL_MS = 10 * 60 * 1000;   // 自動更新頻率
+  const TREND_MAX = 20;                      // 線圖最多保留筆數
 
   // === DOM ===
   const elMetric = document.getElementById("air-metric");
@@ -692,10 +430,13 @@
   const elAuto   = document.getElementById("air-auto");
   const elLast   = document.getElementById("air-last");
   const elPub    = document.getElementById("air-pub");
+  const elSrc    = document.getElementById("air-src");
   const btnEdit  = document.getElementById("air-edit-key");
   const btnRef   = document.getElementById("air-refresh");
+  const btnCache = document.getElementById("src-cache");
+  const btnLive  = document.getElementById("src-live");
 
-  if (!elMetric || !elSite) return; // 沒有區塊就跳出（避免別頁報錯）
+  if (!elMetric || !elSite) return; // 沒有儀表板則跳出
 
   // === 圖表 ===
   const barChart = new Chart(document.getElementById("air-bar"), {
@@ -721,30 +462,44 @@
     if (v<=300) return "#8e44ad";
     return "#7f1d1d";
   }
+  const getKey = () => localStorage.getItem(STORAGE_KEY) || "";
+  const setKey = () => { const k = prompt("輸入 MoENV API Key：", getKey()); if (k !== null) localStorage.setItem(STORAGE_KEY, k.trim()); };
 
-  function getKey() {
-    let k = localStorage.getItem(STORAGE_KEY);
-    if (!k) {
-      k = prompt("請輸入 MoENV API Key：");
-      if (k) localStorage.setItem(STORAGE_KEY, k.trim());
-    }
-    return k;
-  }
-  function setKey() {
-    const k = prompt("輸入新的 MoENV API Key：", localStorage.getItem(STORAGE_KEY) || "");
-    if (k !== null) localStorage.setItem(STORAGE_KEY, k.trim());
+  // === 資料來源 ===
+  let source = "cache"; // "cache" | "live"
+  function setSource(s){
+    source = s;
+    btnCache.classList.toggle("active", s==="cache");
+    btnLive.classList.toggle("active",  s==="live");
+    btnEdit.style.display = (s==="live") ? "inline-block" : "none";
+    elSrc.textContent = "資料來源：" + (s==="cache" ? "快取" : "即時 API");
+    refresh();
   }
 
-  async function fetchAQI() {
+  // === 取資料 ===
+  async function fetchFromCache(){
+    const res = await fetch(JSON_PATH + "?t=" + Date.now());
+    if (!res.ok) throw new Error("Cache HTTP " + res.status);
+    const data = await res.json(); // {generated_utc,count,records:[...]}
+    initSites(data.records || []);
+    try {
+      const tw = new Date((data.generated_utc || "") + "Z").toLocaleString("zh-TW",{ timeZone:"Asia/Taipei" });
+      elLast.textContent = "最後更新（快取產生）：" + tw;
+    } catch { elLast.textContent = "最後更新：—"; }
+    return data.records || [];
+  }
+
+  async function fetchFromLive(){
     const key = getKey();
     if (!key) throw new Error("no-key");
-    const url = new URL(API);
+    const url = new URL(LIVE_API);
     url.searchParams.set("offset", 0);
     url.searchParams.set("limit", 1000);
     url.searchParams.set("api_key", key);
     const r = await fetch(url, { cache: "no-store" });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const js = await r.json();
+    elLast.textContent = "最後更新（即時抓取）：" + new Date().toLocaleString();
     return js.records || [];
   }
 
@@ -754,7 +509,7 @@
     elSite.innerHTML = names.map(n => `<option value="${n}">${n}</option>`).join("");
   }
 
-  // 短趨勢暫存
+  // === 趨勢暫存 ===
   const TREND = {}; // { site: { metric: [{t, v}] } }
   function pushTrend(site, metric, v){
     TREND[site] = TREND[site] || {};
@@ -784,12 +539,12 @@
   async function refresh() {
     try {
       const metric = elMetric.value;
-      const data = await fetchAQI();
-
-      initSites(data);
+      const all = (source === "cache") ? await fetchFromCache() : await fetchFromLive();
 
       const wanted = new Set(TAIPEI_SITES);
-      const rows = data.filter(r => wanted.has(r.sitename));
+      const rows = all.filter(r => wanted.has(r.sitename));
+
+      elPub.textContent = "發布時間：" + (rows[0]?.publishtime || "—");
 
       drawBar(rows, metric);
 
@@ -797,26 +552,29 @@
       const row  = rows.find(r => r.sitename === site);
       if (row) {
         pushTrend(site, metric, toNum(row[metric]));
-        elPub.textContent = "發布時間：" + (row.publishtime || "—");
         drawLine(site, metric);
       }
-
-      elLast.textContent = "最後更新：" + new Date().toLocaleString();
     } catch (e) {
       console.error(e);
-      elLast.textContent = "最後更新：失敗（詳見 console）";
-      if (String(e).includes("no-key")) alert("請先設定 MoENV API Key。");
+      if (String(e).includes("no-key")) {
+        alert("即時模式需要 MoENV API Key，請先設定或改回『快取』模式。");
+        setSource("cache");
+      } else {
+        elLast.textContent = "讀取失敗（詳見 console）";
+      }
     }
   }
 
   // 事件
   elMetric.addEventListener("change", refresh);
   elSite.addEventListener("change", refresh);
-  btnEdit.addEventListener("click", () => { setKey(); refresh(); });
+  btnEdit.addEventListener("click", () => { const k = prompt("輸入 MoENV API Key：", localStorage.getItem(STORAGE_KEY) || ""); if (k !== null) localStorage.setItem(STORAGE_KEY, k.trim()); refresh(); });
   btnRef.addEventListener("click", refresh);
+  btnCache.addEventListener("click", ()=> setSource("cache"));
+  btnLive.addEventListener("click",  ()=> setSource("live"));
 
-  // 啟動
-  refresh();
+  // 啟動（預設快取）
+  setSource("cache");
   setInterval(() => { if (elAuto.checked) refresh(); }, POLL_INTERVAL_MS);
 })();
   </script>
