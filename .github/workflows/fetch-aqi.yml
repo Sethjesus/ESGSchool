@@ -23,7 +23,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      # 1) 檢查 Secret 是否帶進來（不會顯示金鑰）
+      # 檢查 Secret 是否帶進來（不會輸出金鑰內容）
       - name: Debug - check secrets & tree
         env:
           HAS_KEY: ${{ secrets.MOENV_API_KEY != '' }}
@@ -31,9 +31,8 @@ jobs:
           echo "MOENV_API_KEY present? $HAS_KEY"
           echo "Top-level files:"; ls -la | sed -n '1,120p'
 
-      # 2) 取 MoENV，檢查 HTTP 狀態，失敗時把回應前 200 行印出來
+      # 取得 MoENV 原始資料
       - name: Fetch MoENV → raw.json
-        id: fetch
         env:
           MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
           DATASET: aqx_p_432
@@ -41,19 +40,20 @@ jobs:
         run: |
           set -euo pipefail
           if [[ -z "${MOENV_API_KEY:-}" ]]; then
-            echo "❌ MOENV_API_KEY not found (check Settings → Secrets → Actions → Repository secrets)"; exit 1
+            echo "❌ MOENV_API_KEY not found (Settings → Secrets → Actions → Repository secrets)"; exit 1
           fi
           URL="https://data.moenv.gov.tw/api/v2/${DATASET}?offset=0&limit=1000&api_key=${MOENV_API_KEY}"
           echo "GET $URL"
           HTTP_CODE=$(curl -sS -w "%{http_code}" -o raw.json "$URL" || true)
           echo "HTTP_CODE=$HTTP_CODE"
           if [[ "$HTTP_CODE" != "200" ]]; then
-            echo "❌ HTTP $HTTP_CODE"; echo "Response preview:"; sed -n '1,200p' raw.json; exit 2
+            echo "❌ HTTP $HTTP_CODE"; echo "Response preview:"; sed -n '1,80p' raw.json; exit 2
           fi
           echo "✅ Downloaded raw.json (size: $(wc -c < raw.json) bytes)"
 
-      # 3) 正規化鍵名（小寫、把 . 和 - 換成 _），輸出 aqi.json
+      # 正規化鍵名（不使用 gsub，轉小寫並把 .、- -> _）
       - name: Normalize → aqi.json
+        shell: bash
         run: |
           set -euo pipefail
           jq '{
@@ -61,20 +61,27 @@ jobs:
                 generated_utc: (now | todateiso8601),
                 count: (.records | length),
                 records: (.records | map(
-                  with_entries(.key |= ascii_downcase | .key |= gsub("\\\\."; "_") | .key |= gsub("-", "_"))
+                  with_entries(
+                    .key |= (
+                      ascii_downcase
+                      | explode
+                      | map(if .==46 or .==45 then 95 else . end)  # 46=".", 45="-", 95="_"
+                      | implode
+                    )
+                  )
                 ))
               }' raw.json > aqi.json
           rm -f raw.json
           echo "✅ Wrote aqi.json (size: $(wc -c < aqi.json) bytes, count: $(jq -r '.count' aqi.json))"
 
-      # 如果你的 Pages 用 docs/ 目錄，取消註解以下兩行，並讓前端讀 docs/aqi.json
+      # 若你的 GitHub Pages 用 /docs 目錄，取消註解以下兩行，前端改抓 docs/aqi.json
       # - name: Move cache to docs/
       #   run: |
       #     mkdir -p docs
       #     mv -f aqi.json docs/aqi.json
 
-      # 4) 有變更才 commit
       - name: Commit and push if changed
+        shell: bash
         run: |
           if [[ -n "$(git status --porcelain aqi.json docs/aqi.json 2>/dev/null)" ]]; then
             git config user.name  "github-actions[bot]"
