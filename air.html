@@ -205,6 +205,7 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+      background: #fff;
     }
 
     .cards {
@@ -297,6 +298,9 @@
     .switch input:checked + .slider:before{transform:translateX(20px);}
     .switch-text{margin-left:8px; font-size:14px; color:inherit; cursor:pointer; user-select:none; vertical-align:middle;}
   </style>
+
+  <!-- Chart.js（儀表板用） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
@@ -512,6 +516,55 @@
       </div>
     </section>
 
+    <!-- ===== Taipei Air Dashboard (MoENV) ===== -->
+    <section id="taipei-air" class="section" style="background:#fff;">
+      <h2 style="color:#2c3e50; margin-bottom:12px;">📊 台北市空氣品質（即時）</h2>
+
+      <!-- 控制列 -->
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px">
+        <label>測項：
+          <select id="air-metric" class="form-select" style="padding:6px 8px">
+            <option value="aqi">AQI</option>
+            <option value="pm2_5">PM2.5</option>
+            <option value="pm10">PM10</option>
+            <option value="no2">NO₂</option>
+            <option value="o3">O₃</option>
+            <option value="so2">SO₂</option>
+            <option value="co">CO</option>
+          </select>
+        </label>
+
+        <label>測站：
+          <select id="air-site" class="form-select" style="padding:6px 8px"></select>
+        </label>
+
+        <button id="air-edit-key" class="btn" style="padding:6px 10px; border-radius:8px; background:#1e90ff; color:#fff; border:none;">設定 / 更換 API Key</button>
+        <button id="air-refresh" class="btn" style="padding:6px 10px; border-radius:8px; background:#0f172a; color:#fff; border:none;">立即更新</button>
+
+        <label style="margin-left:auto; display:flex; align-items:center; gap:6px;">
+          <input type="checkbox" id="air-auto" checked> 每 10 分鐘自動更新
+        </label>
+      </div>
+
+      <!-- 圖表 -->
+      <div class="card" style="flex:1; margin-bottom:12px;">
+        <div class="t" style="margin-bottom:6px;">目前值（台北各測站）</div>
+        <canvas id="air-bar" height="150"></canvas>
+      </div>
+
+      <div class="card" style="flex:1;">
+        <div class="t" style="margin-bottom:6px;">單站短期趨勢（以本頁歷次抓取建立）</div>
+        <canvas id="air-line" height="130"></canvas>
+      </div>
+
+      <div class="muted" style="margin-top:10px;">
+        <span id="air-pub">發布時間：—</span>　|　
+        <span id="air-last">最後更新：—</span>　|　
+        資料源：環境部資料開放平臺（MoENV）
+      </div>
+    </section>
+    <!-- ===== /Taipei Air Dashboard ===== -->
+
     <!-- ===== Bottom Hero a8 ===== -->
     <section class="hero">
       <img src="a8.png" alt="空氣偵測與過濾">
@@ -622,6 +675,152 @@
       }, 3000);
     })();
   </script>
+
+  <!-- ===== Taipei Air Dashboard Logic ===== -->
+  <script>
+(() => {
+  // === 可調整 ===
+  const API = "https://data.moenv.gov.tw/api/v2/aqx_p_432";
+  const STORAGE_KEY = "moenv_api_key";
+  const TAIPEI_SITES = ["中山","大同","大直","士林","內湖","松山","南港","萬華","古亭","景美","陽明","文山","大安"]; // 需要可增刪
+  const POLL_INTERVAL_MS = 10 * 60 * 1000; // 10 分鐘
+  const TREND_MAX = 20; // 單站單測項最多保留 20 筆
+
+  // === DOM ===
+  const elMetric = document.getElementById("air-metric");
+  const elSite   = document.getElementById("air-site");
+  const elAuto   = document.getElementById("air-auto");
+  const elLast   = document.getElementById("air-last");
+  const elPub    = document.getElementById("air-pub");
+  const btnEdit  = document.getElementById("air-edit-key");
+  const btnRef   = document.getElementById("air-refresh");
+
+  if (!elMetric || !elSite) return; // 沒有區塊就跳出（避免別頁報錯）
+
+  // === 圖表 ===
+  const barChart = new Chart(document.getElementById("air-bar"), {
+    type: "bar",
+    data: { labels: [], datasets: [{ data: [], backgroundColor: [] }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+  });
+  const lineChart = new Chart(document.getElementById("air-line"), {
+    type: "line",
+    data: { labels: [], datasets: [{ data: [], tension: .3, fill: false }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+  });
+
+  // === 工具 ===
+  const toNum = (x) => (x == null ? null : (+String(x).trim()));
+  const mono  = () => "#3498db";
+  function aqiColor(v){
+    if (v==null || isNaN(v)) return "#bdbdbd";
+    if (v<=50) return "#2ecc71";
+    if (v<=100) return "#f1c40f";
+    if (v<=150) return "#e67e22";
+    if (v<=200) return "#e74c3c";
+    if (v<=300) return "#8e44ad";
+    return "#7f1d1d";
+  }
+
+  function getKey() {
+    let k = localStorage.getItem(STORAGE_KEY);
+    if (!k) {
+      k = prompt("請輸入 MoENV API Key：");
+      if (k) localStorage.setItem(STORAGE_KEY, k.trim());
+    }
+    return k;
+  }
+  function setKey() {
+    const k = prompt("輸入新的 MoENV API Key：", localStorage.getItem(STORAGE_KEY) || "");
+    if (k !== null) localStorage.setItem(STORAGE_KEY, k.trim());
+  }
+
+  async function fetchAQI() {
+    const key = getKey();
+    if (!key) throw new Error("no-key");
+    const url = new URL(API);
+    url.searchParams.set("offset", 0);
+    url.searchParams.set("limit", 1000);
+    url.searchParams.set("api_key", key);
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const js = await r.json();
+    return js.records || [];
+  }
+
+  function initSites(records) {
+    if (elSite.options.length) return;
+    const names = [...new Set(records.map(r => r.sitename).filter(n => TAIPEI_SITES.includes(n)))].sort();
+    elSite.innerHTML = names.map(n => `<option value="${n}">${n}</option>`).join("");
+  }
+
+  // 短趨勢暫存
+  const TREND = {}; // { site: { metric: [{t, v}] } }
+  function pushTrend(site, metric, v){
+    TREND[site] = TREND[site] || {};
+    TREND[site][metric] = TREND[site][metric] || [];
+    const arr = TREND[site][metric];
+    arr.push({ t: Date.now(), v });
+    if (arr.length > TREND_MAX) arr.shift();
+  }
+
+  function drawBar(rows, metric) {
+    const labels = rows.map(r => r.sitename);
+    const vals   = rows.map(r => toNum(r[metric]));
+    const colors = metric === "aqi" ? vals.map(aqiColor) : vals.map(mono);
+    barChart.data.labels = labels;
+    barChart.data.datasets[0].data = vals;
+    barChart.data.datasets[0].backgroundColor = colors;
+    barChart.update();
+  }
+
+  function drawLine(site, metric) {
+    const series = (TREND[site] && TREND[site][metric]) || [];
+    lineChart.data.labels = series.map(p => new Date(p.t).toLocaleTimeString());
+    lineChart.data.datasets[0].data = series.map(p => p.v);
+    lineChart.update();
+  }
+
+  async function refresh() {
+    try {
+      const metric = elMetric.value;
+      const data = await fetchAQI();
+
+      initSites(data);
+
+      const wanted = new Set(TAIPEI_SITES);
+      const rows = data.filter(r => wanted.has(r.sitename));
+
+      drawBar(rows, metric);
+
+      const site = elSite.value || rows[0]?.sitename;
+      const row  = rows.find(r => r.sitename === site);
+      if (row) {
+        pushTrend(site, metric, toNum(row[metric]));
+        elPub.textContent = "發布時間：" + (row.publishtime || "—");
+        drawLine(site, metric);
+      }
+
+      elLast.textContent = "最後更新：" + new Date().toLocaleString();
+    } catch (e) {
+      console.error(e);
+      elLast.textContent = "最後更新：失敗（詳見 console）";
+      if (String(e).includes("no-key")) alert("請先設定 MoENV API Key。");
+    }
+  }
+
+  // 事件
+  elMetric.addEventListener("change", refresh);
+  elSite.addEventListener("change", refresh);
+  btnEdit.addEventListener("click", () => { setKey(); refresh(); });
+  btnRef.addEventListener("click", refresh);
+
+  // 啟動
+  refresh();
+  setInterval(() => { if (elAuto.checked) refresh(); }, POLL_INTERVAL_MS);
+})();
+  </script>
+  <!-- ===== /Taipei Air Dashboard Logic ===== -->
 
 </body>
 </html>
