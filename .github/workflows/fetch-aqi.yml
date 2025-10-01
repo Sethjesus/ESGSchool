@@ -2,11 +2,9 @@ name: Fetch AQI cache
 
 on:
   schedule:
-    # 每 10 分鐘跑一次（注意是 UTC 時區）
-    - cron: "*/10 * * * *"
-  workflow_dispatch: {}   # 允許手動觸發
+    - cron: "*/10 * * * *"   # 每 10 分鐘
+  workflow_dispatch: {}
 
-# 讓 workflow 能推回 aqi.json
 permissions:
   contents: write
 
@@ -17,7 +15,6 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -32,6 +29,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
+      # 👉 診斷：確認檔案與 Secret 是否存在（不會顯示金鑰內容）
+      - name: Debug: check files & secrets
+        env:
+          HAS_KEY: ${{ secrets.MOENV_API_KEY != '' }}
+        run: |
+          echo "Repo tree (top level):"
+          ls -la
+          echo "scripts/ 存在？"; test -d scripts && echo YES || (echo NO && exit 1)
+          echo "fetch_aqi.py 存在？"; test -f scripts/fetch_aqi.py && echo YES || (echo NO && exit 1)
+          echo "MOENV_API_KEY 有帶進 workflow ？ $HAS_KEY"
+
+      # （可選）再探測 API 是否可連線
+      - name: Probe API (1 record)
+        env:
+          MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
+        run: |
+          curl -sS "https://data.moenv.gov.tw/api/v2/aqx_p_432?offset=0&limit=1&api_key=${MOENV_API_KEY}" | head
+
       - name: Fetch MoENV AQI and write aqi.json
         env:
           MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
@@ -39,7 +54,7 @@ jobs:
         run: |
           python scripts/fetch_aqi.py
 
-      # 如果你的 GitHub Pages 是用 /docs 資料夾，取消註解以下兩行，把檔案移到 docs/
+      # 如果 Pages 用 /docs 模式，取消下方註解把檔案移到 docs/
       # - name: Move cache to docs/ for Pages
       #   run: |
       #     mkdir -p docs
@@ -54,5 +69,5 @@ jobs:
             git commit -m "chore(aqi): update cache $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             git push
           else
-            echo "✅ aqi.json 無變更"
+            echo "✅ aqi.json 無變更或尚未生成"
           fi
