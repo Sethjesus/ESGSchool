@@ -1,0 +1,58 @@
+name: Fetch AQI cache
+
+on:
+  schedule:
+    # 每 10 分鐘跑一次（注意是 UTC 時區）
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}   # 允許手動觸發
+
+# 讓 workflow 能推回 aqi.json
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-aqi
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Fetch MoENV AQI and write aqi.json
+        env:
+          MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
+          MOENV_DATASET: ${{ secrets.MOENV_DATASET }}
+        run: |
+          python scripts/fetch_aqi.py
+
+      # 如果你的 GitHub Pages 是用 /docs 資料夾，取消註解以下兩行，把檔案移到 docs/
+      # - name: Move cache to docs/ for Pages
+      #   run: |
+      #     mkdir -p docs
+      #     mv -f aqi.json docs/aqi.json
+
+      - name: Commit and push if aqi.json changed
+        run: |
+          if [[ -n "$(git status --porcelain aqi.json docs/aqi.json 2>/dev/null)" ]]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add aqi.json docs/aqi.json 2>/dev/null || true
+            git commit -m "chore(aqi): update cache $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push
+          else
+            echo "✅ aqi.json 無變更"
+          fi
