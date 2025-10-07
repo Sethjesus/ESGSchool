@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-07T04:11:00Z",
+  "generated_utc": "2025-10-07T04:31:24Z",
   "count": 86,
   "records": [
     {
@@ -266,7 +266,7 @@
     {
       "sitename": "中山",
       "county": "臺北市",
-      "aqi": "",
+      "aqi": "21",
       "pollutant": "",
       "status": "良好",
       "so2": "0.9",
