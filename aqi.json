@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-11T19:08:54Z",
+  "generated_utc": "2025-10-11T19:19:58Z",
   "count": 86,
   "records": [
     {
@@ -1982,13 +1982,13 @@
     {
       "sitename": "大城",
       "county": "彰化縣",
-      "aqi": "",
+      "aqi": "48",
       "pollutant": "",
-      "status": "",
-      "so2": "",
+      "status": "良好",
+      "so2": "0.4",
       "co": "0.19",
       "o3": "9",
-      "o3_8hr": "",
+      "o3_8hr": "25",
       "pm10": "28",
       "pm2_5": "15",
       "no2": "3",
@@ -1997,10 +1997,10 @@
       "wind_speed": "0.2",
       "wind_direc": "58",
       "publishtime": "2025/10/12 03:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.1",
+      "pm2_5_avg": "12",
+      "pm10_avg": "26",
+      "so2_avg": "1",
       "longitude": "120.26964167",
       "latitude": "23.85493056",
       "siteid": "85"
