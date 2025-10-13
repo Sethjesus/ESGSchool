@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-13T15:09:27Z",
+  "generated_utc": "2025-10-13T15:24:57Z",
   "count": 86,
   "records": [
     {
@@ -58,7 +58,7 @@
     {
       "sitename": "新店",
       "county": "新北市",
-      "aqi": "",
+      "aqi": "39",
       "pollutant": "",
       "status": "良好",
       "so2": "0.7",
