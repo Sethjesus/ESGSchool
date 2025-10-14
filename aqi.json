@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-14T22:08:31Z",
+  "generated_utc": "2025-10-14T22:22:58Z",
   "count": 86,
   "records": [
     {
@@ -2234,7 +2234,7 @@
       "co_8hr": "",
       "pm2_5_avg": "",
       "pm10_avg": "",
-      "so2_avg": "",
+      "so2_avg": "0",
       "longitude": "120.651472",
       "latitude": "22.260899",
       "siteid": "313"
