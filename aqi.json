@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-15T04:10:13Z",
+  "generated_utc": "2025-10-15T04:26:17Z",
   "count": 86,
   "records": [
     {
@@ -1644,7 +1644,7 @@
     {
       "sitename": "冬山",
       "county": "宜蘭縣",
-      "aqi": "",
+      "aqi": "43",
       "pollutant": "",
       "status": "良好",
       "so2": "0.9",
