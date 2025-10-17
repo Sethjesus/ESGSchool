@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-17T16:09:50Z",
+  "generated_utc": "2025-10-17T16:26:04Z",
   "count": 86,
   "records": [
     {
@@ -1956,14 +1956,14 @@
     {
       "sitename": "富貴角",
       "county": "新北市",
-      "aqi": "",
+      "aqi": "31",
       "pollutant": "",
-      "status": "",
+      "status": "良好",
       "so2": "0.2",
       "co": "0.11",
       "o3": "25",
-      "o3_8hr": "",
-      "pm10": "",
+      "o3_8hr": "25",
+      "pm10": "12",
       "pm2_5": "8",
       "no2": "1",
       "nox": "1.2",
@@ -1971,10 +1971,10 @@
       "wind_speed": "8.6",
       "wind_direc": "99",
       "publishtime": "2025/10/18 00:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0",
+      "pm2_5_avg": "7.6",
+      "pm10_avg": "15",
+      "so2_avg": "0",
       "longitude": "121.53656894",
       "latitude": "25.29681695",
       "siteid": "84"
