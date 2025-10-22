@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-22T19:11:58Z",
+  "generated_utc": "2025-10-22T19:26:09Z",
   "count": 86,
   "records": [
     {
@@ -1592,7 +1592,7 @@
     {
       "sitename": "陽明",
       "county": "臺北市",
-      "aqi": "",
+      "aqi": "42",
       "pollutant": "",
       "status": "良好",
       "so2": "0.6",
