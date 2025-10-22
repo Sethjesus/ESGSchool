@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-22T11:09:32Z",
+  "generated_utc": "2025-10-22T11:23:47Z",
   "count": 86,
   "records": [
     {
@@ -426,7 +426,7 @@
       "pollutant": "懸浮微粒",
       "status": "普通",
       "so2": "0.9",
-      "co": "",
+      "co": "0.11",
       "o3": "43",
       "o3_8hr": "42",
       "pm10": "30",
@@ -437,7 +437,7 @@
       "wind_speed": "8.5",
       "wind_direc": "36",
       "publishtime": "2025/10/22 19:00:00",
-      "co_8hr": "",
+      "co_8hr": "0.1",
       "pm2_5_avg": "8.3",
       "pm10_avg": "33",
       "so2_avg": "0",
