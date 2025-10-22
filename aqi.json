@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-22T03:10:20Z",
+  "generated_utc": "2025-10-22T03:35:10Z",
   "count": 86,
   "records": [
     {
@@ -1904,14 +1904,14 @@
     {
       "sitename": "關山",
       "county": "臺東縣",
-      "aqi": "35",
-      "pollutant": "",
-      "status": "良好",
+      "aqi": "88",
+      "pollutant": "懸浮微粒",
+      "status": "普通",
       "so2": "1.7",
       "co": "0.14",
       "o3": "38",
       "o3_8hr": "20",
-      "pm10": "",
+      "pm10": "279",
       "pm2_5": "11",
       "no2": "2",
       "nox": "3.8",
@@ -1921,7 +1921,7 @@
       "publishtime": "2025/10/22 11:00:00",
       "co_8hr": "0.1",
       "pm2_5_avg": "5.7",
-      "pm10_avg": "21",
+      "pm10_avg": "64",
       "so2_avg": "0",
       "longitude": "121.161933",
       "latitude": "23.045083",
