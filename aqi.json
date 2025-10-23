@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-23T10:09:32Z",
+  "generated_utc": "2025-10-23T10:24:59Z",
   "count": 86,
   "records": [
     {
@@ -427,10 +427,10 @@
       "status": "",
       "so2": "",
       "co": "",
-      "o3": "41",
+      "o3": "",
       "o3_8hr": "",
-      "pm10": "12",
-      "pm2_5": "0",
+      "pm10": "",
+      "pm2_5": "",
       "no2": "",
       "nox": "",
       "no": "",
