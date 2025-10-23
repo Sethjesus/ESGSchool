@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-23T23:08:05Z",
+  "generated_utc": "2025-10-23T23:22:04Z",
   "count": 86,
   "records": [
     {
@@ -864,7 +864,7 @@
     {
       "sitename": "二林",
       "county": "彰化縣",
-      "aqi": "",
+      "aqi": "47",
       "pollutant": "",
       "status": "良好",
       "so2": "0.7",
