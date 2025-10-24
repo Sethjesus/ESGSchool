@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-24T15:09:30Z",
+  "generated_utc": "2025-10-24T15:24:56Z",
   "count": 86,
   "records": [
     {
@@ -1670,18 +1670,18 @@
     {
       "sitename": "三重",
       "county": "新北市",
-      "aqi": "44",
-      "pollutant": "",
-      "status": "良好",
+      "aqi": "60",
+      "pollutant": "二氧化氮",
+      "status": "普通",
       "so2": "1",
       "co": "1.09",
       "o3": "3",
       "o3_8hr": "8",
       "pm10": "15",
       "pm2_5": "13",
-      "no2": "",
-      "nox": "",
-      "no": "",
+      "no2": "37",
+      "nox": "78",
+      "no": "40.3",
       "wind_speed": "-",
       "wind_direc": "-",
       "publishtime": "2025/10/24 23:00:00",
