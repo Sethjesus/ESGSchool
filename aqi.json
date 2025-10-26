@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-10-26T01:08:57Z",
+  "generated_utc": "2025-10-26T01:54:13Z",
   "count": 86,
   "records": [
     {
@@ -1956,7 +1956,7 @@
     {
       "sitename": "富貴角",
       "county": "新北市",
-      "aqi": "",
+      "aqi": "76",
       "pollutant": "懸浮微粒",
       "status": "普通",
       "so2": "0",
