@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-03T16:12:39Z",
+  "generated_utc": "2025-11-03T16:32:37Z",
   "count": 86,
   "records": [
     {
@@ -9,7 +9,7 @@
       "aqi": "39",
       "pollutant": "",
       "status": "良好",
-      "so2": "",
+      "so2": "1",
       "co": "0.14",
       "o3": "42",
       "o3_8hr": "42",
