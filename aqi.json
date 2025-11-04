@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-04T09:13:42Z",
+  "generated_utc": "2025-11-04T09:32:11Z",
   "count": 86,
   "records": [
     {
@@ -1417,7 +1417,7 @@
       "co": "0.28",
       "o3": "59",
       "o3_8hr": "65",
-      "pm10": "97",
+      "pm10": "",
       "pm2_5": "12",
       "no2": "11",
       "nox": "12.8",
@@ -1427,7 +1427,7 @@
       "publishtime": "2025/11/04 17:00:00",
       "co_8hr": "0.4",
       "pm2_5_avg": "16.8",
-      "pm10_avg": "61",
+      "pm10_avg": "54",
       "so2_avg": "1",
       "longitude": "120.30833356",
       "latitude": "22.6044507",
