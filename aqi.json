@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-04T08:11:57Z",
+  "generated_utc": "2025-11-04T08:33:45Z",
   "count": 86,
   "records": [
     {
@@ -994,8 +994,8 @@
     {
       "sitename": "朴子",
       "county": "嘉義縣",
-      "aqi": "97",
-      "pollutant": "懸浮微粒",
+      "aqi": "62",
+      "pollutant": "細懸浮微粒",
       "status": "普通",
       "so2": "1.1",
       "co": "0.08",
@@ -1011,7 +1011,7 @@
       "publishtime": "2025/11/04 16:00:00",
       "co_8hr": "0.2",
       "pm2_5_avg": "16.5",
-      "pm10_avg": "72",
+      "pm10_avg": "",
       "so2_avg": "1",
       "longitude": "120.2478",
       "latitude": "23.46538",
