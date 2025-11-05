@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-05T15:09:40Z",
+  "generated_utc": "2025-11-05T15:25:15Z",
   "count": 86,
   "records": [
     {
@@ -708,7 +708,7 @@
     {
       "sitename": "沙鹿",
       "county": "臺中市",
-      "aqi": "",
+      "aqi": "33",
       "pollutant": "",
       "status": "良好",
       "so2": "0.7",
