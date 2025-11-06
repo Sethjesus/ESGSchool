@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-06T23:10:11Z",
+  "generated_utc": "2025-11-06T23:24:41Z",
   "count": 86,
   "records": [
     {
@@ -1358,13 +1358,13 @@
     {
       "sitename": "左營",
       "county": "高雄市",
-      "aqi": "",
+      "aqi": "64",
       "pollutant": "細懸浮微粒",
       "status": "普通",
       "so2": "2.1",
       "co": "0.45",
-      "o3": "",
-      "o3_8hr": "31",
+      "o3": "11",
+      "o3_8hr": "29",
       "pm10": "45",
       "pm2_5": "18",
       "no2": "20",
