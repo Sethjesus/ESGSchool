@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-06T04:13:51Z",
+  "generated_utc": "2025-11-06T04:33:10Z",
   "count": 86,
   "records": [
     {
@@ -1280,13 +1280,13 @@
     {
       "sitename": "大寮",
       "county": "高雄市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
-      "so2": "",
+      "aqi": "79",
+      "pollutant": "懸浮微粒",
+      "status": "普通",
+      "so2": "5.6",
       "co": "0.56",
       "o3": "48",
-      "o3_8hr": "",
+      "o3_8hr": "24",
       "pm10": "61",
       "pm2_5": "22",
       "no2": "19",
@@ -1295,10 +1295,10 @@
       "wind_speed": "2",
       "wind_direc": "292",
       "publishtime": "2025/11/06 12:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.3",
+      "pm2_5_avg": "21.7",
+      "pm10_avg": "56",
+      "so2_avg": "1",
       "longitude": "120.425311",
       "latitude": "22.56413611",
       "siteid": "51"
