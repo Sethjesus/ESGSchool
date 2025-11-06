@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-06T08:11:39Z",
+  "generated_utc": "2025-11-06T08:33:41Z",
   "count": 86,
   "records": [
     {
@@ -1411,7 +1411,7 @@
       "sitename": "前鎮",
       "county": "高雄市",
       "aqi": "83",
-      "pollutant": "懸浮微粒",
+      "pollutant": "細懸浮微粒",
       "status": "普通",
       "so2": "1",
       "co": "0.63",
@@ -1427,7 +1427,7 @@
       "publishtime": "2025/11/06 16:00:00",
       "co_8hr": "1",
       "pm2_5_avg": "18.7",
-      "pm10_avg": "60",
+      "pm10_avg": "",
       "so2_avg": "1",
       "longitude": "120.30833356",
       "latitude": "22.6044507",
