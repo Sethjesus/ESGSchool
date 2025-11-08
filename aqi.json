@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-08T06:10:55Z",
+  "generated_utc": "2025-11-08T06:33:29Z",
   "count": 86,
   "records": [
     {
@@ -1514,10 +1514,10 @@
     {
       "sitename": "恆春",
       "county": "屏東縣",
-      "aqi": "",
+      "aqi": "48",
       "pollutant": "",
       "status": "良好",
-      "so2": "",
+      "so2": "0.5",
       "co": "0.06",
       "o3": "39",
       "o3_8hr": "35",
@@ -1670,10 +1670,10 @@
     {
       "sitename": "三重",
       "county": "新北市",
-      "aqi": "",
+      "aqi": "74",
       "pollutant": "懸浮微粒",
       "status": "普通",
-      "so2": "",
+      "so2": "1.5",
       "co": "1.03",
       "o3": "17",
       "o3_8hr": "13",
