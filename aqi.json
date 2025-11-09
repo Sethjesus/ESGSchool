@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-09T08:09:57Z",
+  "generated_utc": "2025-11-09T08:25:45Z",
   "count": 86,
   "records": [
     {
@@ -422,9 +422,9 @@
     {
       "sitename": "大園",
       "county": "桃園市",
-      "aqi": "65",
-      "pollutant": "懸浮微粒",
-      "status": "普通",
+      "aqi": "47",
+      "pollutant": "",
+      "status": "良好",
       "so2": "1.3",
       "co": "0.17",
       "o3": "37",
@@ -439,7 +439,7 @@
       "publishtime": "2025/11/09 16:00:00",
       "co_8hr": "0.1",
       "pm2_5_avg": "8.5",
-      "pm10_avg": "44",
+      "pm10_avg": "28",
       "so2_avg": "1",
       "longitude": "121.20251473",
       "latitude": "25.06100357",
