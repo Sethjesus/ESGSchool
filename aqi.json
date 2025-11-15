@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-15T23:08:18Z",
+  "generated_utc": "2025-11-15T23:22:53Z",
   "count": 86,
   "records": [
     {
@@ -954,7 +954,7 @@
       "no2": "8",
       "nox": "10.2",
       "no": "1.2",
-      "wind_speed": "",
+      "wind_speed": "1",
       "wind_direc": "324",
       "publishtime": "2025/11/16 07:00:00",
       "co_8hr": "0.2",
