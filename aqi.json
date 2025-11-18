@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-18T07:12:06Z",
+  "generated_utc": "2025-11-18T07:29:19Z",
   "count": 86,
   "records": [
     {
@@ -2190,7 +2190,7 @@
     {
       "sitename": "臺南（南化）",
       "county": "臺南市",
-      "aqi": "",
+      "aqi": "32",
       "pollutant": "",
       "status": "良好",
       "so2": "",
