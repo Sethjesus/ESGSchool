@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-18T18:13:06Z",
+  "generated_utc": "2025-11-18T18:33:56Z",
   "count": 86,
   "records": [
     {
@@ -2112,13 +2112,13 @@
     {
       "sitename": "屏東（琉球）",
       "county": "屏東縣",
-      "aqi": "",
+      "aqi": "15",
       "pollutant": "",
-      "status": "",
+      "status": "良好",
       "so2": "",
       "co": "",
       "o3": "",
-      "o3_8hr": "",
+      "o3_8hr": "16",
       "pm10": "",
       "pm2_5": "",
       "no2": "",
@@ -2127,10 +2127,10 @@
       "wind_speed": "",
       "wind_direc": "",
       "publishtime": "2025/11/19 02:00:00",
-      "co_8hr": "",
+      "co_8hr": "0.5",
       "pm2_5_avg": "",
       "pm10_avg": "",
-      "so2_avg": "",
+      "so2_avg": "2",
       "longitude": "120.37722",
       "latitude": "22.35222",
       "siteid": "204"
