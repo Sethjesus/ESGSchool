@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-20T23:08:11Z",
+  "generated_utc": "2025-11-20T23:22:47Z",
   "count": 86,
   "records": [
     {
@@ -1514,13 +1514,13 @@
     {
       "sitename": "恆春",
       "county": "屏東縣",
-      "aqi": "",
+      "aqi": "37",
       "pollutant": "",
-      "status": "",
-      "so2": "",
+      "status": "良好",
+      "so2": "1.5",
       "co": "0.2",
       "o3": "38",
-      "o3_8hr": "",
+      "o3_8hr": "40",
       "pm10": "14",
       "pm2_5": "10",
       "no2": "1",
@@ -1529,10 +1529,10 @@
       "wind_speed": "9.7",
       "wind_direc": "353",
       "publishtime": "2025/11/21 07:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.1",
+      "pm2_5_avg": "8.7",
+      "pm10_avg": "14",
+      "so2_avg": "1",
       "longitude": "120.788928",
       "latitude": "21.958069",
       "siteid": "61"
