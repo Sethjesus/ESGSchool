@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-22T23:08:11Z",
+  "generated_utc": "2025-11-22T23:22:40Z",
   "count": 86,
   "records": [
     {
@@ -422,7 +422,7 @@
     {
       "sitename": "大園",
       "county": "桃園市",
-      "aqi": "",
+      "aqi": "45",
       "pollutant": "",
       "status": "良好",
       "so2": "0.5",
@@ -1618,7 +1618,7 @@
     {
       "sitename": "宜蘭",
       "county": "宜蘭縣",
-      "aqi": "",
+      "aqi": "24",
       "pollutant": "",
       "status": "良好",
       "so2": "1.7",
