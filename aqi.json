@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-24T07:09:51Z",
+  "generated_utc": "2025-11-24T07:25:07Z",
   "count": 86,
   "records": [
     {
@@ -578,13 +578,13 @@
     {
       "sitename": "新竹",
       "county": "新竹市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "54",
+      "pollutant": "細懸浮微粒",
+      "status": "普通",
       "so2": "",
       "co": "",
       "o3": "",
-      "o3_8hr": "",
+      "o3_8hr": "28",
       "pm10": "",
       "pm2_5": "",
       "no2": "",
@@ -593,10 +593,10 @@
       "wind_speed": "",
       "wind_direc": "",
       "publishtime": "2025/11/24 15:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.4",
+      "pm2_5_avg": "13.7",
+      "pm10_avg": "28",
+      "so2_avg": "1",
       "longitude": "120.97236752",
       "latitude": "24.8056356",
       "siteid": "24"
