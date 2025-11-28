@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-28T23:08:47Z",
+  "generated_utc": "2025-11-28T23:23:42Z",
   "count": 86,
   "records": [
     {
@@ -1618,7 +1618,7 @@
     {
       "sitename": "宜蘭",
       "county": "宜蘭縣",
-      "aqi": "",
+      "aqi": "91",
       "pollutant": "懸浮微粒",
       "status": "普通",
       "so2": "1.7",
