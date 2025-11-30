@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-11-30T21:08:49Z",
+  "generated_utc": "2025-11-30T21:23:49Z",
   "count": 86,
   "records": [
     {
@@ -1254,13 +1254,13 @@
     {
       "sitename": "鳳山",
       "county": "高雄市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "119",
+      "pollutant": "細懸浮微粒",
+      "status": "對敏感族群不健康",
       "so2": "1.6",
       "co": "0.44",
-      "o3": "",
-      "o3_8hr": "",
+      "o3": "10",
+      "o3_8hr": "12",
       "pm10": "67",
       "pm2_5": "38",
       "no2": "13",
@@ -1269,10 +1269,10 @@
       "wind_speed": "1.1",
       "wind_direc": "283",
       "publishtime": "2025/12/01 05:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.4",
+      "pm2_5_avg": "37.8",
+      "pm10_avg": "64",
+      "so2_avg": "2",
       "longitude": "120.357422",
       "latitude": "22.628126",
       "siteid": "50"
