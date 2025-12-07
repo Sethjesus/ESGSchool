@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-07T06:11:50Z",
+  "generated_utc": "2025-12-07T06:33:38Z",
   "count": 88,
   "records": [
     {
@@ -1566,13 +1566,13 @@
     {
       "sitename": "花蓮",
       "county": "花蓮縣",
-      "aqi": "",
+      "aqi": "22",
       "pollutant": "",
-      "status": "",
+      "status": "良好",
       "so2": "",
       "co": "",
       "o3": "",
-      "o3_8hr": "",
+      "o3_8hr": "22",
       "pm10": "",
       "pm2_5": "",
       "no2": "",
@@ -1581,10 +1581,10 @@
       "wind_speed": "",
       "wind_direc": "",
       "publishtime": "2025/12/07 14:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.2",
+      "pm2_5_avg": "3.7",
+      "pm10_avg": "13",
+      "so2_avg": "0",
       "longitude": "121.599769",
       "latitude": "23.971306",
       "siteid": "63"
