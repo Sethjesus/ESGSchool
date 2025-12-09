@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-09T19:12:37Z",
+  "generated_utc": "2025-12-09T19:26:13Z",
   "count": 88,
   "records": [
     {
@@ -474,14 +474,14 @@
     {
       "sitename": "平鎮",
       "county": "桃園市",
-      "aqi": "",
+      "aqi": "30",
       "pollutant": "",
-      "status": "",
+      "status": "良好",
       "so2": "0.4",
       "co": "0.21",
       "o3": "26",
-      "o3_8hr": "",
-      "pm10": "",
+      "o3_8hr": "32",
+      "pm10": "13",
       "pm2_5": "7",
       "no2": "8",
       "nox": "9",
@@ -489,10 +489,10 @@
       "wind_speed": "0.4",
       "wind_direc": "189",
       "publishtime": "2025/12/10 03:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.2",
+      "pm2_5_avg": "7.5",
+      "pm10_avg": "13",
+      "so2_avg": "0",
       "longitude": "121.203986",
       "latitude": "24.952786",
       "siteid": "20"
