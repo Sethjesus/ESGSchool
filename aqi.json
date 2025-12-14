@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-14T10:08:36Z",
+  "generated_utc": "2025-12-14T10:23:39Z",
   "count": 88,
   "records": [
     {
@@ -938,32 +938,6 @@
       "longitude": "120.544994",
       "latitude": "23.711853",
       "siteid": "37"
-    },
-    {
-      "sitename": "員林",
-      "county": "彰化縣",
-      "aqi": "69",
-      "pollutant": "懸浮微粒",
-      "status": "普通",
-      "so2": "1.3",
-      "co": "0.25",
-      "o3": "35",
-      "o3_8hr": "43",
-      "pm10": "39",
-      "pm2_5": "21",
-      "no2": "8",
-      "nox": "9.3",
-      "no": "1.1",
-      "wind_speed": "3.3",
-      "wind_direc": "54",
-      "publishtime": "2025/12/14 18:00:00",
-      "co_8hr": "0.2",
-      "pm2_5_avg": "16.6",
-      "pm10_avg": "47",
-      "so2_avg": "1",
-      "longitude": "120.5631893",
-      "latitude": "23.9615945",
-      "siteid": "139"
     },
     {
       "sitename": "崙背",
@@ -2030,6 +2004,32 @@
       "longitude": "120.26964167",
       "latitude": "23.85493056",
       "siteid": "85"
+    },
+    {
+      "sitename": "員林",
+      "county": "彰化縣",
+      "aqi": "69",
+      "pollutant": "懸浮微粒",
+      "status": "普通",
+      "so2": "1.3",
+      "co": "0.25",
+      "o3": "35",
+      "o3_8hr": "43",
+      "pm10": "39",
+      "pm2_5": "21",
+      "no2": "8",
+      "nox": "9.3",
+      "no": "1.1",
+      "wind_speed": "3.3",
+      "wind_direc": "54",
+      "publishtime": "2025/12/14 18:00:00",
+      "co_8hr": "0.2",
+      "pm2_5_avg": "16.6",
+      "pm10_avg": "47",
+      "so2_avg": "1",
+      "longitude": "120.5631893",
+      "latitude": "23.9615945",
+      "siteid": "139"
     },
     {
       "sitename": "林森",
