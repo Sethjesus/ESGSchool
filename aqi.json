@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-16T05:12:40Z",
+  "generated_utc": "2025-12-16T05:32:39Z",
   "count": 88,
   "records": [
     {
@@ -890,14 +890,14 @@
     {
       "sitename": "南投",
       "county": "南投縣",
-      "aqi": "",
+      "aqi": "79",
       "pollutant": "細懸浮微粒",
       "status": "普通",
       "so2": "",
       "co": "",
       "o3": "",
       "o3_8hr": "16",
-      "pm10": "",
+      "pm10": "39",
       "pm2_5": "18",
       "no2": "",
       "nox": "",
@@ -907,7 +907,7 @@
       "publishtime": "2025/12/16 13:00:00",
       "co_8hr": "0.4",
       "pm2_5_avg": "22.9",
-      "pm10_avg": "46",
+      "pm10_avg": "44",
       "so2_avg": "1",
       "longitude": "120.685306",
       "latitude": "23.913",
