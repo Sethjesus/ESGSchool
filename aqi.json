@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-20T07:08:21Z",
+  "generated_utc": "2025-12-20T07:22:43Z",
   "count": 88,
   "records": [
     {
@@ -2190,13 +2190,13 @@
     {
       "sitename": "新北(樹林)",
       "county": "新北市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "64",
+      "pollutant": "細懸浮微粒",
+      "status": "普通",
       "so2": "",
       "co": "",
       "o3": "",
-      "o3_8hr": "",
+      "o3_8hr": "16",
       "pm10": "",
       "pm2_5": "",
       "no2": "",
@@ -2205,10 +2205,10 @@
       "wind_speed": "",
       "wind_direc": "",
       "publishtime": "2025/12/20 15:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.4",
+      "pm2_5_avg": "17.1",
+      "pm10_avg": "25",
+      "so2_avg": "1",
       "longitude": "121.38352778",
       "latitude": "24.94902778",
       "siteid": "311"
