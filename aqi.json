@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-22T07:12:26Z",
+  "generated_utc": "2025-12-22T07:32:02Z",
   "count": 88,
   "records": [
     {
@@ -1020,13 +1020,13 @@
     {
       "sitename": "臺西",
       "county": "雲林縣",
-      "aqi": "",
+      "aqi": "59",
       "pollutant": "懸浮微粒",
       "status": "普通",
       "so2": "1.3",
       "co": "0.21",
-      "o3": "",
-      "o3_8hr": "40",
+      "o3": "52",
+      "o3_8hr": "42",
       "pm10": "37",
       "pm2_5": "10",
       "no2": "3",
