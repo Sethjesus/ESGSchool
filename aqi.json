@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-27T16:09:31Z",
+  "generated_utc": "2025-12-27T16:25:47Z",
   "count": 87,
   "records": [
     {
@@ -916,13 +916,13 @@
     {
       "sitename": "斗六",
       "county": "雲林縣",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "59",
+      "pollutant": "細懸浮微粒",
+      "status": "普通",
       "so2": "",
       "co": "",
       "o3": "",
-      "o3_8hr": "",
+      "o3_8hr": "21",
       "pm10": "",
       "pm2_5": "",
       "no2": "",
@@ -931,10 +931,10 @@
       "wind_speed": "",
       "wind_direc": "",
       "publishtime": "2025/12/28 00:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.2",
+      "pm2_5_avg": "15.3",
+      "pm10_avg": "30",
+      "so2_avg": "1",
       "longitude": "120.544994",
       "latitude": "23.711853",
       "siteid": "37"
