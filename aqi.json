@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-28T12:14:20Z",
+  "generated_utc": "2025-12-28T12:35:05Z",
   "count": 87,
   "records": [
     {
@@ -344,7 +344,7 @@
     {
       "sitename": "松山",
       "county": "臺北市",
-      "aqi": "27",
+      "aqi": "38",
       "pollutant": "",
       "status": "良好",
       "so2": "1.2",
@@ -353,9 +353,9 @@
       "o3_8hr": "29",
       "pm10": "13",
       "pm2_5": "4",
-      "no2": "",
-      "nox": "",
-      "no": "",
+      "no2": "16",
+      "nox": "17.3",
+      "no": "1.2",
       "wind_speed": "1.2",
       "wind_direc": "60",
       "publishtime": "2025/12/28 20:00:00",
