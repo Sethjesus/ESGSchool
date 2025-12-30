@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-30T06:14:31Z",
+  "generated_utc": "2025-12-30T06:34:31Z",
   "count": 87,
   "records": [
     {
@@ -1306,10 +1306,10 @@
     {
       "sitename": "林園",
       "county": "高雄市",
-      "aqi": "",
+      "aqi": "82",
       "pollutant": "細懸浮微粒",
       "status": "普通",
-      "so2": "",
+      "so2": "3",
       "co": "0.28",
       "o3": "63",
       "o3_8hr": "37",
