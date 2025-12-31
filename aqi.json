@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2025-12-31T07:11:35Z",
+  "generated_utc": "2025-12-31T07:31:40Z",
   "count": 87,
   "records": [
     {
@@ -1306,14 +1306,14 @@
     {
       "sitename": "林園",
       "county": "高雄市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "79",
+      "pollutant": "細懸浮微粒",
+      "status": "普通",
       "so2": "2.6",
       "co": "0.26",
       "o3": "69",
-      "o3_8hr": "",
-      "pm10": "",
+      "o3_8hr": "35",
+      "pm10": "48",
       "pm2_5": "20",
       "no2": "13",
       "nox": "14.8",
@@ -1321,10 +1321,10 @@
       "wind_speed": "1.4",
       "wind_direc": "359",
       "publishtime": "2025/12/31 15:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.3",
+      "pm2_5_avg": "22.6",
+      "pm10_avg": "53",
+      "so2_avg": "2",
       "longitude": "120.41175",
       "latitude": "22.4795",
       "siteid": "52"
