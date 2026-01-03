@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-03T21:12:18Z",
+  "generated_utc": "2026-01-03T21:28:57Z",
   "count": 88,
   "records": [
     {
@@ -968,13 +968,13 @@
     {
       "sitename": "新港",
       "county": "嘉義縣",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "79",
+      "pollutant": "細懸浮微粒",
+      "status": "普通",
       "so2": "1.7",
       "co": "0.32",
-      "o3": "",
-      "o3_8hr": "",
+      "o3": "6",
+      "o3_8hr": "9",
       "pm10": "46",
       "pm2_5": "26",
       "no2": "12",
@@ -983,10 +983,10 @@
       "wind_speed": "0.8",
       "wind_direc": "36",
       "publishtime": "2026/01/04 05:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.3",
+      "pm2_5_avg": "22.7",
+      "pm10_avg": "48",
+      "so2_avg": "2",
       "longitude": "120.345531",
       "latitude": "23.554839",
       "siteid": "39"
