@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-05T17:11:25Z",
+  "generated_utc": "2026-01-05T17:32:05Z",
   "count": 88,
   "records": [
     {
@@ -11,8 +11,8 @@
       "status": "普通",
       "so2": "1.1",
       "co": "0.37",
-      "o3": "",
-      "o3_8hr": "35",
+      "o3": "33",
+      "o3_8hr": "34",
       "pm10": "31",
       "pm2_5": "15",
       "no2": "4",
