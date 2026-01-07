@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-07T15:11:00Z",
+  "generated_utc": "2026-01-07T15:33:17Z",
   "count": 88,
   "records": [
     {
@@ -2008,13 +2008,13 @@
     {
       "sitename": "臺灣大道",
       "county": "臺中市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "83",
+      "pollutant": "細懸浮微粒",
+      "status": "普通",
       "so2": "",
       "co": "",
       "o3": "",
-      "o3_8hr": "",
+      "o3_8hr": "31",
       "pm10": "",
       "pm2_5": "",
       "no2": "",
@@ -2023,10 +2023,10 @@
       "wind_speed": "",
       "wind_direc": "",
       "publishtime": "2026/01/07 23:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.4",
+      "pm2_5_avg": "24.1",
+      "pm10_avg": "42",
+      "so2_avg": "0",
       "longitude": "120.6567111",
       "latitude": "24.1589",
       "siteid": "88"
