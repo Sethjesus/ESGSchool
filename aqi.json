@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-07T20:10:41Z",
+  "generated_utc": "2026-01-07T20:33:10Z",
   "count": 88,
   "records": [
     {
@@ -2268,12 +2268,12 @@
     {
       "sitename": "嘉義（東區）",
       "county": "嘉義市",
-      "aqi": "",
+      "aqi": "104",
       "pollutant": "細懸浮微粒",
       "status": "對敏感族群不健康",
       "so2": "0.5",
       "co": "0.28",
-      "o3": "",
+      "o3": "20",
       "o3_8hr": "27",
       "pm10": "-",
       "pm2_5": "35",
