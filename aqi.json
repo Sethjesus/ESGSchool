@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-12T15:12:06Z",
+  "generated_utc": "2026-01-12T15:33:16Z",
   "count": 88,
   "records": [
     {
@@ -2060,13 +2060,13 @@
     {
       "sitename": "林森",
       "county": "臺南市",
-      "aqi": "",
-      "pollutant": "",
-      "status": "",
+      "aqi": "93",
+      "pollutant": "懸浮微粒",
+      "status": "普通",
       "so2": "2.2",
       "co": "0.62",
-      "o3": "",
-      "o3_8hr": "",
+      "o3": "8",
+      "o3_8hr": "31",
       "pm10": "68",
       "pm2_5": "26",
       "no2": "30",
@@ -2075,10 +2075,10 @@
       "wind_speed": "0.4",
       "wind_direc": "81",
       "publishtime": "2026/01/12 23:00:00",
-      "co_8hr": "",
-      "pm2_5_avg": "",
-      "pm10_avg": "",
-      "so2_avg": "",
+      "co_8hr": "0.5",
+      "pm2_5_avg": "22.2",
+      "pm10_avg": "69",
+      "so2_avg": "2",
       "longitude": "120.22216042",
       "latitude": "22.98522502",
       "siteid": "140"
