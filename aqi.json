@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-12T03:09:14Z",
+  "generated_utc": "2026-01-12T03:54:04Z",
   "count": 88,
   "records": [
     {
@@ -912,32 +912,6 @@
       "longitude": "120.685306",
       "latitude": "23.913",
       "siteid": "36"
-    },
-    {
-      "sitename": "富貴角",
-      "county": "新北市",
-      "aqi": "73",
-      "pollutant": "懸浮微粒",
-      "status": "普通",
-      "so2": "",
-      "co": "",
-      "o3": "",
-      "o3_8hr": "45",
-      "pm10": "56",
-      "pm2_5": "",
-      "no2": "",
-      "nox": "",
-      "no": "",
-      "wind_speed": "6.5",
-      "wind_direc": "105",
-      "publishtime": "2026/01/12 11:00:00",
-      "co_8hr": "0",
-      "pm2_5_avg": "14",
-      "pm10_avg": "51",
-      "so2_avg": "0",
-      "longitude": "121.53656894",
-      "latitude": "25.29681695",
-      "siteid": "84"
     },
     {
       "sitename": "斗六",
@@ -1978,6 +1952,32 @@
       "longitude": "120.251825",
       "latitude": "23.753506",
       "siteid": "83"
+    },
+    {
+      "sitename": "富貴角",
+      "county": "新北市",
+      "aqi": "73",
+      "pollutant": "懸浮微粒",
+      "status": "普通",
+      "so2": "",
+      "co": "",
+      "o3": "",
+      "o3_8hr": "45",
+      "pm10": "56",
+      "pm2_5": "",
+      "no2": "",
+      "nox": "",
+      "no": "",
+      "wind_speed": "6.5",
+      "wind_direc": "105",
+      "publishtime": "2026/01/12 11:00:00",
+      "co_8hr": "0",
+      "pm2_5_avg": "14",
+      "pm10_avg": "51",
+      "so2_avg": "0",
+      "longitude": "121.53656894",
+      "latitude": "25.29681695",
+      "siteid": "84"
     },
     {
       "sitename": "大城",
