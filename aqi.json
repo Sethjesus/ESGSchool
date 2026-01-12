@@ -1,6 +1,6 @@
 {
   "source": "https://data.moenv.gov.tw/api/v2/aqx_p_432",
-  "generated_utc": "2026-01-12T10:11:32Z",
+  "generated_utc": "2026-01-12T10:33:27Z",
   "count": 88,
   "records": [
     {
@@ -136,15 +136,15 @@
     {
       "sitename": "新莊",
       "county": "新北市",
-      "aqi": "80",
-      "pollutant": "懸浮微粒",
-      "status": "普通",
+      "aqi": "135",
+      "pollutant": "細懸浮微粒",
+      "status": "對所有族群不健康",
       "so2": "1.8",
       "co": "2.81",
       "o3": "3",
       "o3_8hr": "16",
-      "pm10": "",
-      "pm2_5": "",
+      "pm10": "643",
+      "pm2_5": "358",
       "no2": "47",
       "nox": "87.2",
       "no": "40",
@@ -152,8 +152,8 @@
       "wind_direc": "254",
       "publishtime": "2026/01/12 18:00:00",
       "co_8hr": "0.6",
-      "pm2_5_avg": "17.2",
-      "pm10_avg": "57",
+      "pm2_5_avg": "73.7",
+      "pm10_avg": "154",
       "so2_avg": "0",
       "longitude": "121.4325",
       "latitude": "25.037972",
@@ -2234,7 +2234,7 @@
       "co_8hr": "",
       "pm2_5_avg": "",
       "pm10_avg": "",
-      "so2_avg": "",
+      "so2_avg": "0",
       "longitude": "120.44583156",
       "latitude": "23.04562013",
       "siteid": "312"
